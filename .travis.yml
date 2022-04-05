@@ -1,0 +1,10 @@
+language: node_js
+
+node_js:
+  -10
+
+before_script:
+  - gem install dpl
+
+script:
+  - dpl --provider=heroku --api-key=$HEROKU_API_KEY --app=campusa
