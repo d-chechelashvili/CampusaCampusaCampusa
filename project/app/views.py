@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse("უუუ +_+")
+    return HttpResponse("Buddy +_+")
