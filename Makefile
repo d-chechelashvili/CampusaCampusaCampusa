@@ -8,13 +8,13 @@ install: ## Install requirements
 	pip install -r requirements.txt
 
 fmt format: ## Run code formatters
-	isort project
-	black project
+	isort backend frontend project manage.py
+	black backend frontend project manage.py
 
 lint: ## Run code linters
-	isort project
-	black project
-	isort --check project
-	black --check project
-	flake8 project
-	mypy project
+	isort backend frontend project manage.py
+	black backend frontend project manage.py
+	isort --check backend frontend project manage.py
+	black --check backend frontend project manage.py
+	flake8 backend frontend project manage.py
+	mypy backend frontend project manage.py
