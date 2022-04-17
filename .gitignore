@@ -130,3 +130,29 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+
+# --------- REACT IGNORES ---------
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+frontend/reactjs/node_modules
+frontend/reactjs/.pnp
+frontend/reactjs/.pnp.js
+
+# testing
+frontend/reactjs/coverage
+
+# production
+frontend/reactjs/build
+
+# misc
+frontend/reactjs/.DS_Store
+frontend/reactjs/.env.local
+frontend/reactjs/.env.test.local
+frontend/reactjs/.env.development.local
+frontend/reactjs/.env.production.local
+
+frontend/reactjs/npm-debug.log*
+frontend/reactjs/yarn-debug.log*
+frontend/reactjs/yarn-error.log*
