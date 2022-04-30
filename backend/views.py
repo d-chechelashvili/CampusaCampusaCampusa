@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.core.handlers.wsgi import WSGIRequest
+from django.http import JsonResponse
 
-# Create your views here.
+
+def subjects(request: WSGIRequest) -> JsonResponse:
+    response = {
+        "subjects": [
+            "Programming Methodology",
+            "Programming Abstraction",
+            "Programming Paradigms",
+        ]
+    }
+    return JsonResponse(response)

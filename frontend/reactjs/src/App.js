@@ -1,11 +1,14 @@
-import './App.css';
+import React from "react";
+
+import "./App.css";
+import HomePage from "./pages/HomePage";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Welcome to Campusa!</h1>
-    </div>
-  );
+    return (
+        <React.Fragment>
+            <HomePage/>
+        </React.Fragment>
+    );
 }
 
 export default App;
