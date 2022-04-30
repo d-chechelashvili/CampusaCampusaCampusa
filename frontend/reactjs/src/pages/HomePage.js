@@ -1,12 +1,10 @@
 import {useCallback, useEffect, useState} from "react";
 
-const API_HOST = "http://127.0.0.1:8000/api/"
-
 function HomePage() {
     const [data, setData] = useState({});
 
     const fetchDataHandler = useCallback(async () => {
-        const response = await fetch(API_HOST + "subjects",
+        const response = await fetch(window.location.origin + "/api/subjects",
             {mode: "same-origin"}
         );
 
