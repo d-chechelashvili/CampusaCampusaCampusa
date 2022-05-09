@@ -4,16 +4,14 @@ import {Route, Switch} from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import SubjectPage from "./pages/SubjectPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
     return (
         <Switch>
-            <Route path="/subjects/:subjectName">
-                <SubjectPage/>
-            </Route>
-            <Route path="/">
-                <HomePage/>
-            </Route>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/subject/:subjectId" component={SubjectPage} />
+            <Route component={NotFoundPage} />
         </Switch>
     )
 }
