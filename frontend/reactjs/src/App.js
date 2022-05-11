@@ -9,11 +9,11 @@ import NotFoundPage from "./pages/NotFoundPage";
 function App() {
     return (
         <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/subject/:subjectId" component={SubjectPage} />
-            <Route component={NotFoundPage} />
+            <Route exact path="/" component={HomePage}/>
+            <Route path="/subjects/:subjectId" component={SubjectPage}/>
+            <Route component={NotFoundPage}/>
         </Switch>
-    )
+    );
 }
 
 export default App;

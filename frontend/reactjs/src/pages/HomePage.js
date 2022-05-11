@@ -1,39 +1,36 @@
-import {useCallback, useEffect, useState} from "react";
+import {useEffect} from "react";
+import useHttp from "../hooks/use-http";
+import {getAllSubjects} from "../library/api";
+import SubjectList from "../components/subjects/SubjectList";
 
-function HomePage() {
-    const [data, setData] = useState({});
-
-    const fetchDataHandler = useCallback(async () => {
-        const response = await fetch(window.location.origin + "/api/subjects",
-            {mode: "same-origin"}
-        );
-
-        const json = await response.json();
-
-        const subjects = json["subjects"].map((subject) => {
-            return (
-                <li>
-                    <button>{subject}</button>
-                </li>
-            );
-        });
-
-        const dataObject = {
-            subjects: subjects
-        };
-
-        setData(dataObject);
-    }, []);
+const HomePage = () => {
+    const {sendRequest, status, data: loadedSubjects, error} = useHttp(
+        getAllSubjects,
+        true
+    );
 
     useEffect(() => {
-        fetchDataHandler();
-    }, [fetchDataHandler]);
+        sendRequest();
+    }, [sendRequest]);
 
-    return (
-        <div>
-            <ul>{data.subjects}</ul>
-        </div>
-    );
-}
+    // todo if status pending could show loading spinner
+    if (status === 'pending') {
+        return (
+            <div>
+                <p>{"LOADING..."}</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
+    if (status === 'completed' && (!loadedSubjects || loadedSubjects.length === 0)) {
+        return <p>{"NO DATA"}</p>;
+    }
+    return <SubjectList subjects={loadedSubjects}/>;
+};
+
 
 export default HomePage;
