@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  padding: 32px 0 32px 0;
+}
+
+.nameContainer {
+  flex: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.ratingsContainer {
+  flex: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ratingsContainerColumn {
+  flex: 50%;
+}
+
+.pointsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+}
+
+.text {
+  text-align: center;
+  padding: 0 32px 0 32px;
+}

@@ -1,9 +1,10 @@
 import React from "react";
+import SubjectHeader from "../components/subject_page/SubjectHeader";
 
 function SubjectPage(props) {
     return (
         <React.Fragment>
-            <h1>{props.subject}</h1>
+            <SubjectHeader />
         </React.Fragment>
     );
 }
