@@ -1,7 +1,9 @@
-import {useEffect} from "react";
+import {Fragment, useEffect} from "react";
+
 import useHttp from "../hooks/use-http";
 import {getAllSubjects} from "../library/api";
 import SubjectList from "../components/subjects/SubjectList";
+import classes from "./HomePage.module.css";
 
 const HomePage = () => {
     const {sendRequest, status, data: loadedSubjects, error} = useHttp(
@@ -29,7 +31,14 @@ const HomePage = () => {
     if (status === 'completed' && (!loadedSubjects || loadedSubjects.length === 0)) {
         return <p>{"NO DATA"}</p>;
     }
-    return <SubjectList subjects={loadedSubjects}/>;
+    return (
+        <Fragment>
+            <div className={classes.planner}></div>
+            <div className={classes.list}>
+                <SubjectList subjects={loadedSubjects}/>
+            </div>
+        </Fragment>
+    );
 };
 
 

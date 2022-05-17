@@ -8,6 +8,11 @@ def subjects(request: WSGIRequest) -> JsonResponse:
             "Programming Methodology",
             "Programming Abstraction",
             "Programming Paradigms",
+            "Nand2Tetris",
+            "Design Patterns",
+            "Distributed Systems",
+            "Compilers",
+            "Computer Networks",
         ]
     }
     return JsonResponse(response)

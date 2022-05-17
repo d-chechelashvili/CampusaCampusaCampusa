@@ -1,5 +1,3 @@
-from typing import TypeVar
-
 from django.apps import AppConfig
 
 

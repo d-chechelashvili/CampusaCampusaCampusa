@@ -1,0 +1,9 @@
+.list{
+    float: right;
+    width: 50%;
+}
+
+.planner{
+    float: left;
+    width: 50%;
+}
