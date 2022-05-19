@@ -1,7 +1,7 @@
 import {Fragment} from 'react';
 
-import SubjectListItem from "./SubjectListItem";
 import classes from './SubjectList.module.css';
+import SubjectListItem from "./SubjectListItem";
 
 
 const SubjectList = (props) => {

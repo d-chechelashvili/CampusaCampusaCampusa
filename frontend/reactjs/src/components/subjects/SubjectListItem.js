@@ -10,7 +10,7 @@ const SubjectListItem = (props) => {
     const credits = 6;
 
     return (
-        <Link to={`/subjects/${props.subject}`}  style={{textDecoration: 'none'}}>
+        <Link to={`/subjects/${props.subject}`} style={{textDecoration: 'none'}}>
             <li className={classes.item}>
                 <figure>
                     <blockquote>

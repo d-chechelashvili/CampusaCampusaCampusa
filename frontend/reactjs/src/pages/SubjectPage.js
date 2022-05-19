@@ -5,7 +5,7 @@ import SubjectHeader from "../components/subject_page/SubjectHeader";
 function SubjectPage(props) {
     return (
         <React.Fragment>
-            <SubjectHeader />
+            <SubjectHeader/>
         </React.Fragment>
     );
 }
