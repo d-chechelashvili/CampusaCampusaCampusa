@@ -1,6 +1,7 @@
 import React from "react";
 
 import classes from "./SubjectHeader.module.css"
+import programming_methodology_syllabus from "../../media/syllabuses/programming_methodology.pdf"
 
 function SubjectHeader(props) {
     return (
@@ -8,10 +9,11 @@ function SubjectHeader(props) {
             <div className={classes.container}>
                 <div className={classes.nameContainer}>
                     <h1 className={classes.text}>პროგრამირების მეთოდოლოგია</h1>
+                    <h3 className={classes.text}><a href={programming_methodology_syllabus} target="_blank" rel="noreferrer">სილაბუსის ნახვა</a></h3>
                 </div>
                 <div className={classes.ratingsContainer}>
                     <div className={classes.ratingsContainerColumn}>
-                        <h3 className={classes.text}>შენი შეფასება</h3>
+                        <h3 className={classes.centeredText}>შენი შეფასება</h3>
                         <div className={classes.pointsContainer}>
                             <select>
                                 <option value="?">?</option>
@@ -26,9 +28,9 @@ function SubjectHeader(props) {
                         </div>
                     </div>
                     <div className={classes.ratingsContainerColumn}>
-                        <h3 className={classes.text}>კამპუსას შეფასება</h3>
+                        <h3 className={classes.centeredText}>კამპუსას შეფასება</h3>
                         <div className={classes.pointsContainer}>
-                            <h3 className={classes.text}>4.0 / 5.0</h3>
+                            <h3 className={classes.centeredText}>4.0 / 5.0</h3>
                         </div>
                     </div>
                 </div>

@@ -5,8 +5,6 @@
 
 .nameContainer {
     flex: 70%;
-    display: flex;
-    align-items: center;
 }
 
 .ratingsContainer {
@@ -28,6 +26,11 @@
 }
 
 .text {
+    padding: 0 32px 0 32px;
+    margin: 16px;
+}
+
+.centeredText {
     text-align: center;
     padding: 0 32px 0 32px;
 }
