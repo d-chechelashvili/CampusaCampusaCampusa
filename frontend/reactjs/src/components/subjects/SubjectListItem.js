@@ -4,13 +4,13 @@ import classes from './SubjectListItem.module.css';
 
 
 const SubjectListItem = (props) => {
-    const semester = 1;
+    // const semester = 1;
+    // const lecturer = "Dr. John Doe";
+    // const credits = 6;
     const faculty = "MACS";
-    const lecturer = "Dr. John Doe";
-    const credits = 6;
 
     return (
-        <Link to={`/subjects/${props.subject}`} style={{textDecoration: 'none'}}>
+        <Link className={classes.link} to={`/subjects/${props.subject}`}>
             <li className={classes.item}>
                 <figure>
                     <blockquote>

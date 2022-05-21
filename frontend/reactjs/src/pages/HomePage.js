@@ -17,11 +17,7 @@ const HomePage = () => {
 
     // todo if status pending could show loading spinner
     if (status === 'pending') {
-        return (
-            <div>
-                <p>{"LOADING..."}</p>
-            </div>
-        );
+        return <h2>Loading...</h2>;
     }
 
     if (error) {

@@ -1,4 +1,9 @@
+.link {
+    text-decoration: none;
+}
+
 .header {
+    position: sticky;
     width: 100%;
     height: 5rem;
     display: flex;

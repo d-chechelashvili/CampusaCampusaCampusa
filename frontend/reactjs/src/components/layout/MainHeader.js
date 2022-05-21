@@ -1,9 +1,13 @@
+import {Link} from "react-router-dom";
+
 import classes from './MainHeader.module.css';
 
 const MainHeader = () => {
     return (
         <header className={classes.header}>
-            <div className={classes.logo}>CampusaCampusaCampusa</div>
+            <Link className={classes.link} to={`/`}>
+                <div className={classes.logo}>CampusaCampusaCampusa</div>
+            </Link>
         </header>
     );
 };
