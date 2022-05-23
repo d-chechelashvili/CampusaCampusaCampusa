@@ -1,0 +1,13 @@
+.container {
+    padding: 24px 48px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    white-space: nowrap;
+    margin: 8px 0;
+}
