@@ -15,5 +15,5 @@
 .logo {
     font-size: 2rem;
     color: white;
-    padding: 0 2.5%;
+    padding: 0 48px; /* TODO: make responsive */
 }

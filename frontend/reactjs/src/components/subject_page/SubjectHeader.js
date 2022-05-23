@@ -13,10 +13,10 @@ function SubjectHeader(props) {
                 </div>
                 <div className={classes.ratingsContainer}>
                     <div className={classes.ratingsContainerColumn}>
-                        <h3 className={classes.centeredText}>შენი შეფასება</h3>
+                        <h3 className={classes.centeredText}>თქვენი შეფასება</h3>
                         <div className={classes.pointsContainer}>
                             <select>
-                                <option value="?">?</option>
+                                <option value=" ">&nbsp;</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
