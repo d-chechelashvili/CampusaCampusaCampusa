@@ -7,6 +7,14 @@
     align-items: center;
 }
 
+.hoursSlider {
+    margin: 0 16px;
+}
+
+.hoursInput {
+    width: 41px;
+}
+
 .text {
     white-space: nowrap;
     margin: 8px 0;

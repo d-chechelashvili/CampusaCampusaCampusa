@@ -16,13 +16,13 @@ function SubjectHeader(props) {
                         <h3 className={classes.centeredText}>თქვენი შეფასება</h3>
                         <div className={classes.pointsContainer}>
                             <select>
-                                <option value=" ">&nbsp;</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                <option value=" ">   </option>
+                                <option value="0">0.0</option>
+                                <option value="1">1.0</option>
+                                <option value="2">2.0</option>
+                                <option value="3">3.0</option>
+                                <option value="4">4.0</option>
+                                <option value="5">5.0</option>
                             </select>
                             <h3>&nbsp;/ 5.0</h3>
                         </div>
