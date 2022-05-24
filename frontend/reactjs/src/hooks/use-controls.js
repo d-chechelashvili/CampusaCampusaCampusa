@@ -3,6 +3,7 @@ import {useReducer} from 'react';
 const initialControlsState = {
     searchBarValue: "",
     facultyFilterValue: "ALL",
+    sortType: "default"
 };
 
 const controlsStateReducer = (state, action) => {
@@ -16,6 +17,12 @@ const controlsStateReducer = (state, action) => {
         return {
             ...state,
             facultyFilterValue: action.value,
+        };
+    }
+    if (action.type === 'SORT'){
+        return {
+            ...state,
+            sortType: action.value,
         };
     }
     return controlsStateReducer;
@@ -35,11 +42,17 @@ const useControls = () => {
         dispatch({type: 'FACULTY_FILTER', value: event.target.value});
     };
 
+    const sortTypeChanged = (event) => {
+        dispatch({type: 'SORT', value: event.target.value});
+    };
+
     return {
         searchBarValue: controlsState.searchBarValue,
         facultyFilterValue: controlsState.facultyFilterValue,
+        sortType: controlsState.sortType,
         searchBarValueChanged,
         facultyFilterValueChanged,
+        sortTypeChanged,
     };
 };
 
