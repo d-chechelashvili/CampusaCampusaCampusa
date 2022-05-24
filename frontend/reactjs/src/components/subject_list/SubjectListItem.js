@@ -9,8 +9,8 @@ const SubjectListItem = (props) => {
     // const credits = 6;
     // const rating = 9.8;
     // const timeRequired = 5.4;
-    const subjectName = props.subject;
-    const faculty = "MACS";
+    const subjectName = props.subject.name;
+    const faculty = props.subject.faculty;
 
     return (
         <Link className={classes.link} to={`/subjects/${subjectName}`}>

@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import useHttp from "../hooks/use-http";
 import classes from "./HomePage.module.css";
 import {getAllSubjects} from "../library/api";
-import SubjectList from "../components/subjects/SubjectList";
+import SubjectList from "../components/subject_list/SubjectList";
 
 const HomePage = () => {
     const {sendRequest, status, data: loadedSubjects, error} = useHttp(
