@@ -1,15 +1,31 @@
-import {Link} from "react-router-dom";
+import {Link as RouterLink} from "react-router-dom";
 
-import classes from './MainHeader.module.css';
+import {AppBar, Link, Toolbar, Typography} from "@mui/material";
 
 const MainHeader = () => {
+    const appBarStyle = {
+        background: "#008080",
+        position: "sticky",
+    }
+
+    const toolBarStyle = {
+        height: "5rem",
+    }
+
+    const linkStyle = {
+        textDecoration: "none",
+        color: "white",
+    }
+
     return (
-        <header className={classes.header}>
-            <Link className={classes.link} to={`/`}>
-                <div className={classes.logo}>CampusaCampusaCampusa</div>
-            </Link>
-        </header>
-    );
+        <AppBar sx={appBarStyle} elevation={0}>
+            <Toolbar sx={toolBarStyle}>
+                <Link sx={linkStyle} component={RouterLink} to="/">
+                    <Typography fontSize="2rem">CampusaCampusaCampusa</Typography>
+                </Link>
+            </Toolbar>
+        </AppBar>
+    )
 };
 
 export default MainHeader;

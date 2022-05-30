@@ -1,6 +1,6 @@
-import {Link} from "react-router-dom";
+import {Link as RouterLink} from "react-router-dom";
 
-import classes from './SubjectListItem.module.css';
+import {Card, CardHeader, Link} from "@mui/material";
 
 
 const SubjectListItem = (props) => {
@@ -12,16 +12,26 @@ const SubjectListItem = (props) => {
     const subjectName = props.subject.name;
     const faculty = props.subject.faculty;
 
+    const linkStyle = {
+        textDecoration: "none",
+    }
+
+    const cardStyle = {
+        background: "#c2e7f0",
+        borderRadius: 2.5,
+        transition: "all 0.035s ease-in-out",
+        "&:hover": {
+            transform: "scale(1.015)",
+            boxShadow: "1px -1px 2px 1px #c2e7f0",
+        }
+    }
+
+
     return (
-        <Link className={classes.link} to={`/subjects/${subjectName}`}>
-            <li className={classes.item}>
-                <figure>
-                    <blockquote>
-                        <p>{subjectName}</p>
-                    </blockquote>
-                    <figcaption>{faculty}</figcaption>
-                </figure>
-            </li>
+        <Link sx={linkStyle} component={RouterLink} to={`/subjects/${subjectName}`}>
+            <Card sx={cardStyle}>
+                <CardHeader title={subjectName} subheader={faculty}/>
+            </Card>
         </Link>
     );
 

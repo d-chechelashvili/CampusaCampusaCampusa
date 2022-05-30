@@ -1,15 +1,15 @@
-import {Fragment} from 'react';
+import {Stack, Typography} from "@mui/material";
 
-import classes from './SubjectList.module.css';
 import SubjectListItem from "./SubjectListItem";
 import useControls from "../../hooks/use-controls";
 import SubjectSorter from "./sorter/SubjectSorter";
 import SubjectSearchBar from "./search_bar/SubjectSearchBar";
 import SubjectFacultyFilter from "./faculty_filter/SubjectFacultyFilter";
 
+
 const subj = [
     {name: "Programming Methodology", faculty: "MACS", credits: 6, time: 6.1, rating: 7.5},
-    {name: "Software Engineering", faculty: "MACS", credits: 5, time: 5.1 , rating: 7.3},
+    {name: "Software Engineering", faculty: "MACS", credits: 5, time: 5.1, rating: 7.3},
     {name: "Libri Magne", faculty: "GOV", credits: 3, time: 3.1, rating: 7.2},
     {name: "Anthropology", faculty: "GEN", credits: 4, time: 4.1, rating: 6.1},
     {name: "Libri Magne II", faculty: "GOV", credits: 3, time: 3.1, rating: 6.9},
@@ -53,7 +53,7 @@ const SubjectList = (props) => {
 
     props.subjects = subj;
     if (!props.subjects) {
-        return <h2>Loading...</h2>;
+        return <Typography variant="h2" align="center">Loading...</Typography>;
     }
 
     const searchedSubjects = props.subjects.filter(subject => {
@@ -68,19 +68,27 @@ const SubjectList = (props) => {
 
     const sortedSubjects = sortSubjects(filteredSubjects, sortType);
 
+
+    // return (
+    //     <Fragment>
+    //         {/*<div className={classes.controls}>*/}
+    //         {/*    <SubjectSearchBar onChange={searchBarValueChanged}/>*/}
+    //         {/*    <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={searchedSubjects}/>*/}
+    //         {/*    <SubjectSorter onChange={sortTypeChanged}/>*/}
+    //         {/*</div>*/}
+    //         <Stack spacing={2} paddingX={3.5} paddingY={2.5} sx={stackStyle}>
+    //             {sortedSubjects.map((subject) => (
+    //                 <SubjectListItem subject={subject}/>
+    //             ))}
+    //         </Stack>
+    //     </Fragment>
+    // );
     return (
-        <Fragment>
-            <div className={classes.controls}>
-                <SubjectSearchBar onChange={searchBarValueChanged}/>
-                <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={searchedSubjects}/>
-                <SubjectSorter onChange={sortTypeChanged}/>
-            </div>
-            <ul className={classes.list}>
-                {sortedSubjects.map((subject) => (
-                    <SubjectListItem subject={subject}/>
-                ))}
-            </ul>
-        </Fragment>
+        <Stack spacing={2} paddingX={4} paddingY={2.5}>
+            {sortedSubjects.map((subject) => (
+                <SubjectListItem subject={subject}/>
+            ))}
+        </Stack>
     );
 };
 
