@@ -29,29 +29,24 @@ const HomePage = () => {
         return <Typography variant="h2" align="center">NO DATA</Typography>;
     }
 
-    // const gridStyle = {
-    //     height: "100%",
-    //     overflowY: "auto",
-    //     msOverflowStyle: "none",
-    //     scrollbarWidth: "none",
-    //     "&::-webkit-scrollbar": {
-    //         display: "none"
-    //     },
-    // };
+    const gridContainerStyle = {
+        marginTop: "0",
+        width: "100%",
+        height: "calc(100vh - 5rem)",
+    }
+    const subjectListStyle = {
+        height: "calc(100vh - 5rem)",
+    };
 
     return (
-        // <Box sx={gridStyle}>
-        <Grid container direction="row-reverse" spacing={0}>
-            <Grid item xs={12} sm={6}>
-                {/*<Box sx={gridStyle}>*/}
-                <SubjectList subjects={loadedSubjects}/>
-                {/*</Box>*/}
-            </Grid>
+        <Grid container spacing={0} sx={gridContainerStyle}>
             <Grid item xs={12} sm={6}>
                 <Typography variant="h1" align="center">Planner</Typography>
             </Grid>
+            <Grid item xs={12} sm={6} sx={subjectListStyle}>
+                <SubjectList subjects={loadedSubjects}/>
+            </Grid>
         </Grid>
-        // </Box>
     )
     // return (
     //     <div className={classes.screen}>

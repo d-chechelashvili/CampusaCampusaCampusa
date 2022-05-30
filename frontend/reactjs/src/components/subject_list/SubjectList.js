@@ -1,4 +1,4 @@
-import {Stack, Typography} from "@mui/material";
+import {Box, Container, Stack, Typography} from "@mui/material";
 
 import SubjectListItem from "./SubjectListItem";
 import useControls from "../../hooks/use-controls";
@@ -83,8 +83,22 @@ const SubjectList = (props) => {
     //         </Stack>
     //     </Fragment>
     // );
+    const gridStyle = {
+        height: "100%",
+        overflowY: "auto",
+        msOverflowStyle: "none",
+        scrollbarWidth: "none",
+        "&::-webkit-scrollbar": {
+            display: "none"
+        },
+    };
     return (
-        <Stack spacing={2} paddingX={4} paddingY={2.5}>
+        <Stack spacing={2} paddingX={4} paddingY={2.5} sx={gridStyle}>
+            <Box>
+                <SubjectSearchBar onChange={searchBarValueChanged}/>
+                <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={searchedSubjects}/>
+                <SubjectSorter onChange={sortTypeChanged}/>
+            </Box>
             {sortedSubjects.map((subject) => (
                 <SubjectListItem subject={subject}/>
             ))}
