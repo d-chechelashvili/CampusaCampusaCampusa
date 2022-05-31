@@ -1,4 +1,4 @@
-import {Box, Container, Stack, Typography} from "@mui/material";
+import {Box, Stack, Typography} from "@mui/material";
 
 import SubjectListItem from "./SubjectListItem";
 import useControls from "../../hooks/use-controls";
@@ -16,7 +16,7 @@ const subj = [
     {name: "Programming Abstractions", faculty: "MACS", credits: 8, time: 8.7},
     {name: "Visual Arts", faculty: "VAADS", credits: 1, time: 1.1, rating: 3.5},
     {name: "Excel", faculty: "ESM", credits: 2, time: 2.1, rating: 4.5},
-]
+];
 
 const sortSubjects = (subjects, sortBy) => {
     const sorter = (subjects, sortBy) => {
@@ -35,14 +35,14 @@ const sortSubjects = (subjects, sortBy) => {
             default:
                 return subjects;
         }
-    }
+    };
     const sortingType = sortBy.split("-")[1];
     sortBy = sortBy.split("-")[0];
     subjects = sorter(subjects, sortBy);
     if (sortingType === "desc") {
         subjects.reverse();
     }
-    return subjects
+    return subjects;
 }
 
 const SubjectList = (props) => {
@@ -68,21 +68,6 @@ const SubjectList = (props) => {
 
     const sortedSubjects = sortSubjects(filteredSubjects, sortType);
 
-
-    // return (
-    //     <Fragment>
-    //         {/*<div className={classes.controls}>*/}
-    //         {/*    <SubjectSearchBar onChange={searchBarValueChanged}/>*/}
-    //         {/*    <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={searchedSubjects}/>*/}
-    //         {/*    <SubjectSorter onChange={sortTypeChanged}/>*/}
-    //         {/*</div>*/}
-    //         <Stack spacing={2} paddingX={3.5} paddingY={2.5} sx={stackStyle}>
-    //             {sortedSubjects.map((subject) => (
-    //                 <SubjectListItem subject={subject}/>
-    //             ))}
-    //         </Stack>
-    //     </Fragment>
-    // );
     const gridStyle = {
         height: "100%",
         overflowY: "auto",
@@ -92,12 +77,13 @@ const SubjectList = (props) => {
             display: "none"
         },
     };
+
     return (
         <Stack spacing={2} paddingX={4} paddingY={2.5} sx={gridStyle}>
             <Box>
                 <SubjectSearchBar onChange={searchBarValueChanged}/>
-                <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={searchedSubjects}/>
                 <SubjectSorter onChange={sortTypeChanged}/>
+                <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={searchedSubjects}/>
             </Box>
             {sortedSubjects.map((subject) => (
                 <SubjectListItem subject={subject}/>

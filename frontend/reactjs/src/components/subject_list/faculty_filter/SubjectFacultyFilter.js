@@ -1,7 +1,10 @@
-import classes from './SubjectFacultyFilter.module.css';
+import {useState} from "react";
 
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 const SubjectFacultyFilter = (props) => {
+    const [selectedFaculty, setFaculty] = useState('ALL');
+
     function getFaculties(subjects) {
         let faculties = [];
         for (let i = 0; i < subjects.length; i++) {
@@ -13,13 +16,29 @@ const SubjectFacultyFilter = (props) => {
     }
 
     const faculties = getFaculties(props.subjects);
+
+    const formStyle = {
+        marginTop: 1,
+        marginRight: 1,
+        float: 'right',
+        minWidth: 50,
+    };
+
+    const handleChange = (event) => {
+        setFaculty(event.target.value);
+        props.onChange(event);
+    };
+
     return (
-        <select className={classes.filter} onChange={props.onChange}>
-            <option value="ALL">All</option>
-            {faculties.map((faculty) => {
-                return <option value={faculty}>{faculty}</option>
-            })}
-        </select>
+        <FormControl size="small" sx={formStyle}>
+            <InputLabel>school</InputLabel>
+            <Select label="school" value={selectedFaculty} onChange={handleChange}>
+                <MenuItem value="ALL">All</MenuItem>
+                {faculties.map((faculty) => {
+                    return <MenuItem value={faculty}>{faculty}</MenuItem>
+                })}
+            </Select>
+        </FormControl>
     );
 };
 

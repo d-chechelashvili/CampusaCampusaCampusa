@@ -1,9 +1,10 @@
 import {useEffect} from "react";
 
-import {Box, Grid, Typography} from "@mui/material";
+import {Grid, Typography} from "@mui/material";
 
 import useHttp from "../hooks/use-http";
 import {getAllSubjects} from "../library/api";
+import Planner from "../components/planner/Planner";
 import SubjectList from "../components/subject_list/SubjectList";
 
 const HomePage = () => {
@@ -33,7 +34,8 @@ const HomePage = () => {
         marginTop: "0",
         width: "100%",
         height: "calc(100vh - 5rem)",
-    }
+    };
+
     const subjectListStyle = {
         height: "calc(100vh - 5rem)",
     };
@@ -41,23 +43,13 @@ const HomePage = () => {
     return (
         <Grid container spacing={0} sx={gridContainerStyle}>
             <Grid item xs={12} sm={6}>
-                <Typography variant="h1" align="center">Planner</Typography>
+                <Planner/>
             </Grid>
             <Grid item xs={12} sm={6} sx={subjectListStyle}>
                 <SubjectList subjects={loadedSubjects}/>
             </Grid>
         </Grid>
-    )
-    // return (
-    //     <div className={classes.screen}>
-    //         <div className={classes.planner}>
-    //             <Typography variant="h1">Planner</Typography>
-    //         </div>
-    //         <div className={classes.list}>
-    //             <SubjectList subjects={loadedSubjects}/>
-    //         </div>
-    //     </div>
-    // );
+    );
 };
 
 

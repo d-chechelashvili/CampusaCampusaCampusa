@@ -6,16 +6,16 @@ const MainHeader = () => {
     const appBarStyle = {
         background: "#008080",
         position: "sticky",
-    }
+    };
 
     const toolBarStyle = {
         height: "5rem",
-    }
+    };
 
     const linkStyle = {
         textDecoration: "none",
         color: "white",
-    }
+    };
 
     return (
         <AppBar sx={appBarStyle} elevation={0}>

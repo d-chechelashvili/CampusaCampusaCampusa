@@ -14,7 +14,7 @@ const SubjectListItem = (props) => {
 
     const linkStyle = {
         textDecoration: "none",
-    }
+    };
 
     const cardStyle = {
         background: "#c2e7f0",
@@ -24,7 +24,7 @@ const SubjectListItem = (props) => {
             transform: "scale(1.015)",
             boxShadow: "1px -1px 2px 1px #c2e7f0",
         }
-    }
+    };
 
 
     return (
