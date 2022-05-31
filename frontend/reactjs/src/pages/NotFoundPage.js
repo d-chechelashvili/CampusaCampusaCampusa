@@ -3,7 +3,7 @@ import {Fragment} from "react";
 function NotFoundPage() {
     return (
         <Fragment>
-            <p>Page not found!</p>
+            <p>გვერდი ვერ მოიძებნა</p>
         </Fragment>
     );
 }

@@ -19,7 +19,7 @@ const HomePage = () => {
 
     // todo if status pending could show loading spinner
     if (status === 'pending') {
-        return <Typography variant="h2" align="center">Loading...</Typography>;
+        return <Typography variant="h2" align="center">იტვირთება...</Typography>;
     }
 
     if (error) {

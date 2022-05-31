@@ -23,7 +23,7 @@ const SubjectSearchBar = (props) => {
         <Box sx={boxStyle}>
             <SearchIcon fontSize="medium" sx={searchIconStyle}/>
             <Input
-                placeholder="Search..."
+                placeholder="ძებნა..."
                 onChange={props.onChange}
                 sx={inputStyle}
                 disableUnderline

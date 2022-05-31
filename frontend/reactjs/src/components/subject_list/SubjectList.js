@@ -8,14 +8,14 @@ import SubjectFacultyFilter from "./faculty_filter/SubjectFacultyFilter";
 
 
 const subj = [
-    {name: "Programming Methodology", faculty: "MACS", credits: 6, time: 6.1, rating: 7.5},
-    {name: "Software Engineering", faculty: "MACS", credits: 5, time: 5.1, rating: 7.3},
-    {name: "Libri Magne", faculty: "GOV", credits: 3, time: 3.1, rating: 7.2},
-    {name: "Anthropology", faculty: "GEN", credits: 4, time: 4.1, rating: 6.1},
-    {name: "Libri Magne II", faculty: "GOV", credits: 3, time: 3.1, rating: 6.9},
-    {name: "Programming Abstractions", faculty: "MACS", credits: 8, time: 8.7},
-    {name: "Visual Arts", faculty: "VAADS", credits: 1, time: 1.1, rating: 3.5},
-    {name: "Excel", faculty: "ESM", credits: 2, time: 2.1, rating: 4.5},
+    {name: "პროგრამირების მეთოდოლოგიები", faculty: "MACS", credits: 6, time: 6.1, rating: 7.5},
+    {name: "პროგრამული უზრუნველყოფის არქიტექტურა", faculty: "MACS", credits: 5, time: 5.1, rating: 7.3},
+    {name: "ლიბრი მაგნე", faculty: "GOV", credits: 3, time: 3.1, rating: 7.2},
+    {name: "ანთროპოლოგია", faculty: "GEN", credits: 4, time: 4.1, rating: 6.1},
+    {name: "ლიბრი მაგნე II", faculty: "GOV", credits: 3, time: 3.1, rating: 6.9},
+    {name: "პროგრამირების აბსტრაქციები", faculty: "MACS", credits: 8, time: 8.7},
+    {name: "ვიზუალური ხელოვნება", faculty: "VAADS", credits: 1, time: 1.1, rating: 3.5},
+    {name: "ექსელი", faculty: "ESM", credits: 2, time: 2.1, rating: 4.5},
 ];
 
 const sortSubjects = (subjects, sortBy) => {
@@ -53,7 +53,7 @@ const SubjectList = (props) => {
 
     props.subjects = subj;
     if (!props.subjects) {
-        return <Typography variant="h2" align="center">Loading...</Typography>;
+        return <Typography variant="h2" align="center">იტვირთება...</Typography>;
     }
 
     const searchedSubjects = props.subjects.filter(subject => {

@@ -14,7 +14,7 @@ function Planner() {
 
     return (
         <Box sx={boxStyle}>
-            <Typography variant="h1" align="center">Planner</Typography>
+            <Typography variant="h3">დამგეგმავი</Typography>
         </Box>
     );
 }
