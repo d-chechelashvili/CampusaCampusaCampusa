@@ -21,7 +21,7 @@ const MainHeader = () => {
         <AppBar sx={appBarStyle} elevation={0}>
             <Toolbar sx={toolBarStyle}>
                 <Link sx={linkStyle} component={RouterLink} to="/">
-                    <Typography fontSize="2rem">CampusaCampusaCampusa</Typography>
+                    <Typography fontSize="2rem">კამპუსაკამპუსაკამპუსა</Typography>
                 </Link>
             </Toolbar>
         </AppBar>

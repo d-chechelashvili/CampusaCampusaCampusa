@@ -31,9 +31,9 @@ const SubjectFacultyFilter = (props) => {
 
     return (
         <FormControl size="small" sx={formStyle}>
-            <InputLabel>school</InputLabel>
+            <InputLabel>სკოლა</InputLabel>
             <Select label="school" value={selectedFaculty} onChange={handleChange}>
-                <MenuItem value="ALL">All</MenuItem>
+                <MenuItem value="ALL">ყველა</MenuItem>
                 {faculties.map((faculty) => {
                     return <MenuItem value={faculty}>{faculty}</MenuItem>
                 })}

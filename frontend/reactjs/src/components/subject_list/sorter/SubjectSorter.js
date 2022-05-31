@@ -18,19 +18,16 @@ const SubjectSorter = (props) => {
 
     return (
         <FormControl size="small" sx={formStyle}>
-            <InputLabel>sort</InputLabel>
-            <Select label="sort" value={selectedSort} onChange={handleChange}>
-                <MenuItem value="default">Default</MenuItem>
-                <MenuItem value="name-asc">By Name Asc</MenuItem>
-                <MenuItem value="name-desc">By Name Desc</MenuItem>
-                <MenuItem value="faculty-asc">By Faculty Asc</MenuItem>
-                <MenuItem value="faculty-desc">By Faculty Desc</MenuItem>
-                <MenuItem value="credits-asc">By Credits Asc</MenuItem>
-                <MenuItem value="credits-desc">By Credits Desc</MenuItem>
-                <MenuItem value="time-asc">By Time Asc</MenuItem>
-                <MenuItem value="time-desc">By Time Desc</MenuItem>
-                <MenuItem value="rating-asc">By Rating Asc</MenuItem>
-                <MenuItem value="rating-desc">By Rating Desc</MenuItem>
+            <InputLabel>დალაგება</InputLabel>
+            <Select label="დალაგება" value={selectedSort} onChange={handleChange}>
+                <MenuItem value="default">დაულაგებელი</MenuItem>
+                <MenuItem value="faculty-asc">სკოლებით</MenuItem>
+                <MenuItem value="credits-asc">კრედიტების ზრდადობით</MenuItem>
+                <MenuItem value="credits-desc">კრედიტების კლებადობით</MenuItem>
+                <MenuItem value="time-asc">სირთულის ზრდადობით</MenuItem>
+                <MenuItem value="time-desc">სირთულის კლებადობით</MenuItem>
+                <MenuItem value="rating-asc">რეიტინგის ზრდადობით</MenuItem>
+                <MenuItem value="rating-desc">რეიტინგის კლებადობით</MenuItem>
             </Select>
         </FormControl>
     );
