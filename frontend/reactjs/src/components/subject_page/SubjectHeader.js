@@ -2,6 +2,7 @@ import React from "react";
 
 import classes from "./SubjectHeader.module.css";
 import programming_methodology_syllabus from "../../media/syllabuses/programming_methodology.pdf";
+import {Rating} from "@mui/material";
 
 function SubjectHeader(props) {
     return (
@@ -14,24 +15,15 @@ function SubjectHeader(props) {
                 </div>
                 <div className={classes.ratingsContainer}>
                     <div className={classes.ratingsContainerColumn}>
-                        <h3 className={classes.centeredText}>თქვენი შეფასება</h3>
+                        <h3 className={classes.centeredText}>თქვენი<br/>ზოგადი შეფასება</h3>
                         <div className={classes.pointsContainer}>
-                            <select>
-                                <option value=" "></option>
-                                <option value="0">0.0</option>
-                                <option value="1">1.0</option>
-                                <option value="2">2.0</option>
-                                <option value="3">3.0</option>
-                                <option value="4">4.0</option>
-                                <option value="5">5.0</option>
-                            </select>
-                            <h3>&nbsp;/ 5.0</h3>
+                            <Rating name="your-rating" defaultValue={0} precision={1}/>
                         </div>
                     </div>
                     <div className={classes.ratingsContainerColumn}>
-                        <h3 className={classes.centeredText}>კამპუსას შეფასება</h3>
+                        <h3 className={classes.centeredText}>კამპუსას<br/>ზოგადი შეფასება</h3>
                         <div className={classes.pointsContainer}>
-                            <h3 className={classes.centeredText}>4.0 / 5.0</h3>
+                            <Rating name="campusa-rating" defaultValue={3.5} precision={0.5} readOnly/>
                         </div>
                     </div>
                 </div>

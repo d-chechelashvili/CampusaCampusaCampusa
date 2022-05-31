@@ -7,12 +7,10 @@
     align-items: center;
 }
 
-.hoursSlider {
-    margin: 0 16px;
-}
-
-.hoursInput {
-    width: 41px;
+.slider {
+    padding: 28px 32px 0 32px;
+    width: 240px;
+    min-width: 200px;
 }
 
 .text {
