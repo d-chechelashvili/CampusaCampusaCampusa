@@ -1,5 +1,5 @@
 .container {
-    padding: 24px 48px;
+    padding: 64px 48px;
 }
 
 .form {
@@ -12,8 +12,7 @@
     margin: 8px 0;
 }
 
-.slider {
-    padding: 28px 32px 0 32px;
-    width: 240px;
-    min-width: 200px;
+.inputContainer {
+    padding: 0 0 0 32px;
+    min-width: 120px
 }
