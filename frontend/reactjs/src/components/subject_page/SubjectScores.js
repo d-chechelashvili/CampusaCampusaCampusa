@@ -26,22 +26,24 @@ function SubjectScores(props) {
                 <div className={classes.form}>
                     <h3 className={classes.text}>მიუთითეთ თქვენი შეფასება:</h3>
                     <div className={classes.inputContainer}>
-                        <TextField
-                            required
-                            id="score"
-                            label="ქულა"
-                            type="number"
-                            size="small"
-                            InputProps={{
-                                inputProps: {
-                                    min: 0,
-                                    max: 100
-                                }
-                            }}
-                            InputLabelProps={{
-                                shrink: true
-                            }}
-                        />
+                        <FormControl fullWidth>
+                            <TextField
+                                required
+                                id="score"
+                                label="ქულა"
+                                type="number"
+                                size="small"
+                                InputProps={{
+                                    inputProps: {
+                                        min: 0,
+                                        max: 100
+                                    }
+                                }}
+                                InputLabelProps={{
+                                    shrink: true
+                                }}
+                            />
+                        </FormControl>
                     </div>
                     <div className={classes.inputContainer}>
                         <FormControl fullWidth>
