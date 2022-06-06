@@ -1,0 +1,24 @@
+.container {
+    padding: 0 48px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    white-space: nowrap;
+    margin: 8px 0;
+}
+
+.inputContainer {
+    padding: 0 0 0 32px;
+    min-width: 120px;
+}
+
+.paper {
+    max-width: 750px;
+    margin-top: 32px;
+    padding-top: 16px;
+}
