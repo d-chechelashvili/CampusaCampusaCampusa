@@ -23,8 +23,8 @@ function YourSubjectScore(props) {
     return (
         <React.Fragment>
             <div className={classes.container}>
+                <h3 className={classes.text}>მიუთითეთ თქვენი შეფასება:</h3>
                 <div className={classes.form}>
-                    <h3 className={classes.text}>მიუთითეთ თქვენი შეფასება:</h3>
                     <div className={classes.inputContainer}>
                         <FormControl fullWidth>
                             <TextField

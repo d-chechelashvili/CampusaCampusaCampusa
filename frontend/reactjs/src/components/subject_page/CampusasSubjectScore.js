@@ -23,8 +23,8 @@ function CampusasSubjectScore(props) {
     return (
         <React.Fragment>
             <div className={classes.container}>
+                <h3 className={classes.text}>შეფასებების სტატისტიკა:</h3>
                 <div className={classes.form}>
-                    <h3 className={classes.text}>შეფასებების სტატისტიკა:</h3>
                     <div className={classes.inputContainer}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">წელი</InputLabel>
