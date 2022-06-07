@@ -3,6 +3,7 @@ import {useReducer} from 'react';
 const initialControlsState = {
     searchBarValue: "",
     facultyFilterValue: "ALL",
+    semesterFilterValue: "ALL",
     sortType: "default"
 };
 
@@ -17,6 +18,12 @@ const controlsStateReducer = (state, action) => {
         return {
             ...state,
             facultyFilterValue: action.value,
+        };
+    }
+    if (action.type === 'SEMESTER_FILTER') {
+        return {
+            ...state,
+            semesterFilterValue: action.value,
         };
     }
     if (action.type === 'SORT'){
@@ -42,16 +49,23 @@ const useControls = () => {
         dispatch({type: 'FACULTY_FILTER', value: event.target.value});
     };
 
+    const semesterFilterValueChanged = (event) => {
+        dispatch({type: 'SEMESTER_FILTER', value: event.target.value});
+    };
+
     const sortTypeChanged = (event) => {
         dispatch({type: 'SORT', value: event.target.value});
     };
 
+
     return {
         searchBarValue: controlsState.searchBarValue,
         facultyFilterValue: controlsState.facultyFilterValue,
+        semesterFilterValue: controlsState.semesterFilterValue,
         sortType: controlsState.sortType,
         searchBarValueChanged,
         facultyFilterValueChanged,
+        semesterFilterValueChanged,
         sortTypeChanged,
     };
 };
