@@ -5,7 +5,7 @@ import useControls from "../../hooks/use-controls";
 import SubjectSorter from "./sorter/SubjectSorter";
 import SubjectSearchBar from "./search_bar/SubjectSearchBar";
 import SubjectFacultyFilter from "./faculty_filter/SubjectFacultyFilter";
-import SubjectSemesterFilter from "./semester_filter/SubjectFacultyFilter";
+import SubjectSemesterFilter from "./semester_filter/SubjectSemesterFilter";
 
 
 const subj = [
@@ -14,9 +14,10 @@ const subj = [
     {name: "ლიბრი მაგნე", faculty: "GOV", semester: "SPRING", year: 1, credits: 3, difficulty: 3.1, rating: 7.2},
     {name: "ანთროპოლოგია", faculty: "GEN", semester: "SPRING", year: 1, credits: 4, difficulty: 4.1, rating: 6.1},
     {name: "ლიბრი მაგნე II", faculty: "GOV", semester: "AUTUMN", year: 2, credits: 3, difficulty: 3.1, rating: 6.9},
-    {name: "პროგრამირების აბსტრაქციები", faculty: "MACS", semester: "SPRING", year: 1, credits: 8, difficulty: 8.7},
+    {name: "პროგრამირების აბსტრაქციები", faculty: "MACS", semester: "SPRING", year: 1, credits: 8, difficulty: 8.7, rating: 7.5},
     {name: "ვიზუალური ხელოვნება", faculty: "VAADS", semester: "AUTUMN", year: 3, credits: 1, difficulty: 1.1, rating: 3.5},
     {name: "ექსელი", faculty: "ESM", semester: "AUTUMN", year: 1, credits: 2, difficulty: 2.1, rating: 4.5},
+    {name: "საინტერესო საგანი", faculty: "GEN", semester: "BOTH", year: 4, credits: 3, difficulty: 7.7, rating: 4.5},
 ];
 
 const sortSubjects = (subjects, sortBy) => {
@@ -63,7 +64,7 @@ const SubjectList = (props) => {
 
     const subjectsFilteredBySemester = searchedSubjects.filter(subject => {
         return !(subject.semester !== semesterFilterValue &&
-            semesterFilterValue !== "ALL");
+            semesterFilterValue !== "ALL" && subject.semester !== "BOTH");
     });
 
     const filteredSubjects = subjectsFilteredBySemester.filter(subject => {

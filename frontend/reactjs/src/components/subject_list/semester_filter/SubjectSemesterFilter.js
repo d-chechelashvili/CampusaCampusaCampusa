@@ -25,6 +25,7 @@ const SubjectSemesterFilter = (props) => {
                 <MenuItem value="ALL">ყველა</MenuItem>
                 <MenuItem value="SPRING">გაზაფხულის</MenuItem>
                 <MenuItem value="AUTUMN">შემოდგომის</MenuItem>
+                <MenuItem value="BOTH">ორივე</MenuItem>
             </Select>
         </FormControl>
     );
