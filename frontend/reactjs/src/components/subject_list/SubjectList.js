@@ -9,14 +9,14 @@ import SubjectSemesterFilter from "./semester_filter/SubjectFacultyFilter";
 
 
 const subj = [
-    {name: "პროგრამირების მეთოდოლოგიები", faculty: "MACS", semester: "AUTUMN", credits: 6, time: 6.1, rating: 7.5},
-    {name: "პროგრამული უზრუნველყოფის არქიტექტურა", faculty: "MACS", semester: "SPRING", credits: 5, time: 5.1, rating: 7.3},
-    {name: "ლიბრი მაგნე", faculty: "GOV", semester: "SPRING", credits: 3, time: 3.1, rating: 7.2},
-    {name: "ანთროპოლოგია", faculty: "GEN", semester: "SPRING", credits: 4, time: 4.1, rating: 6.1},
-    {name: "ლიბრი მაგნე II", faculty: "GOV", semester: "AUTUMN", credits: 3, time: 3.1, rating: 6.9},
-    {name: "პროგრამირების აბსტრაქციები", faculty: "MACS", semester: "SPRING", credits: 8, time: 8.7},
-    {name: "ვიზუალური ხელოვნება", faculty: "VAADS", semester: "AUTUMN", credits: 1, time: 1.1, rating: 3.5},
-    {name: "ექსელი", faculty: "ESM", semester: "AUTUMN", credits: 2, time: 2.1, rating: 4.5},
+    {name: "პროგრამირების მეთოდოლოგიები", faculty: "MACS", semester: "AUTUMN", year: 1,  credits: 6, difficulty: 6.1, rating: 7.5},
+    {name: "პროგრამული უზრუნველყოფის არქიტექტურა", faculty: "MACS", semester: "SPRING", year: 2, credits: 5, difficulty: 5.1, rating: 7.3},
+    {name: "ლიბრი მაგნე", faculty: "GOV", semester: "SPRING", year: 1, credits: 3, difficulty: 3.1, rating: 7.2},
+    {name: "ანთროპოლოგია", faculty: "GEN", semester: "SPRING", year: 1, credits: 4, difficulty: 4.1, rating: 6.1},
+    {name: "ლიბრი მაგნე II", faculty: "GOV", semester: "AUTUMN", year: 2, credits: 3, difficulty: 3.1, rating: 6.9},
+    {name: "პროგრამირების აბსტრაქციები", faculty: "MACS", semester: "SPRING", year: 1, credits: 8, difficulty: 8.7},
+    {name: "ვიზუალური ხელოვნება", faculty: "VAADS", semester: "AUTUMN", year: 3, credits: 1, difficulty: 1.1, rating: 3.5},
+    {name: "ექსელი", faculty: "ESM", semester: "AUTUMN", year: 1, credits: 2, difficulty: 2.1, rating: 4.5},
 ];
 
 const sortSubjects = (subjects, sortBy) => {
@@ -28,8 +28,8 @@ const sortSubjects = (subjects, sortBy) => {
                 return subjects.sort((a, b) => a.faculty.localeCompare(b.faculty));
             case "credits":
                 return subjects.sort((a, b) => a.credits - b.credits);
-            case "time":
-                return subjects.sort((a, b) => a.time - b.time);
+            case "difficulty":
+                return subjects.sort((a, b) => a.difficulty - b.difficulty);
             case "rating":
                 return subjects.sort((a, b) => a.rating - b.rating);
             default:
@@ -70,6 +70,8 @@ const SubjectList = (props) => {
         return !(subject.faculty !== facultyFilterValue &&
             facultyFilterValue !== "ALL");
     });
+
+    // TODO წლებზე დროფდაუნი. წლებით გასორტვა.
 
     const sortedSubjects = sortSubjects(filteredSubjects, sortType);
 
