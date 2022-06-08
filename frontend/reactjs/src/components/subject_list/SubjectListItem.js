@@ -1,6 +1,6 @@
 import {Link as RouterLink} from "react-router-dom";
 
-import {Box, Card, CardContent, CardHeader, Divider, Link, Typography} from "@mui/material";
+import {Box, Card, CardContent, CardHeader, Divider, Grid, Link, Typography} from "@mui/material";
 
 
 const SubjectListItem = (props) => {
@@ -19,9 +19,6 @@ const SubjectListItem = (props) => {
         }
     }
 
-    const year = getYearInRoman(props.subject.year);
-
-
     function getSemesterString(semester) {
         switch (semester) {
             case "SPRING":
@@ -33,6 +30,7 @@ const SubjectListItem = (props) => {
         }
     }
 
+    const year = getYearInRoman(props.subject.year);
     const semester = getSemesterString(props.subject.semester);
     const credits = props.subject.credits;
     const rating = props.subject.rating;
@@ -54,6 +52,12 @@ const SubjectListItem = (props) => {
         }
     };
 
+    const lastMarginRightStyle = {
+        xs: 0,
+        sm: "0.5rem",
+        md: 0,
+    };
+
     const infoBoxStyle = {
         display: 'flex',
         alignItems: 'center',
@@ -61,15 +65,16 @@ const SubjectListItem = (props) => {
         border: '1.3px inset #1a06a6',
         borderRadius: 1,
         minWidth: "1.3rem",
-        marginRight: "0.4rem",
+        marginRight: lastMarginRightStyle,
     };
 
     const yearBoxStyle = {
         ...infoBoxStyle,
         float: "right",
         paddingX: 0.5,
-        marginRight: 0,
+        marginRight: lastMarginRightStyle,
     };
+
 
     const cardContentStyle = {
         paddingTop: 1.5,
@@ -85,8 +90,20 @@ const SubjectListItem = (props) => {
     };
 
     const dividerStyle = {
-        marginRight: "0.4rem"
+        marginLeft: 0.75,
+        display: {
+            lg: "inherit",
+            xs: "none",
+        }
     };
+
+    const infoWrappingBoxStyle = {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-end",
+    };
+
+    // decomposition
 
     return (
         <Link sx={linkStyle} component={RouterLink} to={`/subjects/${subjectName}`}>
@@ -107,34 +124,50 @@ const SubjectListItem = (props) => {
                     }
                 />
                 <CardContent sx={cardContentStyle}>
-                    <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
-                        <Typography sx={bottomTextStyle} variant="h6">კრედიტი:</Typography>
-                        <Box sx={infoBoxStyle}>
-                            <Typography sx={{color: "#000000"}} fontSize="0.9rem" variant="body1">{credits}</Typography>
-                        </Box>
-                        <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                        <Typography sx={bottomTextStyle} variant="h6">რეიტინგი:</Typography>
-                        <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
-                            <Typography sx={{color: "#000000"}} fontSize="0.9rem" variant="body1">{rating}</Typography>
-                        </Box>
-                        <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                        <Typography sx={bottomTextStyle} variant="h6">სირთულე:</Typography>
-                        <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
-                            <Typography sx={{color: "#000000"}} fontSize="0.9rem"
-                                        variant="body1">{difficulty}</Typography>
-                        </Box>
-                        <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                        <Typography sx={bottomTextStyle} variant="h6">სემესტრი:</Typography>
-                        <Box sx={{...infoBoxStyle, minWidth: "2.1rem", marginRight: 0}}>
-                            <Typography sx={{color: "#000000"}} fontSize="0.9rem"
-                                        variant="body1">{semester}</Typography>
-                        </Box>
-                    </Box>
+                    <Grid container columnSpacing={0.75} rowSpacing={1} justifyContent="flex-end">
+                        <Grid item xs={5} sm="auto" md={5} lg="auto">
+                            <Box sx={infoWrappingBoxStyle}>
+                                <Typography sx={bottomTextStyle} variant="h6">კრედიტი:</Typography>
+                                <Box sx={infoBoxStyle}>
+                                    <Typography fontSize="0.9rem" variant="body1">{credits}</Typography>
+                                </Box>
+                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs={5} sm="auto" md={5} lg="auto">
+                            <Box sx={infoWrappingBoxStyle}>
+                                <Typography sx={bottomTextStyle} variant="h6">რეიტინგი:</Typography>
+                                <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
+                                    <Typography fontSize="0.9rem" variant="body1">{rating}</Typography>
+                                </Box>
+                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs={5} sm="auto" md={5} lg="auto">
+                            <Box sx={infoWrappingBoxStyle}>
+                                <Typography sx={bottomTextStyle} variant="h6">სირთულე:</Typography>
+                                <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
+                                    <Typography fontSize="0.9rem" variant="body1">{difficulty}</Typography>
+                                </Box>
+                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs={5} sm="auto" md={5} lg="auto">
+                            <Box sx={infoWrappingBoxStyle}>
+                                <Typography sx={bottomTextStyle} variant="h6">სემესტრი:</Typography>
+                                <Box sx={{...infoBoxStyle, minWidth: "2.1rem", marginRight: lastMarginRightStyle,}}>
+                                    <Typography fontSize="0.9rem" variant="body1">{semester}</Typography>
+                                </Box>
+                            </Box>
+                        </Grid>
+                    </Grid>
                 </CardContent>
             </Card>
         </Link>
     );
-
 };
 
 export default SubjectListItem;
