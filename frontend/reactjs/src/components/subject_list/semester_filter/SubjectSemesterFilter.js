@@ -29,12 +29,7 @@ const SubjectSemesterFilter = (props) => {
         }
     }
 
-    const semesterValues = [
-        "SPRING",
-        "AUTUMN",
-        "BOTH",
-    ];
-
+    const semesterValues = ["SPRING", "AUTUMN", "BOTH"];
 
     return (
         <FormControl size="small" sx={formStyle}>

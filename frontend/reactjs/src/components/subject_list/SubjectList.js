@@ -4,6 +4,7 @@ import SubjectListItem from "./SubjectListItem";
 import useControls from "../../hooks/use-controls";
 import SubjectSorter from "./sorter/SubjectSorter";
 import SubjectSearchBar from "./search_bar/SubjectSearchBar";
+import SubjectYearFilter from "./year_filter/SubjectYearFilter";
 import SubjectFacultyFilter from "./faculty_filter/SubjectFacultyFilter";
 import SubjectSemesterFilter from "./semester_filter/SubjectSemesterFilter";
 
@@ -48,8 +49,8 @@ const sortSubjects = (subjects, sortBy) => {
 
 const SubjectList = (props) => {
     const {
-        searchBarValue, facultyFilterValue, semesterFilterValue, sortType,
-        searchBarValueChanged, facultyFilterValueChanged, semesterFilterValueChanged, sortTypeChanged,
+        searchBarValue, facultyFilterValue, semesterFilterValue, yearFilterValue, sortType,
+        searchBarValueChanged, facultyFilterValueChanged, semesterFilterValueChanged, yearFilterValueChanged, sortTypeChanged,
     } = useControls();
 
     props.subjects = subj;
@@ -67,7 +68,12 @@ const SubjectList = (props) => {
             semesterFilterValue.length !== 0);
     });
 
-    const filteredSubjects = subjectsFilteredBySemester.filter(subject => {
+    const subjectsFilteredByYear = subjectsFilteredBySemester.filter(subject => {
+        return !(!yearFilterValue.includes(subject.year) &&
+            yearFilterValue.length !== 0);
+    });
+
+    const filteredSubjects = subjectsFilteredByYear.filter(subject => {
         return !(!facultyFilterValue.includes(subject.faculty) &&
             facultyFilterValue.length !== 0);
     });
@@ -93,6 +99,7 @@ const SubjectList = (props) => {
                 <SubjectSorter onChange={sortTypeChanged}/>
                 <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={subjectsFilteredBySemester}/>
                 <SubjectSemesterFilter onChange={semesterFilterValueChanged}/>
+                <SubjectYearFilter onChange={yearFilterValueChanged}/>
             </Box>
             {sortedSubjects.map((subject) => (
                 <SubjectListItem subject={subject}/>

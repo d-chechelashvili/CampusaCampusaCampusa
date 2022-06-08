@@ -4,6 +4,7 @@ const initialControlsState = {
     searchBarValue: "",
     facultyFilterValue: [],
     semesterFilterValue: [],
+    yearFilterValue: [],
     sortType: "default"
 };
 
@@ -24,6 +25,12 @@ const controlsStateReducer = (state, action) => {
         return {
             ...state,
             semesterFilterValue: action.value,
+        };
+    }
+    if (action.type === 'YEAR_FILTER') {
+        return {
+            ...state,
+            yearFilterValue: action.value,
         };
     }
     if (action.type === 'SORT') {
@@ -53,6 +60,10 @@ const useControls = () => {
         dispatch({type: 'SEMESTER_FILTER', value: event.target.value});
     };
 
+    const yearFilterValueChanged = (event) => {
+        dispatch({type: 'YEAR_FILTER', value: event.target.value});
+    };
+
     const sortTypeChanged = (event) => {
         dispatch({type: 'SORT', value: event.target.value});
     };
@@ -62,10 +73,12 @@ const useControls = () => {
         searchBarValue: controlsState.searchBarValue,
         facultyFilterValue: controlsState.facultyFilterValue,
         semesterFilterValue: controlsState.semesterFilterValue,
+        yearFilterValue: controlsState.yearFilterValue,
         sortType: controlsState.sortType,
         searchBarValueChanged,
         facultyFilterValueChanged,
         semesterFilterValueChanged,
+        yearFilterValueChanged,
         sortTypeChanged,
     };
 };
