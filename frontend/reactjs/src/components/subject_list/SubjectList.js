@@ -24,10 +24,10 @@ const subj = [
 const sortSubjects = (subjects, sortBy) => {
     const sorter = (subjects, sortBy) => {
         switch (sortBy) {
-            case "name":
-                return subjects.sort((a, b) => a.name.localeCompare(b.name));
             case "faculty":
                 return subjects.sort((a, b) => a.faculty.localeCompare(b.faculty));
+            case "year":
+                return subjects.sort((a, b) => a.year - b.year);
             case "credits":
                 return subjects.sort((a, b) => a.credits - b.credits);
             case "difficulty":
@@ -78,7 +78,7 @@ const SubjectList = (props) => {
             facultyFilterValue.length !== 0);
     });
 
-    // TODO წლებზე დროფდაუნი. წლებით გასორტვა.
+    // TODO წლებით გასორტვა. make controls fully responsive.
 
     const sortedSubjects = sortSubjects(filteredSubjects, sortType);
 
