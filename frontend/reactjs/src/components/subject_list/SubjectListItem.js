@@ -103,7 +103,7 @@ const SubjectListItem = (props) => {
         justifyContent: "flex-end",
     };
 
-    // decomposition
+    // decomposition + make styles.js
 
     return (
         <Link sx={linkStyle} component={RouterLink} to={`/subjects/${subjectName}`}>

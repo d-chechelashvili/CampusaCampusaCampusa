@@ -63,13 +63,13 @@ const SubjectList = (props) => {
     });
 
     const subjectsFilteredBySemester = searchedSubjects.filter(subject => {
-        return !(subject.semester !== semesterFilterValue &&
-            semesterFilterValue !== "ALL" && subject.semester !== "BOTH");
+        return !(!semesterFilterValue.includes(subject.semester) &&
+            semesterFilterValue.length !== 0);
     });
 
     const filteredSubjects = subjectsFilteredBySemester.filter(subject => {
-        return !(subject.faculty !== facultyFilterValue &&
-            facultyFilterValue !== "ALL");
+        return !(!facultyFilterValue.includes(subject.faculty) &&
+            facultyFilterValue.length !== 0);
     });
 
     // TODO წლებზე დროფდაუნი. წლებით გასორტვა.

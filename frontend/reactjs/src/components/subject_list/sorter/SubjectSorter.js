@@ -19,7 +19,7 @@ const SubjectSorter = (props) => {
     return (
         <FormControl size="small" sx={formStyle}>
             <InputLabel>დალაგება</InputLabel>
-            <Select label="დალაგება" value={selectedSort} onChange={handleChange}>
+            <Select sx={{fontSize: "0.93rem"}} label="დალაგება" value={selectedSort} onChange={handleChange}>
                 <MenuItem value="default">დაულაგებელი</MenuItem>
                 <MenuItem value="faculty-asc">სკოლებით</MenuItem>
                 <MenuItem value="credits-asc">კრედიტების ზრდადობით</MenuItem>

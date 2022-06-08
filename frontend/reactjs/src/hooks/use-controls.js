@@ -2,8 +2,8 @@ import {useReducer} from 'react';
 
 const initialControlsState = {
     searchBarValue: "",
-    facultyFilterValue: "ALL",
-    semesterFilterValue: "ALL",
+    facultyFilterValue: [],
+    semesterFilterValue: [],
     sortType: "default"
 };
 
@@ -26,7 +26,7 @@ const controlsStateReducer = (state, action) => {
             semesterFilterValue: action.value,
         };
     }
-    if (action.type === 'SORT'){
+    if (action.type === 'SORT') {
         return {
             ...state,
             sortType: action.value,
