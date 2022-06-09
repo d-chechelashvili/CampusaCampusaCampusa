@@ -8,7 +8,6 @@ const SubjectSorter = (props) => {
 
     const formStyle = {
         marginTop: 1,
-        float: "right",
     };
 
     const handleChange = (event) => {
@@ -18,7 +17,7 @@ const SubjectSorter = (props) => {
 
     return (
         <FormControl size="small" sx={formStyle}>
-            <InputLabel>დალაგება</InputLabel>
+            <InputLabel sx={{color: "#000000", fontSize: "0.92rem"}}>დალაგება</InputLabel>
             <Select sx={{fontSize: "0.93rem"}} label="დალაგება" value={selectedSort} onChange={handleChange}>
                 <MenuItem value="default">დაულაგებელი</MenuItem>
                 <MenuItem value="faculty-asc">სკოლებით</MenuItem>

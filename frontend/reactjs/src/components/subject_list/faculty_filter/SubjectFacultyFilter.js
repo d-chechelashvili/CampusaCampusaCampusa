@@ -20,7 +20,6 @@ const SubjectFacultyFilter = (props) => {
     const formStyle = {
         marginTop: 1,
         marginRight: 1,
-        float: 'right',
         minWidth: 90,
         maxWidth: 150,
     };
@@ -32,7 +31,7 @@ const SubjectFacultyFilter = (props) => {
 
     return (
         <FormControl size="small" sx={formStyle}>
-            <InputLabel>სკოლა</InputLabel>
+            <InputLabel sx={{color: "#000000", fontSize: "0.92rem"}}>სკოლა</InputLabel>
             <Select sx={{fontSize: "0.92rem"}}
                     value={selectedFaculties}
                     onChange={handleChange}

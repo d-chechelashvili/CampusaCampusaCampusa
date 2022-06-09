@@ -8,7 +8,6 @@ const SubjectYearFilter = (props) => {
     const formStyle = {
         marginTop: 1,
         marginRight: 1,
-        float: 'right',
         minWidth: 65,
         maxWidth: 100,
     };
@@ -33,7 +32,7 @@ const SubjectYearFilter = (props) => {
         }
     }
 
-    const yearValues = [1,2,3,4];
+    const yearValues = [1, 2, 3, 4];
 
     function getRenderValue(selected) {
         if (selected.length === 0) {
@@ -44,9 +43,9 @@ const SubjectYearFilter = (props) => {
 
     return (
         <FormControl size="small" sx={formStyle}>
-            <InputLabel>{selectedYears.length ? "კურსი" : ""}</InputLabel>
+            <InputLabel sx={{color: "#000000", fontSize: "0.92rem"}}>{selectedYears.length ? "კურსი" : ""}</InputLabel>
             <Select label="კურსი" multiple displayEmpty
-                    sx={{fontSize: "0.92rem"}}
+                    sx={{color: "#000000", fontSize: "0.92rem"}}
                     value={selectedYears}
                     onChange={handleChange}
                     renderValue={(selected) => getRenderValue(selected)}>

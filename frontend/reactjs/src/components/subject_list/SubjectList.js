@@ -1,4 +1,4 @@
-import {Box, Stack, Typography} from "@mui/material";
+import {Box, Grid, Stack, Typography} from "@mui/material";
 
 import SubjectListItem from "./SubjectListItem";
 import useControls from "../../hooks/use-controls";
@@ -78,8 +78,6 @@ const SubjectList = (props) => {
             facultyFilterValue.length !== 0);
     });
 
-    // TODO წლებით გასორტვა. make controls fully responsive.
-
     const sortedSubjects = sortSubjects(filteredSubjects, sortType);
 
     const gridStyle = {
@@ -96,10 +94,12 @@ const SubjectList = (props) => {
         <Stack spacing={2} paddingX={4} paddingY={2.5} sx={gridStyle}>
             <Box>
                 <SubjectSearchBar onChange={searchBarValueChanged}/>
-                <SubjectSorter onChange={sortTypeChanged}/>
-                <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={subjectsFilteredBySemester}/>
-                <SubjectSemesterFilter onChange={semesterFilterValueChanged}/>
-                <SubjectYearFilter onChange={yearFilterValueChanged}/>
+                <Grid container justifyContent="flex-end">
+                    <SubjectYearFilter onChange={yearFilterValueChanged}/>
+                    <SubjectSemesterFilter onChange={semesterFilterValueChanged}/>
+                    <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={subjectsFilteredBySemester}/>
+                    <SubjectSorter onChange={sortTypeChanged}/>
+                </Grid>
             </Box>
             {sortedSubjects.map((subject) => (
                 <SubjectListItem subject={subject}/>

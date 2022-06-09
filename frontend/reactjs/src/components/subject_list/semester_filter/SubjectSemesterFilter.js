@@ -8,7 +8,6 @@ const SubjectSemesterFilter = (props) => {
     const formStyle = {
         marginTop: 1,
         marginRight: 1,
-        float: 'right',
         minWidth: 110,
         maxWidth: 200,
     };
@@ -33,7 +32,7 @@ const SubjectSemesterFilter = (props) => {
 
     return (
         <FormControl size="small" sx={formStyle}>
-            <InputLabel>სემესტრი</InputLabel>
+            <InputLabel sx={{color: "#000000", fontSize: "0.92rem"}}>სემესტრი</InputLabel>
             <Select label="სემესტრი" multiple
                     sx={{fontSize: "0.92rem"}}
                     value={selectedSemesters}
