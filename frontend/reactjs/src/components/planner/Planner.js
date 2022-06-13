@@ -1,21 +1,21 @@
-import {Box, Typography} from "@mui/material";
+import {Stack} from "@mui/material";
+import Semester from "./Semester/Semester";
 
 function Planner() {
     const boxStyle = {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         border: '1px solid #000000',
         borderRadius: '4px',
-        marginY: "8px",
-        marginLeft: "8px",
-        height: 'calc(100% - 16px)',
+        marginTop: "8px",
+        marginLeft: 2.5,
+        marginRight: {xs: 2.5, sm: 0},
+        height: 'calc(100% - 12px)',
     };
 
     return (
-        <Box sx={boxStyle}>
-            <Typography variant="h3">დამგეგმავი</Typography>
-        </Box>
+        <Stack spacing={2} sx={boxStyle}>
+            <Semester></Semester>
+            {/*<SemesterAdder></SemesterAdder>*/}
+        </Stack>
     );
 }
 

@@ -88,10 +88,13 @@ const SubjectList = (props) => {
         "&::-webkit-scrollbar": {
             display: "none"
         },
+        paddingRight: 3,
+        paddingLeft: {xs: 3, lg: 5},
+        paddingY: 1.5,
     };
 
     return (
-        <Stack spacing={2} paddingX={4} paddingY={2.5} sx={gridStyle}>
+        <Stack spacing={2} sx={gridStyle}>
             <Box>
                 <SubjectSearchBar onChange={searchBarValueChanged}/>
                 <Grid container justifyContent="flex-end">
