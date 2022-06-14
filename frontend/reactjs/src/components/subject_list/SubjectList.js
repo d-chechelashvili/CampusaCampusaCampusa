@@ -82,7 +82,10 @@ const SubjectList = (props) => {
 
     const gridStyle = {
         height: "100%",
-        overflowY: "auto",
+        overflowY: {
+            xs: "visible",
+            sm: "auto",
+        },
         msOverflowStyle: "none",
         scrollbarWidth: "none",
         "&::-webkit-scrollbar": {

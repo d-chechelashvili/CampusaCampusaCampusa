@@ -4,7 +4,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 function SemesterAdder(props) {
     const dividerStyle = {
         marginBottom: 1.1,
-        width: "80%",
+        width: "84%",
     }
 
     const buttonStyle = {

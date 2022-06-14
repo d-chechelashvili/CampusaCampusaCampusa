@@ -32,7 +32,7 @@ function Planner() {
         border: "1px groove #ccc",
         borderRadius: "4px",
         marginTop: "8px",
-        paddingTop: 0.25,
+        paddingTop: 1,
         marginLeft: 2.5,
         marginRight: {xs: 2.5, sm: 0},
         height: "calc(100% - 12px)",
