@@ -14,17 +14,25 @@ function Planner() {
     const addSemester = () => {
         setSemesterList((prevSemesterList) => {
             const newSemester = {
-                semesterNumber: prevSemesterList.length + 1,
                 subjects: [],
             };
             return [...prevSemesterList, newSemester];
         });
-    }
+    };
+
+    const removeSemester = (semesterNumber) => {
+        setSemesterList((prevSemesterList) => {
+            const index = semesterNumber - 1;
+            prevSemesterList.splice(index, 1);
+            return [...prevSemesterList];
+        });
+    };
 
     const boxStyle = {
-        border: "1px solid #000000",
+        border: "1px groove #ccc",
         borderRadius: "4px",
         marginTop: "8px",
+        paddingTop: 0.25,
         marginLeft: 2.5,
         marginRight: {xs: 2.5, sm: 0},
         height: "calc(100% - 12px)",
@@ -38,9 +46,10 @@ function Planner() {
         <Box sx={boxStyle}>
             <Scrollbars autoHide style={scrollbarStyle}>
                 <Stack spacing={2}>
-                    {semesterList.map((semester) => {
+                    {semesterList.map((semester, index) => {
                         return (
-                            <Semester semesterNumber={semester.semesterNumber}
+                            <Semester onDeleteClicked={removeSemester}
+                                      semesterNumber={index + 1}
                                       subjects={semester.subjects}/>
                         );
                     })}

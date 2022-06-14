@@ -8,21 +8,21 @@ function SemesterAdder(props) {
     }
 
     const buttonStyle = {
-        width: "58%",
+        width: "50%",
         fontSize: "0.9rem",
     }
 
     return (
-            <Box display="flex" flexDirection="column" alignItems="center">
-                <Divider sx={dividerStyle}/>
-                <Button
-                    variant="contained"
-                    onClick={props.onClick}
-                    startIcon={<AddCircleIcon/>}
-                    sx={buttonStyle}>
-                    სემესტრის დამატება
-                </Button>
-            </Box>
+        <Box display="flex" flexDirection="column" alignItems="center">
+            <Divider sx={dividerStyle}/>
+            <Button
+                variant="contained"
+                onClick={props.onClick}
+                startIcon={<AddCircleIcon/>}
+                sx={buttonStyle}>
+                სემესტრის დამატება
+            </Button>
+        </Box>
     );
 }
 

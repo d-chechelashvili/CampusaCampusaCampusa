@@ -42,10 +42,10 @@ const HomePage = () => {
 
     return (
         <Grid container spacing={0} sx={gridContainerStyle}>
-            <Grid item xs={12} sm={6} md={5.15} sx={gridItemsStyle}>
+            <Grid item xs={12} sm={6} md={5.2} sx={gridItemsStyle}>
                 <Planner/>
             </Grid>
-            <Grid item xs={12} sm={6} md={6.85} sx={gridItemsStyle}>
+            <Grid item xs={12} sm={6} md={6.8} sx={gridItemsStyle}>
                 <SubjectList subjects={loadedSubjects}/>
             </Grid>
         </Grid>
