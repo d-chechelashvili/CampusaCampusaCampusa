@@ -1,8 +1,9 @@
-import {Typography} from "@mui/material";
+import SemesterHeader from "./SemesterHeader";
 
 function Semester(props) {
     return (
-        <Typography align="center" fontSize="1.2rem">სემესტრი I</Typography>
+        <SemesterHeader semesterNumber={props.semesterNumber}/>
+        // semester body as list of subjects
     );
 }
 

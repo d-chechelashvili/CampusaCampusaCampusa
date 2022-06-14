@@ -36,16 +36,16 @@ const HomePage = () => {
         height: "calc(100vh - 5rem)",
     };
 
-    const subjectListStyle = {
+    const gridItemsStyle = {
         height: "calc(100vh - 5rem)",
     };
 
     return (
         <Grid container spacing={0} sx={gridContainerStyle}>
-            <Grid item xs={12} sm={6} md={5.1}>
+            <Grid item xs={12} sm={6} md={5.15} sx={gridItemsStyle}>
                 <Planner/>
             </Grid>
-            <Grid item xs={12} sm={6} md={6.9} sx={subjectListStyle}>
+            <Grid item xs={12} sm={6} md={6.85} sx={gridItemsStyle}>
                 <SubjectList subjects={loadedSubjects}/>
             </Grid>
         </Grid>
