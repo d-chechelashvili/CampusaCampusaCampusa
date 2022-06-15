@@ -44,7 +44,7 @@ function Planner() {
     const removeSemester = (semesterNumber) => {
         setSemesterList((prevSemesterList) => {
             const index = semesterNumber - 1;
-            prevSemesterList.splice(index, 1);
+            prevSemesterList[index].subjects = [];
             return [...prevSemesterList];
         });
     };

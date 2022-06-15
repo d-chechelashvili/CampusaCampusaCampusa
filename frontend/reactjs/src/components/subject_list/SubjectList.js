@@ -82,6 +82,10 @@ const SubjectList = (props) => {
 
     const gridStyle = {
         height: "100%",
+        marginBottom: {
+            xs: 2,
+            sm: 0,
+        },
         overflowY: {
             xs: "visible",
             sm: "auto",
