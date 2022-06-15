@@ -60,8 +60,6 @@ function SemesterHeader(props) {
         width: "0.5px"
     };
 
-    props.credits = 34; //TODO DELETE THIS
-    props.GPA = 2.4; //TODO DELETE THIS
     const semesterNumber = toRoman(props.semesterNumber);
 
     return (
