@@ -1,0 +1,15 @@
+.container {
+    padding: 48px;
+}
+
+.text {
+    white-space: nowrap;
+    margin: 8px 0;
+}
+
+.paginationContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 32px;
+}
