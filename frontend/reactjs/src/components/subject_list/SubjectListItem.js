@@ -1,9 +1,40 @@
+import {useState} from "react";
+
 import {Link as RouterLink} from "react-router-dom";
 
-import {Box, Card, CardContent, CardHeader, Divider, Grid, Link, Typography} from "@mui/material";
+import {
+    Box,
+    Card,
+    CardContent,
+    CardHeader,
+    Collapse,
+    Divider,
+    Grid,
+    IconButton,
+    styled,
+    Typography
+} from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+
+const ExpandMore = styled((props) => {
+    const {expand, ...other} = props;
+    return <IconButton {...other} />;
+})(({theme, expand}) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shorter,
+    }),
+}));
 
 const SubjectListItem = (props) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const handleExpandClick = (e) => {
+        e.preventDefault();
+        setIsExpanded((expanded) => !expanded);
+    };
+
     function getYearInRoman(year) {
         switch (year) {
             case 1:
@@ -39,11 +70,11 @@ const SubjectListItem = (props) => {
     const faculty = props.subject.faculty;
 
     const linkStyle = {
-        textDecoration: "none",
+        "text-decoration": "none",
     };
 
     const cardStyle = {
-        background: "rgba(207,230,243,0.92)",
+        background: "rgba(207,235,243,0.92)",
         // background: "rgba(194,231,240,0.95)",
         // background: "rgba(212,175,55,0.49)",
         borderRadius: 2.5,
@@ -51,7 +82,8 @@ const SubjectListItem = (props) => {
         "&:hover": {
             transform: "scale(1.015)",
             boxShadow: "1px -1px 2px 1px #c2e7f0",
-        }
+        },
+        paddingBottom: 1.5,
     };
 
     const lastMarginRightStyle = {
@@ -81,9 +113,11 @@ const SubjectListItem = (props) => {
     const cardContentStyle = {
         paddingTop: 1.5,
         paddingBottom: 0,
-        "&:last-child": {
-            paddingBottom: 1.5,
-        },
+    };
+
+    const contentBoxStyle = {
+        display: 'flex',
+        flexWrap: 'nowrap',
     };
 
     const bottomTextStyle = {
@@ -105,10 +139,8 @@ const SubjectListItem = (props) => {
         justifyContent: "flex-end",
     };
 
-    // decomposition + make styles.js
-
     return (
-        <Link sx={linkStyle} component={RouterLink} to={`/subjects/${subjectName}`}>
+        <RouterLink style={linkStyle} to={`/subjects/${subjectName}`}>
             <Card sx={cardStyle}>
                 <CardHeader
                     sx={{paddingBottom: 0}}
@@ -126,49 +158,64 @@ const SubjectListItem = (props) => {
                     }
                 />
                 <CardContent sx={cardContentStyle}>
-                    <Grid container columnSpacing={0.75} rowSpacing={1} justifyContent="flex-end">
-                        <Grid item xs={5} sm="auto" md={5} lg="auto">
-                            <Box sx={infoWrappingBoxStyle}>
-                                <Typography sx={bottomTextStyle} variant="h6">კრედიტი:</Typography>
-                                <Box sx={infoBoxStyle}>
-                                    <Typography fontSize="0.9rem" variant="body1">{credits}</Typography>
+                    <Box sx={contentBoxStyle}>
+                        <ExpandMore
+                            expand={isExpanded}
+                            onClick={handleExpandClick}
+                            aria-expanded={isExpanded}
+                            aria-label="show more"
+                        >
+                            <ExpandMoreIcon/>
+                        </ExpandMore>
+                        <Grid container columnSpacing={0.75} rowSpacing={1} justifyContent="flex-end" alignItems="end">
+                            <Grid item xs={5} sm="auto" md={5} lg="auto">
+                                <Box sx={infoWrappingBoxStyle}>
+                                    <Typography sx={bottomTextStyle} variant="h6">კრედიტი:</Typography>
+                                    <Box sx={infoBoxStyle}>
+                                        <Typography fontSize="0.9rem" variant="body1">{credits}</Typography>
+                                    </Box>
+                                    <Divider sx={dividerStyle} orientation="vertical" flexItem/>
                                 </Box>
-                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                            </Box>
-                        </Grid>
+                            </Grid>
 
-                        <Grid item xs={5} sm="auto" md={5} lg="auto">
-                            <Box sx={infoWrappingBoxStyle}>
-                                <Typography sx={bottomTextStyle} variant="h6">რეიტინგი:</Typography>
-                                <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
-                                    <Typography fontSize="0.9rem" variant="body1">{rating}</Typography>
+                            <Grid item xs={5} sm="auto" md={5} lg="auto">
+                                <Box sx={infoWrappingBoxStyle}>
+                                    <Typography sx={bottomTextStyle} variant="h6">რეიტინგი:</Typography>
+                                    <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
+                                        <Typography fontSize="0.9rem" variant="body1">{rating}</Typography>
+                                    </Box>
+                                    <Divider sx={dividerStyle} orientation="vertical" flexItem/>
                                 </Box>
-                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                            </Box>
-                        </Grid>
+                            </Grid>
 
-                        <Grid item xs={5} sm="auto" md={5} lg="auto">
-                            <Box sx={infoWrappingBoxStyle}>
-                                <Typography sx={bottomTextStyle} variant="h6">სირთულე:</Typography>
-                                <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
-                                    <Typography fontSize="0.9rem" variant="body1">{difficulty}</Typography>
+                            <Grid item xs={5} sm="auto" md={5} lg="auto">
+                                <Box sx={infoWrappingBoxStyle}>
+                                    <Typography sx={bottomTextStyle} variant="h6">სირთულე:</Typography>
+                                    <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
+                                        <Typography fontSize="0.9rem" variant="body1">{difficulty}</Typography>
+                                    </Box>
+                                    <Divider sx={dividerStyle} orientation="vertical" flexItem/>
                                 </Box>
-                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                            </Box>
-                        </Grid>
+                            </Grid>
 
-                        <Grid item xs={5} sm="auto" md={5} lg="auto">
-                            <Box sx={infoWrappingBoxStyle}>
-                                <Typography sx={bottomTextStyle} variant="h6">სემესტრი:</Typography>
-                                <Box sx={{...infoBoxStyle, minWidth: "2.1rem", marginRight: lastMarginRightStyle,}}>
-                                    <Typography fontSize="0.9rem" variant="body1">{semester}</Typography>
+                            <Grid item xs={5} sm="auto" md={5} lg="auto">
+                                <Box sx={infoWrappingBoxStyle}>
+                                    <Typography sx={bottomTextStyle} variant="h6">სემესტრი:</Typography>
+                                    <Box sx={{...infoBoxStyle, minWidth: "2.1rem", marginRight: lastMarginRightStyle,}}>
+                                        <Typography fontSize="0.9rem" variant="body1">{semester}</Typography>
+                                    </Box>
                                 </Box>
-                            </Box>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </Box>
                 </CardContent>
+                <Collapse in={isExpanded} timeout="auto">
+                    <CardContent sx={{paddingBottom: 0}}>
+                        <Typography align="center">Add semester placeholder</Typography>
+                    </CardContent>
+                </Collapse>
             </Card>
-        </Link>
+        </RouterLink>
     );
 };
 
