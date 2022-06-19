@@ -43,7 +43,7 @@ const SubjectListItem = (props) => {
     };
 
     const cardStyle = {
-        background: "rgba(207,230,243,0.925)",
+        background: "rgba(207,230,243,0.92)",
         // background: "rgba(194,231,240,0.95)",
         // background: "rgba(212,175,55,0.49)",
         borderRadius: 2.5,

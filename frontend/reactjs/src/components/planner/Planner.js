@@ -1,4 +1,6 @@
-import {useState} from "react";
+import {useDispatch, useSelector} from 'react-redux';
+import {semesterActions} from "../../store/redux-store";
+
 
 import {Box, Stack} from "@mui/material";
 import Scrollbars from "react-custom-scrollbars-2";
@@ -6,47 +8,17 @@ import Scrollbars from "react-custom-scrollbars-2";
 import Semester from "./Semester/Semester";
 import SemesterAdder from "./Semester/SemesterAdder";
 
-const memorizedSemesterList = [
-    {
-        subjects: [
-            {name: "პროგრამირების მეთოდოლოგიები", credits: 12, grade: "B"},
-            {name: "პროგრამირების აბსტრაქციები", credits: 8, grade: "C"},
-        ]
-    },
-    {
-        subjects: [
-            {name: "Libri Magni", credits: 3, grade: "?"},
-            {name: "სოციოლოგია", credits: 4, grade: "E"},
-            {name: "ფილოსოფია", credits: 4, grade: "F"},
-        ]
-    },
-    {
-        subjects: [
-            {name: "მსოფლიო ისტორია და საქართველო", credits: 3, grade: "?"},
-        ]
-    },
-];
-
 function Planner() {
     // TODO should fetch list from backend
-    const [semesterList, setSemesterList] = useState(memorizedSemesterList);
+    const dispatch = useDispatch();
+    const semesterList = useSelector((state) => state.semesterList);
 
     const addSemester = () => {
-        setSemesterList((prevSemesterList) => {
-            const newSemester = {
-                subjects: [],
-            };
-            return [...prevSemesterList, newSemester];
-        });
+        dispatch(semesterActions.addSemester());
     };
 
-
     const removeSemester = (semesterNumber) => {
-        setSemesterList((prevSemesterList) => {
-            const index = semesterNumber - 1;
-            prevSemesterList[index].subjects = [];
-            return [...prevSemesterList];
-        });
+        dispatch(semesterActions.removeSemester(semesterNumber));
     };
 
     const boxStyle = {
