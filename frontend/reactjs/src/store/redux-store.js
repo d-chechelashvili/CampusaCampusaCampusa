@@ -34,7 +34,11 @@ const semesterStore = createSlice({
         },
         removeSemester(state, action) {
             const index = action.payload - 1;
-            state.semesterList[index].subjects = [];
+            if (index === state.semesterList.length - 1) {
+                state.semesterList.pop();
+            } else {
+                state.semesterList[index].subjects = [];
+            }
         },
     }
 });
