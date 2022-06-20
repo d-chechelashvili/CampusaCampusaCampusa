@@ -10,6 +10,10 @@ function Semester(props) {
         props.onDeleteClicked(props.semesterNumber);
     };
 
+    const updateGrade = (subjectName, grade) => {
+        props.onGradeChange(props.semesterNumber, subjectName, grade);
+    }
+
     const credits = props.subjects.reduce((acc, subject) => acc + subject.credits, 0);
     const GPA = (Math.random() * 4.0).toFixed(2);
 
@@ -24,7 +28,9 @@ function Semester(props) {
                         <Subject
                             name={subject.name}
                             credits={subject.credits}
-                            grade={subject.grade}/>
+                            grade={subject.grade}
+                            onGradeChange={updateGrade}
+                        />
                     );
                 })}
             </Stack>

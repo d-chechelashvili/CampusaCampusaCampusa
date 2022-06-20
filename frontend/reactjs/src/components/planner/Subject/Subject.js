@@ -3,7 +3,7 @@ import React from 'react';
 import {Box, Divider, TextField, Typography} from "@mui/material";
 
 function Subject(props) {
-    const [grade, setGrade] = React.useState("?");
+    const [grade, setGrade] = React.useState(props.grade);
 
     const boxStyle = {
         paddingX: "2%",
@@ -27,6 +27,7 @@ function Subject(props) {
 
     const handleChange = (event) => {
         setGrade(event.target.value);
+        props.onGradeChange(props.name, event.target.value);
     };
 
     return (

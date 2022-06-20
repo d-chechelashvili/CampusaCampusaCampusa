@@ -40,6 +40,12 @@ const semesterStore = createSlice({
                 state.semesterList[index].subjects = [];
             }
         },
+        selectSubjectGrade(state, action) {
+            const {semesterNumber, subjectNumber, grade} = action.payload;
+            const semester = state.semesterList[semesterNumber - 1];
+            const subjectIndex = semester.subjects.findIndex((subject) => subject.name === subjectNumber);
+            semester.subjects[subjectIndex].grade = grade;
+        }
     }
 });
 
