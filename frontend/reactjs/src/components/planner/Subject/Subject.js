@@ -1,7 +1,10 @@
 import React from 'react';
-import {Box, Divider, Typography} from "@mui/material";
+
+import {Box, Divider, TextField, Typography} from "@mui/material";
 
 function Subject(props) {
+    const [grade, setGrade] = React.useState("?");
+
     const boxStyle = {
         paddingX: "2%",
         paddingY: 0.5,
@@ -19,13 +22,41 @@ function Subject(props) {
         marginX: 0.5,
     };
 
+    const grades = ["?", "A", "B", "C", "D", "E", "F"];
+
+
+    const handleChange = (event) => {
+        setGrade(event.target.value);
+    };
+
     return (
-        <Box sx={boxStyle}>
-            <Typography sx={{float: "left"}} fontSize="0.88rem" variant="h4">{props.name}</Typography>
-            <Box display="flex" sx={{float: "right"}}>
-                <Typography fontSize="0.8rem" variant="h6">კრედიტი: {props.credits}</Typography>
+        <Box display="flex" sx={boxStyle}>
+            <Typography alignSelf="center" sx={{float: "left"}} fontSize="0.9rem" variant="h4">{props.name}</Typography>
+            <Box display="flex" alignItems="center" sx={{marginLeft: "auto"}}>
+                <Typography fontSize="0.85rem" variant="h6">კრედიტი: {props.credits}</Typography>
                 <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                <Typography fontSize="0.8rem" variant="h6">ნიშანი: {props.grade}</Typography>
+                <Typography fontSize="0.85rem" variant="h6">{"ნიშანი: "}</Typography>
+                <TextField
+                    id="grade-select-native"
+                    sx={{textAlignLast: "center", marginLeft: 0.4}}
+                    select
+                    value={grade}
+                    onChange={handleChange}
+                    SelectProps={{
+                        native: true,
+                        fontSize: "0.5rem",
+                        size: "small",
+                    }}
+                    fontSize="0.5rem"
+                    variant="standard"
+                    size="small"
+                >
+                    {grades.map((option) => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </TextField>
             </Box>
         </Box>
     );

@@ -1,14 +1,14 @@
 import React from 'react'
 
-import SemesterHeader from "./SemesterHeader";
-import Subject from "../Subject/Subject";
 import {Stack} from "@mui/material";
+
+import Subject from "../Subject/Subject";
+import SemesterHeader from "./SemesterHeader";
 
 function Semester(props) {
     const removeSemester = () => {
         props.onDeleteClicked(props.semesterNumber);
     };
-    // TODO საგნების წაშლაა დასამატებელი
 
     const credits = props.subjects.reduce((acc, subject) => acc + subject.credits, 0);
     const GPA = (Math.random() * 4.0).toFixed(2);
