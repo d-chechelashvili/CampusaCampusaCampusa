@@ -16,12 +16,31 @@ function SubjectAdder(props) {
 
     const subjectName = props.subjectName;
     const credits = props.subjectCredits;
+    const semester = props.subjectSemester;
+    const year = props.subjectYear;
 
     const addSubject = (e) => {
         dispatch(semesterActions.addSubject({semesterNumber, subjectName, credits}));
     };
 
-    const semesters = [1, 2, 3];
+    const semesters = semesterList.map((semester, index) => {
+        return index + 1
+    });
+
+    const filteredSemesters = semesters.filter((semesterNum) => {
+        const minSemester = (year-1) * 2;
+        if (semesterNum < minSemester) {
+            return false;
+        }
+        switch (semester) {
+            case "SPRING":
+                return semesterNum % 2 === 1;
+            case "AUTUMN":
+                return semesterNum % 2 === 0;
+            default:
+                return true;
+        }
+    });
 
     const boxStyle = {
         display: "flex",
@@ -53,7 +72,7 @@ function SubjectAdder(props) {
                     variant="standard"
                     size="small"
                 >
-                    {semesters.map((option) => (
+                    {filteredSemesters.map((option) => (
                         <option key={option} value={option}>
                             {option}
                         </option>

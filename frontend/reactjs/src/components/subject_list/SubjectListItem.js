@@ -211,7 +211,10 @@ const SubjectListItem = (props) => {
                 </CardContent>
                 <Collapse in={isExpanded} timeout="auto">
                     <Divider sx={{background: "rgba(150,145,145,0.96)", marginTop: 1.1}}/>
-                    <SubjectAdder subjectName={subjectName} subjectCredits={credits}/>
+                    <SubjectAdder subjectCredits={credits}
+                                  subjectName={subjectName}
+                                  subjectYear={props.subject.year}
+                                  subjectSemester={props.subject.semester}/>
                 </Collapse>
             </Card>
         </RouterLink>

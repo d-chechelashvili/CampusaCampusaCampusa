@@ -40,9 +40,10 @@ function Planner() {
         height: "100%",
     }
 
-    const totalCredits = semesterList.reduce((acc, semester) => acc +
-            semester.subjects.reduce((acc2, subject) => acc2 + subject.credits, 0)
-        , 0);
+    const getSemesterCredits = (subjects) => {return subjects.reduce((acc, subject) => acc + subject.credits, 0)};
+
+    const totalCredits = semesterList.reduce((acc, semester) =>
+        acc + getSemesterCredits(semester.subjects), 0);
 
     const GPA = (Math.random() * 4.0).toFixed(2);
 
