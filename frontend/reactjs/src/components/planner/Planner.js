@@ -30,9 +30,9 @@ function Planner() {
         borderRadius: "4px",
         marginTop: "8px",
         paddingTop: 1,
-        marginLeft: 2.5,
+        marginLeft: {xs: 0, sm: 1, md: 1.5, lg: 2.5},
         marginRight: {xs: 2.5, sm: 0},
-        height: "calc(100% - 12px)",
+        height: "calc(100% - 15px)",
         width: "100%",
     };
 
@@ -64,7 +64,7 @@ function Planner() {
                     </Stack>
                 </Scrollbars>
             </Box>
-            <Box sx={{height: "6.2%", background: "#eee", marginTop: "0.3%"}}>
+            <Box boxShadow={3} sx={{height: "6.2%", background: "#e0dede", marginTop: "0.3%"}}>
                 <Divider sx={{background: "#d3d3d3"}}/>
                 <Box display="flex" alignItems="center" justifyContent="space-evenly">
                     <Typography marginTop={0.3} variant="h6" fontSize="1.05rem">

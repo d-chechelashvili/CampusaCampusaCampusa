@@ -10,13 +10,45 @@ import SubjectSemesterFilter from "./semester_filter/SubjectSemesterFilter";
 
 
 const subj = [
-    {name: "პროგრამირების მეთოდოლოგიები", faculty: "MACS", semester: "AUTUMN", year: 1,  credits: 6, difficulty: 6.1, rating: 7.5},
-    {name: "პროგრამული უზრუნველყოფის არქიტექტურა", faculty: "MACS", semester: "SPRING", year: 2, credits: 5, difficulty: 5.1, rating: 7.3},
+    {
+        name: "პროგრამირების მეთოდოლოგიები",
+        faculty: "MACS",
+        semester: "AUTUMN",
+        year: 1,
+        credits: 6,
+        difficulty: 6.1,
+        rating: 7.5
+    },
+    {
+        name: "პროგრამული უზრუნველყოფის არქიტექტურა",
+        faculty: "MACS",
+        semester: "SPRING",
+        year: 2,
+        credits: 5,
+        difficulty: 5.1,
+        rating: 7.3
+    },
     {name: "Libri magni", faculty: "GOV", semester: "SPRING", year: 1, credits: 3, difficulty: 3.1, rating: 7.2},
     {name: "ანთროპოლოგია", faculty: "GEN", semester: "SPRING", year: 1, credits: 4, difficulty: 4.1, rating: 6.1},
     {name: "Libri magni II", faculty: "GOV", semester: "AUTUMN", year: 2, credits: 3, difficulty: 3.1, rating: 6.9},
-    {name: "პროგრამირების აბსტრაქციები", faculty: "MACS", semester: "SPRING", year: 1, credits: 8, difficulty: 8.7, rating: 7.5},
-    {name: "ვიზუალური ხელოვნება", faculty: "VAADS", semester: "AUTUMN", year: 3, credits: 1, difficulty: 1.1, rating: 3.5},
+    {
+        name: "პროგრამირების აბსტრაქციები",
+        faculty: "MACS",
+        semester: "SPRING",
+        year: 1,
+        credits: 8,
+        difficulty: 8.7,
+        rating: 7.5
+    },
+    {
+        name: "ვიზუალური ხელოვნება",
+        faculty: "VAADS",
+        semester: "AUTUMN",
+        year: 3,
+        credits: 1,
+        difficulty: 1.1,
+        rating: 3.5
+    },
     {name: "ექსელი", faculty: "ESM", semester: "AUTUMN", year: 1, credits: 2, difficulty: 2.1, rating: 4.5},
     {name: "საინტერესო საგანი", faculty: "GEN", semester: "BOTH", year: 4, credits: 3, difficulty: 7.7, rating: 4.5},
 ];
@@ -49,8 +81,16 @@ const sortSubjects = (subjects, sortBy) => {
 
 const SubjectList = (props) => {
     const {
-        searchBarValue, facultyFilterValue, semesterFilterValue, yearFilterValue, sortType,
-        searchBarValueChanged, facultyFilterValueChanged, semesterFilterValueChanged, yearFilterValueChanged, sortTypeChanged,
+        searchBarValue,
+        facultyFilterValue,
+        semesterFilterValue,
+        yearFilterValue,
+        sortType,
+        searchBarValueChanged,
+        facultyFilterValueChanged,
+        semesterFilterValueChanged,
+        yearFilterValueChanged,
+        sortTypeChanged,
     } = useControls();
 
     props.subjects = subj;
@@ -82,10 +122,6 @@ const SubjectList = (props) => {
 
     const gridStyle = {
         height: "100%",
-        marginBottom: {
-            xs: 2,
-            sm: 0,
-        },
         overflowY: {
             xs: "visible",
             sm: "auto",
@@ -101,20 +137,24 @@ const SubjectList = (props) => {
     };
 
     return (
-        <Stack spacing={2} sx={gridStyle}>
-            <Box>
-                <SubjectSearchBar onChange={searchBarValueChanged}/>
-                <Grid container justifyContent="flex-end">
-                    <SubjectYearFilter onChange={yearFilterValueChanged}/>
-                    <SubjectSemesterFilter onChange={semesterFilterValueChanged}/>
-                    <SubjectFacultyFilter onChange={facultyFilterValueChanged} subjects={subjectsFilteredBySemester}/>
-                    <SubjectSorter onChange={sortTypeChanged}/>
-                </Grid>
-            </Box>
-            {sortedSubjects.map((subject) => (
-                <SubjectListItem subject={subject}/>
-            ))}
-        </Stack>
+        <Box sx={gridStyle}>
+            <Stack spacing={2}>
+                <Box>
+                    <SubjectSearchBar onChange={searchBarValueChanged}/>
+                    <Grid container justifyContent="flex-end">
+                        <SubjectYearFilter onChange={yearFilterValueChanged}/>
+                        <SubjectSemesterFilter onChange={semesterFilterValueChanged}/>
+                        <SubjectFacultyFilter onChange={facultyFilterValueChanged}
+                                              subjects={subjectsFilteredBySemester}/>
+                        <SubjectSorter onChange={sortTypeChanged}/>
+                    </Grid>
+                </Box>
+                {sortedSubjects.map((subject) => (
+                    <SubjectListItem subject={subject}/>
+                ))}
+            </Stack>
+            <Box sx={{height: {xs: "15px", sm: 0}, width: {xs: "100%", sm: 0}}}></Box>
+        </Box>
     );
 };
 

@@ -168,7 +168,7 @@ const SubjectListItem = (props) => {
                             <ExpandMoreIcon/>
                         </ExpandMore>
                         <Grid container columnSpacing={0.75} rowSpacing={1} justifyContent="flex-end" alignItems="end">
-                            <Grid item xs={5} sm="auto" md={5} lg="auto">
+                            <Grid item xs="auto" md={5} lg="auto">
                                 <Box sx={infoWrappingBoxStyle}>
                                     <Typography sx={bottomTextStyle} variant="h6">კრედიტი:</Typography>
                                     <Box sx={infoBoxStyle}>
@@ -178,7 +178,7 @@ const SubjectListItem = (props) => {
                                 </Box>
                             </Grid>
 
-                            <Grid item xs={5} sm="auto" md={5} lg="auto">
+                            <Grid item xs="auto" md={5} lg="auto">
                                 <Box sx={infoWrappingBoxStyle}>
                                     <Typography sx={bottomTextStyle} variant="h6">რეიტინგი:</Typography>
                                     <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
@@ -188,7 +188,7 @@ const SubjectListItem = (props) => {
                                 </Box>
                             </Grid>
 
-                            <Grid item xs={5} sm="auto" md={5} lg="auto">
+                            <Grid item xs="auto" md={5} lg="auto">
                                 <Box sx={infoWrappingBoxStyle}>
                                     <Typography sx={bottomTextStyle} variant="h6">სირთულე:</Typography>
                                     <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
@@ -198,7 +198,7 @@ const SubjectListItem = (props) => {
                                 </Box>
                             </Grid>
 
-                            <Grid item xs={5} sm="auto" md={5} lg="auto">
+                            <Grid item xs="auto" md={5} lg="auto">
                                 <Box sx={infoWrappingBoxStyle}>
                                     <Typography sx={bottomTextStyle} variant="h6">სემესტრი:</Typography>
                                     <Box sx={{...infoBoxStyle, minWidth: "2.1rem", marginRight: lastMarginRightStyle,}}>

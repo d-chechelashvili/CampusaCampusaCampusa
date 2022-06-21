@@ -8,8 +8,8 @@ import {Alert, Box, Button, TextField, Typography} from "@mui/material";
 function SubjectAdder(props) {
     const dispatch = useDispatch();
     const semesterList = useSelector((state) => state.semesterList);
-    const [semesterNumber, setSemesterNumber] = React.useState(1);
     const [error, setError] = React.useState(null);
+    const [semesterNumber, setSemesterNumber] = React.useState(1);
     const [errorTimeoutId, setErrorTimeoutId] = React.useState(null);
 
 
@@ -127,7 +127,6 @@ function SubjectAdder(props) {
                        sx={{marginTop: 0.5}} severity="error">{error}</Alert>
             }
         </Box>
-
     );
 }
 
