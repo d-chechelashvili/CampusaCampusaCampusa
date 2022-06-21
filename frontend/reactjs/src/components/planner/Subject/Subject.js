@@ -24,31 +24,32 @@ function Subject(props) {
 
     const grades = ["?", "A", "B", "C", "D", "E", "F"];
 
-
     const handleChange = (event) => {
         setGrade(event.target.value);
         props.onGradeChange(props.name, event.target.value);
     };
 
     return (
-        <Box display="flex" sx={boxStyle}>
-            <Typography alignSelf="center" sx={{float: "left"}} fontSize="0.9rem" variant="h4">{props.name}</Typography>
-            <Box display="flex" alignItems="center" sx={{marginLeft: "auto"}}>
-                <Typography fontSize="0.85rem" variant="h6">კრედიტი: {props.credits}</Typography>
+        <Box sx={boxStyle}>
+            <Typography fontSize="0.9rem" sx={{float: "left", marginRight: 0.5}}
+                        alignSelf="center" variant="h4">{props.name}</Typography>
+            <Box display="flex" justifyContent="flex-end" alignItems="center" sx={{marginLeft: "auto", float: "right"}}>
+                <Typography marginRight={0} fontSize="0.85rem" variant="h6">
+                    კრედიტი: {props.credits}</Typography>
                 <Divider sx={dividerStyle} orientation="vertical" flexItem/>
                 <Typography fontSize="0.85rem" variant="h6">{"ნიშანი: "}</Typography>
                 <TextField
                     id="grade-select-native"
-                    sx={{textAlignLast: "center", marginLeft: 0.4}}
+                    sx={{marginLeft: 0.4}}
+                    hiddenLabel
                     select
                     value={grade}
                     onChange={handleChange}
                     SelectProps={{
                         native: true,
-                        fontSize: "0.5rem",
+                        sx: {fontSize: "0.84rem", textAlignLast: "right"},
                         size: "small",
                     }}
-                    fontSize="0.5rem"
                     variant="standard"
                     size="small"
                 >

@@ -1,12 +1,12 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {semesterActions} from "../../store/redux-store";
-
 
 import {Box, Stack} from "@mui/material";
 import Scrollbars from "react-custom-scrollbars-2";
 
 import Semester from "./Semester/Semester";
 import SemesterAdder from "./Semester/SemesterAdder";
+import {semesterActions} from "../../store/redux-store";
+
 
 function Planner() {
     // TODO should fetch list from backend
@@ -22,8 +22,8 @@ function Planner() {
     };
 
     const changeSubjectGrade = (semesterNumber, subjectName, grade) => {
-        dispatch(semesterActions.selectSubjectGrade(semesterNumber, subjectName, grade));
-    }
+        dispatch(semesterActions.selectSubjectGrade({semesterNumber, subjectName, grade}));
+    };
 
     const boxStyle = {
         border: "1px groove #ccc",

@@ -16,6 +16,8 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import SubjectAdder from "./subject_adder/SubjectAdder";
+
 
 const ExpandMore = styled((props) => {
     const {expand, ...other} = props;
@@ -75,8 +77,6 @@ const SubjectListItem = (props) => {
 
     const cardStyle = {
         background: "rgba(207,235,243,0.92)",
-        // background: "rgba(194,231,240,0.95)",
-        // background: "rgba(212,175,55,0.49)",
         borderRadius: 2.5,
         transition: "all 0.035s ease-in-out",
         "&:hover": {
@@ -210,9 +210,8 @@ const SubjectListItem = (props) => {
                     </Box>
                 </CardContent>
                 <Collapse in={isExpanded} timeout="auto">
-                    <CardContent sx={{paddingBottom: 0}}>
-                        <Typography align="center">Add semester placeholder</Typography>
-                    </CardContent>
+                    <Divider sx={{background: "rgba(150,145,145,0.96)", marginTop: 1.1}}/>
+                    <SubjectAdder subjectName={subjectName} subjectCredits={credits}/>
                 </Collapse>
             </Card>
         </RouterLink>
