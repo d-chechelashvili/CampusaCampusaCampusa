@@ -40,12 +40,55 @@ function Planner() {
         height: "100%",
     }
 
-    const getSemesterCredits = (subjects) => {return subjects.reduce((acc, subject) => acc + subject.credits, 0)};
+    const getSemesterCredits = (subjects) => {
+        return subjects.reduce((acc, subject) => acc + subject.credits, 0)
+    };
 
     const totalCredits = semesterList.reduce((acc, semester) =>
         acc + getSemesterCredits(semester.subjects), 0);
 
-    const GPA = (Math.random() * 4.0).toFixed(2);
+    const getSemesterPoints = (subjects) => {
+        return subjects.reduce((acc, subject) => {
+            if (acc === "?") {
+                return "?";
+            }
+
+            switch (subject.grade) {
+                case "A":
+                    return acc + (4 * subject.credits);
+                case "B":
+                    return acc + (3.38 * subject.credits);
+                case "C":
+                    return acc + (2.77 * subject.credits);
+                case "D":
+                    return acc + (2.16 * subject.credits);
+                case "E":
+                    return acc + (1.55 * subject.credits);
+                case "F":
+                    return acc;
+                default:
+                    return "?";
+            }
+        }, 0);
+    }
+
+    const totalPoints = semesterList.reduce((acc, semester) =>{
+        const currSemesterPoints = getSemesterPoints(semester.subjects);
+        if (acc === "?" || currSemesterPoints === "?") {
+            return "?";
+        }
+
+        return acc + currSemesterPoints;
+    }, 0);
+
+
+    let GPA = totalPoints === "?" ? "?" : +(Math.round(totalPoints / totalCredits + "e+2") + "e-2");
+    if (!GPA) {
+        GPA = 0.0;
+    }
+    if (Number.isInteger(GPA)) {
+        GPA = GPA.toFixed(2);
+    }
 
     return (
         <Box sx={boxStyle}>
