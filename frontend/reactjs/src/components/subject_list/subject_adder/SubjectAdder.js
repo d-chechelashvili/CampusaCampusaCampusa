@@ -9,9 +9,8 @@ function SubjectAdder(props) {
     const dispatch = useDispatch();
     const semesterList = useSelector((state) => state.semesterList);
     const [error, setError] = React.useState(null);
-    const [semesterNumber, setSemesterNumber] = React.useState(1);
+    const [semesterNumber, setSemesterNumber] = React.useState(null);
     const [errorTimeoutId, setErrorTimeoutId] = React.useState(null);
-
 
     const handleChange = (event) => {
         setSemesterNumber(event.target.value);
@@ -72,6 +71,10 @@ function SubjectAdder(props) {
         }
     });
 
+    if (semesterNumber === null && filteredSemesters.length > 0) {
+        setSemesterNumber(filteredSemesters[0]);
+    }
+
     const boxStyle = {
         display: "flex",
         alignItems: "center",
@@ -123,7 +126,8 @@ function SubjectAdder(props) {
             </Box>
             {error &&
                 <Alert onClick={() => setError(null)}
-                       onClose={() => {}}
+                       onClose={() => {
+                       }}
                        sx={{marginTop: 0.5}} severity="error">{error}</Alert>
             }
         </Box>

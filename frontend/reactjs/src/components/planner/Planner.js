@@ -72,7 +72,7 @@ function Planner() {
         }, 0);
     }
 
-    const totalPoints = semesterList.reduce((acc, semester) =>{
+    const totalPoints = semesterList.reduce((acc, semester) => {
         const currSemesterPoints = getSemesterPoints(semester.subjects);
         if (acc === "?" || currSemesterPoints === "?") {
             return "?";
