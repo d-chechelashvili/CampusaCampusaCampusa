@@ -10,9 +10,13 @@ function Semester(props) {
         props.onDeleteClicked(props.semesterNumber);
     };
 
+    const removeSubject = (subjectName) => {
+        props.onDeleteSubjectClicked(props.semesterNumber, subjectName);
+    };
+
     const updateGrade = (subjectName, grade) => {
         props.onGradeChange(props.semesterNumber, subjectName, grade);
-    }
+    };
 
     const credits = props.subjects.reduce((acc, subject) => acc + subject.credits, 0);
     const points = props.subjects.reduce((acc, subject) => {
@@ -56,10 +60,12 @@ function Semester(props) {
                 {props.subjects.map((subject) => {
                     return (
                         <Subject
+                            key={subject.name}
                             name={subject.name}
                             credits={subject.credits}
                             grade={subject.grade}
                             onGradeChange={updateGrade}
+                            onDeleteClicked={removeSubject}
                         />
                     );
                 })}

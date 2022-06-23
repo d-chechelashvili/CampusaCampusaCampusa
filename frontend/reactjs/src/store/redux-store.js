@@ -29,10 +29,15 @@ const semesterStore = createSlice({
         },
         addSubject(state, action) {
             const {semesterNumber, subjectName, credits} = action.payload;
-            state.semesterList[semesterNumber - 1].subjects.push(
-                {name: subjectName, credits: credits, grade: "?"}
-            );
-        }
+            const semester = state.semesterList[semesterNumber - 1];
+            semester.subjects.push({name: subjectName, credits, grade: "?"});
+        },
+        removeSubject(state, action) {
+            const {semesterNumber, subjectName} = action.payload;
+            const semester = state.semesterList[semesterNumber - 1];
+            const subjectIndex = semester.subjects.findIndex((subject) => subject.name === subjectName);
+            semester.subjects.splice(subjectIndex, 1);
+        },
     }
 });
 

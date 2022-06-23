@@ -25,6 +25,10 @@ function Planner() {
         dispatch(semesterActions.selectSubjectGrade({semesterNumber, subjectName, grade}));
     };
 
+    const removeSubject = (semesterNumber, subjectName) => {
+        dispatch(semesterActions.removeSubject({semesterNumber, subjectName}));
+    }
+
     const boxStyle = {
         border: "1px groove #ccc",
         borderRadius: "4px",
@@ -99,6 +103,7 @@ function Planner() {
                             return (
                                 <Semester onDeleteClicked={removeSemester}
                                           onGradeChange={changeSubjectGrade}
+                                          onDeleteSubjectClicked={removeSubject}
                                           semesterNumber={index + 1}
                                           subjects={semester.subjects}/>
                             );
