@@ -73,6 +73,7 @@ const SubjectListItem = (props) => {
 
     const linkStyle = {
         "text-decoration": "none",
+        "color": "inherit",
     };
 
     const cardStyle = {
@@ -140,8 +141,8 @@ const SubjectListItem = (props) => {
     };
 
     return (
-        <RouterLink style={linkStyle} to={`/subjects/${subjectName}`}>
-            <Card sx={cardStyle}>
+        <Card sx={cardStyle}>
+            <RouterLink style={linkStyle} to={`/subjects/${subjectName}`}>
                 <CardHeader
                     sx={{paddingBottom: 0}}
                     title={subjectName}
@@ -157,67 +158,67 @@ const SubjectListItem = (props) => {
                         </Box>
                     }
                 />
-                <CardContent sx={cardContentStyle}>
-                    <Box sx={contentBoxStyle}>
-                        <ExpandMore
-                            expand={isExpanded}
-                            onClick={handleExpandClick}
-                            aria-expanded={isExpanded}
-                            aria-label="show more"
-                        >
-                            <ExpandMoreIcon/>
-                        </ExpandMore>
-                        <Grid container columnSpacing={0.75} rowSpacing={1} justifyContent="flex-end" alignItems="end">
-                            <Grid item xs="auto" md={5} lg="auto">
-                                <Box sx={infoWrappingBoxStyle}>
-                                    <Typography sx={bottomTextStyle} variant="h6">კრედიტი:</Typography>
-                                    <Box sx={infoBoxStyle}>
-                                        <Typography fontSize="0.9rem" variant="body1">{credits}</Typography>
-                                    </Box>
-                                    <Divider sx={dividerStyle} orientation="vertical" flexItem/>
+            </RouterLink>
+            <CardContent sx={cardContentStyle}>
+                <Box sx={contentBoxStyle}>
+                    <ExpandMore
+                        expand={isExpanded}
+                        onClick={handleExpandClick}
+                        aria-expanded={isExpanded}
+                        aria-label="show more"
+                    >
+                        <ExpandMoreIcon/>
+                    </ExpandMore>
+                    <Grid container columnSpacing={0.75} rowSpacing={1} justifyContent="flex-end" alignItems="end">
+                        <Grid item xs="auto" md={5} lg="auto">
+                            <Box sx={infoWrappingBoxStyle}>
+                                <Typography sx={bottomTextStyle} variant="h6">კრედიტი:</Typography>
+                                <Box sx={infoBoxStyle}>
+                                    <Typography fontSize="0.9rem" variant="body1">{credits}</Typography>
                                 </Box>
-                            </Grid>
-
-                            <Grid item xs="auto" md={5} lg="auto">
-                                <Box sx={infoWrappingBoxStyle}>
-                                    <Typography sx={bottomTextStyle} variant="h6">რეიტინგი:</Typography>
-                                    <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
-                                        <Typography fontSize="0.9rem" variant="body1">{rating}</Typography>
-                                    </Box>
-                                    <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                                </Box>
-                            </Grid>
-
-                            <Grid item xs="auto" md={5} lg="auto">
-                                <Box sx={infoWrappingBoxStyle}>
-                                    <Typography sx={bottomTextStyle} variant="h6">სირთულე:</Typography>
-                                    <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
-                                        <Typography fontSize="0.9rem" variant="body1">{difficulty}</Typography>
-                                    </Box>
-                                    <Divider sx={dividerStyle} orientation="vertical" flexItem/>
-                                </Box>
-                            </Grid>
-
-                            <Grid item xs="auto" md={5} lg="auto">
-                                <Box sx={infoWrappingBoxStyle}>
-                                    <Typography sx={bottomTextStyle} variant="h6">სემესტრი:</Typography>
-                                    <Box sx={{...infoBoxStyle, minWidth: "2.1rem", marginRight: lastMarginRightStyle,}}>
-                                        <Typography fontSize="0.9rem" variant="body1">{semester}</Typography>
-                                    </Box>
-                                </Box>
-                            </Grid>
+                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
+                            </Box>
                         </Grid>
-                    </Box>
-                </CardContent>
-                <Collapse in={isExpanded} timeout="auto">
-                    <Divider sx={{background: "rgba(150,145,145,0.96)", marginTop: 1.1}}/>
-                    <SubjectAdder subjectCredits={credits}
-                                  subjectName={subjectName}
-                                  subjectYear={props.subject.year}
-                                  subjectSemester={props.subject.semester}/>
-                </Collapse>
-            </Card>
-        </RouterLink>
+
+                        <Grid item xs="auto" md={5} lg="auto">
+                            <Box sx={infoWrappingBoxStyle}>
+                                <Typography sx={bottomTextStyle} variant="h6">რეიტინგი:</Typography>
+                                <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
+                                    <Typography fontSize="0.9rem" variant="body1">{rating}</Typography>
+                                </Box>
+                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs="auto" md={5} lg="auto">
+                            <Box sx={infoWrappingBoxStyle}>
+                                <Typography sx={bottomTextStyle} variant="h6">სირთულე:</Typography>
+                                <Box sx={{...infoBoxStyle, minWidth: "1.8rem"}}>
+                                    <Typography fontSize="0.9rem" variant="body1">{difficulty}</Typography>
+                                </Box>
+                                <Divider sx={dividerStyle} orientation="vertical" flexItem/>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs="auto" md={5} lg="auto">
+                            <Box sx={infoWrappingBoxStyle}>
+                                <Typography sx={bottomTextStyle} variant="h6">სემესტრი:</Typography>
+                                <Box sx={{...infoBoxStyle, minWidth: "2.1rem", marginRight: lastMarginRightStyle,}}>
+                                    <Typography fontSize="0.9rem" variant="body1">{semester}</Typography>
+                                </Box>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </CardContent>
+            <Collapse in={isExpanded} timeout="auto">
+                <Divider sx={{background: "rgba(150,145,145,0.96)", marginTop: 1.1}}/>
+                <SubjectAdder subjectCredits={credits}
+                              subjectName={subjectName}
+                              subjectYear={props.subject.year}
+                              subjectSemester={props.subject.semester}/>
+            </Collapse>
+        </Card>
     );
 };
 
