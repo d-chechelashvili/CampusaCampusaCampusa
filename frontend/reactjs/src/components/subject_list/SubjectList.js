@@ -1,10 +1,10 @@
 import {Box, Grid, Stack, Typography} from "@mui/material";
 
-import SubjectListItem from "./SubjectListItem";
 import useControls from "../../hooks/use-controls";
 import SubjectSorter from "./sorter/SubjectSorter";
 import SubjectSearchBar from "./search_bar/SubjectSearchBar";
 import SubjectYearFilter from "./year_filter/SubjectYearFilter";
+import SubjectListItem from "./subject_list_item/SubjectListItem";
 import SubjectFacultyFilter from "./faculty_filter/SubjectFacultyFilter";
 import SubjectSemesterFilter from "./semester_filter/SubjectSemesterFilter";
 

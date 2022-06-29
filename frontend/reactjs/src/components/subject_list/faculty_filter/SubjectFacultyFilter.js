@@ -2,31 +2,23 @@ import {useState} from "react";
 
 import {Checkbox, FormControl, InputLabel, ListItemText, MenuItem, Select} from "@mui/material";
 
+import {getUniqueFacultiesFromSubjects} from "../../../lib/utils";
+
 const SubjectFacultyFilter = (props) => {
     const [selectedFaculties, setFaculties] = useState([]);
 
-    function getFaculties(subjects) {
-        let faculties = [];
-        for (let i = 0; i < subjects.length; i++) {
-            if (faculties.indexOf(subjects[i].faculty) === -1) {
-                faculties.push(subjects[i].faculty);
-            }
-        }
-        return faculties;
-    }
+    const faculties = getUniqueFacultiesFromSubjects(props.subjects);
 
-    const faculties = getFaculties(props.subjects);
+    const handleChange = (event) => {
+        setFaculties(event.target.value);
+        props.onChange(event);
+    };
 
     const formStyle = {
         marginTop: 1,
         marginRight: 1,
         minWidth: 90,
         maxWidth: 150,
-    };
-
-    const handleChange = (event) => {
-        setFaculties(event.target.value);
-        props.onChange(event);
     };
 
     return (

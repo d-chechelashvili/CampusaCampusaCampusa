@@ -1,10 +1,11 @@
-import {useContext, useState} from "react";
-import {Link as RouterLink} from "react-router-dom";
+import {useContext} from "react";
 
 import jwt_decode from "jwt-decode";
 
-import {AppBar, Avatar, Box, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, Typography} from "@mui/material";
+import {AppBar, Toolbar} from "@mui/material";
 
+import Logo from "./logo/Logo";
+import UserMenu from "./user_menu/UserMenu";
 import AuthContext from "../../store/auth-context";
 
 
@@ -16,15 +17,9 @@ const MainHeader = () => {
         const decoded = jwt_decode(authContext.token);
         pictureUrl = decoded.picture;
     }
-    console.log(pictureUrl);
-    const [anchorElUser, setAnchorElUser] = useState(null);
 
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
+    const handleLogout = () => {
+        authContext.logout();
     };
 
     const appBarStyle = {
@@ -36,56 +31,11 @@ const MainHeader = () => {
         height: "5rem",
     };
 
-    const linkStyle = {
-        textDecoration: "none",
-        color: "white",
-    };
-
-    const handleLogout = () => {
-        authContext.logout();
-    };
-
     return (
         <AppBar sx={appBarStyle} elevation={0}>
             <Toolbar sx={toolBarStyle}>
-                <Box display="flex" alignItems="center" justifyContent="center" marginRight={1}>
-                    <Link sx={linkStyle} component={RouterLink} to="/">
-                        <Typography sx={{color: "#fce803"}} fontSize="2rem">კამპუსა</Typography>
-                    </Link>
-                    <Link sx={linkStyle} component={RouterLink} to="/">
-                        <Typography sx={{color: "#03fc2c"}} fontSize="2rem">კამპუსა</Typography>
-                    </Link>
-                    <Link sx={linkStyle} component={RouterLink} to="/">
-                        <Typography sx={{color: "#fcc203"}} fontSize="2rem">კამპუსა</Typography>
-                    </Link>
-                </Box>
-                {isLoggedIn && <Box sx={{flexGrow: 0, marginLeft: "auto"}}>
-                    <Tooltip title="Open settings">
-                        <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                            <Avatar src={pictureUrl} imgProps={{referrerPolicy: "no-referrer"}}/>
-                        </IconButton>
-                    </Tooltip>
-                    <Menu
-                        sx={{mt: '45px'}}
-                        id="menu-appbar"
-                        anchorEl={anchorElUser}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        open={Boolean(anchorElUser)}
-                        onClose={handleCloseUserMenu}
-                    >
-                        <MenuItem key="logout" onClick={handleCloseUserMenu}>
-                            <Typography onClick={handleLogout} textAlign="center">Logout</Typography>
-                        </MenuItem>
-                    </Menu>
-                </Box>}
+                <Logo/>
+                {isLoggedIn && <UserMenu pictureUrl={pictureUrl} onLogout={handleLogout}/>}
             </Toolbar>
         </AppBar>
     )

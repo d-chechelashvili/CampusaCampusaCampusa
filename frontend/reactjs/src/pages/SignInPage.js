@@ -35,6 +35,7 @@ function SignInPage(props) {
         width: '22vw',
         minWidth: 'fit-content',
         minHeight: 'fit-content',
+        paddingX: 0.75,
     };
 
     return (

@@ -13,9 +13,11 @@ function App() {
     const isLoggedIn = authContext.isLoggedIn;
     const history = useHistory();
     const location = useLocation();
+    
     if (!isLoggedIn && (location.pathname === "/" || location.pathname.startsWith("/subjects/"))) {
         history.push(location);
     }
+
     return (
         <Layout>
             <Switch>

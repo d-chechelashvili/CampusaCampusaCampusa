@@ -2,35 +2,15 @@ import {useState} from "react";
 
 import {Checkbox, FormControl, InputLabel, ListItemText, MenuItem, Select} from "@mui/material";
 
+import {getYearInRoman} from "../../../lib/utils";
+
 const SubjectYearFilter = (props) => {
     const [selectedYears, setYears] = useState([]);
-
-    const formStyle = {
-        marginTop: 1,
-        marginRight: 1,
-        minWidth: 65,
-        maxWidth: 100,
-    };
 
     const handleChange = (event) => {
         setYears(event.target.value);
         props.onChange(event);
     };
-
-    function getYearInRoman(year) {
-        switch (year) {
-            case 1:
-                return "I";
-            case 2:
-                return "II";
-            case 3:
-                return "III";
-            case 4:
-                return "IV";
-            default:
-                return "?";
-        }
-    }
 
     const yearValues = [1, 2, 3, 4];
 
@@ -40,6 +20,13 @@ const SubjectYearFilter = (props) => {
         }
         return selected.map(x => getYearInRoman(x)).join(', ')
     }
+
+    const formStyle = {
+        marginTop: 1,
+        marginRight: 1,
+        minWidth: 65,
+        maxWidth: 100,
+    };
 
     return (
         <FormControl size="small" sx={formStyle}>

@@ -1,34 +1,11 @@
-import React from 'react';
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Box, Divider, IconButton, Typography} from "@mui/material";
 
-function SemesterHeader(props) {
-    function toRoman(num) {
-        const roman = {
-            M: 1000,
-            CM: 900,
-            D: 500,
-            CD: 400,
-            C: 100,
-            XC: 90,
-            L: 50,
-            XL: 40,
-            X: 10,
-            IX: 9,
-            V: 5,
-            IV: 4,
-            I: 1
-        };
+import {convertNumToRoman} from "../../../lib/utils";
 
-        let str = '';
-        for (let i of Object.keys(roman)) {
-            let q = Math.floor(num / roman[i]);
-            num -= q * roman[i];
-            str += i.repeat(q);
-        }
-        return str;
-    }
+
+function SemesterHeader(props) {
+    const semesterNumber = convertNumToRoman(props.semesterNumber);
 
     const headerStyle = {
         background: "#2d4d50",
@@ -57,10 +34,8 @@ function SemesterHeader(props) {
     const dividerStyle = {
         marginX: 0.5,
         background: "#ccc",
-        width: "0.5px"
+        width: "0.5px",
     };
-
-    const semesterNumber = toRoman(props.semesterNumber);
 
     return (
         <Box sx={headerStyle}>

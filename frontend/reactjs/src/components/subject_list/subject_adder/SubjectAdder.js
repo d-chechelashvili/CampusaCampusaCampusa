@@ -1,21 +1,26 @@
-import React from 'react';
+import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {semesterActions} from "../../../store/redux-store";
 import {Alert, Box, Button, TextField, Typography} from "@mui/material";
+
+import {semesterActions} from "../../../store/redux-store";
 
 
 function SubjectAdder(props) {
     const dispatch = useDispatch();
     const semesterList = useSelector((state) => state.semesterList);
-    const [error, setError] = React.useState(null);
-    const [semesterNumber, setSemesterNumber] = React.useState(null);
-    const [errorTimeoutId, setErrorTimeoutId] = React.useState(null);
+    const [error, setError] = useState(null);
+    const [semesterNumber, setSemesterNumber] = useState(null);
+    const [errorTimeoutId, setErrorTimeoutId] = useState(null);
 
     const handleChange = (event) => {
         setSemesterNumber(event.target.value);
     };
 
+    const subjectName = props.subjectName;
+    const credits = props.subjectCredits;
+    const semester = props.subjectSemester;
+    const year = props.subjectYear;
 
     const validSubject = () => {
         for (let i = 0; i < semesterList.length; i++) {
@@ -46,14 +51,8 @@ function SubjectAdder(props) {
         }
     };
 
-    const subjectName = props.subjectName;
-    const credits = props.subjectCredits;
-    const semester = props.subjectSemester;
-    const year = props.subjectYear;
-
-
     const semesters = semesterList.map((semester, index) => {
-        return index + 1
+        return index + 1;
     });
 
     const filteredSemesters = semesters.filter((semesterNum) => {
@@ -126,8 +125,7 @@ function SubjectAdder(props) {
             </Box>
             {error &&
                 <Alert onClick={() => setError(null)}
-                       onClose={() => {
-                       }}
+                       onClose={() => {}}
                        sx={{marginTop: 0.5}} severity="error">{error}</Alert>
             }
         </Box>

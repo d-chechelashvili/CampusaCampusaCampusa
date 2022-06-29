@@ -3,7 +3,6 @@ import {Box, Typography} from "@mui/material";
 import campusa from "../media/images/Campusa.jpg"
 
 function NotFoundPage() {
-
     const backgroundBoxStyle = {
         background: "linear-gradient(90deg, rgba(255, 208, 61, 0.225),  rgba(36, 178, 76, 0.175))",
         display: 'flex',
@@ -23,7 +22,8 @@ function NotFoundPage() {
 
     return (
         <Box sx={backgroundBoxStyle}>
-            <Typography textAlign="center" marginTop={3} marginBottom={3} fontSize="2.75rem" variant="h3">სამწუხაროდ გვერდი ვერ მოიძებნა :(</Typography>
+            <Typography textAlign="center" marginTop={3} marginBottom={3} fontSize="2.75rem" variant="h3">სამწუხაროდ
+                გვერდი ვერ მოიძებნა :(</Typography>
             <Box sx={imageStyle} component="img" alt="*კამპუსას სურათი* :)" src={campusa}></Box>
         </Box>
     );

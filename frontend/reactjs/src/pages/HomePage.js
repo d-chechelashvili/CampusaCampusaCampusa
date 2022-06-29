@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {Grid, Typography} from "@mui/material";
 
 import useHttp from "../hooks/use-http";
-import {getAllSubjects} from "../library/api";
+import {getAllSubjects} from "../lib/api";
 import Planner from "../components/planner/Planner";
 import SubjectList from "../components/subject_list/SubjectList";
 

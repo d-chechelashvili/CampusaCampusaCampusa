@@ -6,13 +6,13 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 const SubjectSorter = (props) => {
     const [selectedSort, setSort] = useState('default');
 
-    const formStyle = {
-        marginTop: 1,
-    };
-
     const handleChange = (event) => {
         setSort(event.target.value);
         props.onChange(event);
+    };
+
+    const formStyle = {
+        marginTop: 1,
     };
 
     return (
