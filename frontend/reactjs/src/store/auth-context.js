@@ -1,5 +1,8 @@
 import {createContext, useCallback, useEffect, useState} from "react";
 
+import jwt_decode from "jwt-decode";
+
+
 let logoutTimer;
 
 const AuthContext = createContext({
@@ -13,25 +16,27 @@ const AuthContext = createContext({
 
 const calculateRemainingTime = (expirationTime) => {
     const currentTime = new Date().getTime();
-    const adjExpirationTime = new Date(expirationTime).getTime();
-    return adjExpirationTime - currentTime;
+    console.log(expirationTime);
+    console.log(currentTime);
+    console.log(expirationTime - currentTime);
+    return expirationTime - currentTime;
 };
 
 const retrieveStoredToken = () => {
     const storedToken = localStorage.getItem('token');
-    // const storedExpirationDate = localStorage.getItem('expirationTime');
-    //
-    // const remainingTime = calculateRemainingTime(storedExpirationDate);
-    //
-    // if (remainingTime <= 60000) {
-    //     localStorage.removeItem('token');
-    //     localStorage.removeItem('expirationTime');
-    //     return null;
-    // }
+    const storedExpirationTime = parseInt(localStorage.getItem('expirationTime'));
+
+    const remainingTime = calculateRemainingTime(storedExpirationTime);
+
+    if (remainingTime <= 60000) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('expirationTime');
+        return null;
+    }
 
     return {
         token: storedToken,
-        // duration: remainingTime,
+        duration: remainingTime,
     };
 };
 
@@ -49,28 +54,31 @@ export const AuthContextProvider = (props) => {
 
     const logoutHandler = useCallback(() => {
         setToken(null);
-        // localStorage.removeItem('token');
-        // localStorage.removeItem('expirationTime');
+        localStorage.removeItem('token');
+        localStorage.removeItem('expirationTime');
 
-        // if (logoutTimer) {
-        //     clearTimeout(logoutTimer);
-        // }
+        if (logoutTimer) {
+            clearTimeout(logoutTimer);
+        }
     }, []);
 
     const loginHandler = (token) => {
         setToken(token);
-        // localStorage.setItem('token', token);
-        // localStorage.setItem('expirationTime', expirationTime);
+        localStorage.setItem('token', token);
+        const jwt = token.credential;
+        const decoded = jwt_decode(token);
+        const expirationTime = decoded.exp * 1000;
+        localStorage.setItem('expirationTime', expirationTime.toString());
 
-        // const remainingTime = calculateRemainingTime(expirationTime);
-        // logoutTimer = setTimeout(logoutHandler, remainingTime);
+        const remainingTime = calculateRemainingTime(expirationTime);
+        logoutTimer = setTimeout(logoutHandler, remainingTime);
     };
 
-    // useEffect(() => {
-    //     if (tokenData) {
-    //         logoutTimer = setTimeout(logoutHandler, tokenData.duration);
-    //     }
-    // }, [tokenData, logoutHandler]);
+    useEffect(() => {
+        if (tokenData) {
+            logoutTimer = setTimeout(logoutHandler, tokenData.duration);
+        }
+    }, [tokenData, logoutHandler]);
 
 
     const contextValue = {
