@@ -17,10 +17,7 @@ const HomePage = () => {
         sendRequest();
     }, [sendRequest]);
 
-    // todo if status pending could show loading spinner
-    if (status === 'pending') {
-        return <Typography variant="h2" align="center">იტვირთება...</Typography>;
-    }
+    // todo if status is pending could show loading spinner
 
     if (error) {
         return <Typography variant="h2" align="center">{error}</Typography>;

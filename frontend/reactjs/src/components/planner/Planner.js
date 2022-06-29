@@ -17,6 +17,10 @@ function Planner() {
         dispatch(semesterActions.addSemester());
     };
 
+    if (semesterList.length === 0) {
+        addSemester();
+    }
+
     const removeSemester = (semesterNumber) => {
         dispatch(semesterActions.removeSemester(semesterNumber));
     };
