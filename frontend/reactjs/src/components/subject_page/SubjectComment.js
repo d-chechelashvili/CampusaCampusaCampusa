@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Grid} from "@mui/material";
+import {Avatar, Divider, Grid} from "@mui/material";
 
 function SubjectComment(props) {
     const imgLink =
@@ -16,15 +16,11 @@ function SubjectComment(props) {
                     <p style={{textAlign: "left", color: "gray"}}>
                         15/06/2020
                     </p>
-                    <p style={{textAlign: "left"}}>
-                        ძალიან კარგი საგანია. თავიდან არაფერი არ ვიცოდი პროგრამირებაში და ამ საგნით დავიწყე
-                        პროგრამირების სწავლა.
-                        ლექციებზეც და სემინარებზეც ყველაფერი კარგად იყო ახსნილი. თუ მიყვებოდი კურსს, დავალებებიც არ იყო
-                        რთული დასაწერი და ბონუს ქულების აღების შესაძლებლობაც იყო. გამოცდები ცოტა რთულია იმის ფონზე, რომ
-                        ყველაფერი ახალია, თუმცა ჩასაბარებლად არ შეგექმნებათ პრობლემა. {" "}
+                    <p style={{textAlign: "left"}}>{props.text} {" "}
                     </p>
                 </Grid>
             </Grid>
+            <Divider variant="fullWidth" style={{margin: "30px 0"}}/>
         </React.Fragment>
     );
 }
