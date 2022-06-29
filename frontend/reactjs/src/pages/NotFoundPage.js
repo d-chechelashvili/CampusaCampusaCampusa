@@ -12,7 +12,7 @@ function NotFoundPage() {
         flexDirection: 'column',
         width: 'max(100vw, wrap-content)',
         height: 'calc(100vh - 1rem)',
-        minHeight: 'wrap-content',
+        minHeight: 'fit-content',
     };
 
     const imageStyle = {
@@ -24,7 +24,7 @@ function NotFoundPage() {
     return (
         <Box sx={backgroundBoxStyle}>
             <Typography textAlign="center" marginTop={3} marginBottom={3} fontSize="2.75rem" variant="h3">სამწუხაროდ გვერდი ვერ მოიძებნა :(</Typography>
-            <Box sx={imageStyle} component="img" alt="კამპუსას სურათი :)" src={campusa}></Box>
+            <Box sx={imageStyle} component="img" alt="*კამპუსას სურათი* :)" src={campusa}></Box>
         </Box>
     );
 }

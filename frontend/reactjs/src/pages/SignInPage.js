@@ -28,13 +28,13 @@ function SignInPage(props) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: "linear-gradient(90deg, rgb(36, 178, 76, 0.9), rgb(255, 208, 61, 0.9))",
+        background: "linear-gradient(90deg, rgb(36, 178, 76, 0.8), rgb(255, 208, 61, 0.8))",
         borderRadius: '15px',
         border: "3px solid #92c145",
         height: '27vh',
-        width: '27vw',
-        minWidth: 'wrap-content',
-        minHeight: 'wrap-content',
+        width: '22vw',
+        minWidth: 'fit-content',
+        minHeight: 'fit-content',
     };
 
     return (
