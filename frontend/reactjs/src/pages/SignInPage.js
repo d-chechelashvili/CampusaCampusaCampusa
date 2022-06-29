@@ -11,9 +11,8 @@ function SignInPage(props) {
     const history = useHistory();
 
     const handleLogin = (response) => {
-        console.log(response);
         authContext.login(response.credential);
-        history.replace("/");
+        history.go(-1);
     };
 
     const backgroundBoxStyle = {
@@ -22,7 +21,7 @@ function SignInPage(props) {
         alignItems: 'center',
         justifyContent: 'center',
         width: '100vw',
-        height: '100vh',
+        height: 'calc(100vh - 5rem)',
     };
 
     const loginWrapperBoxStyle = {
@@ -32,8 +31,8 @@ function SignInPage(props) {
         background: "linear-gradient(90deg, rgb(36, 178, 76, 0.9), rgb(255, 208, 61, 0.9))",
         borderRadius: '15px',
         border: "3px solid #92c145",
-        height: '30vh',
-        width: '30vw',
+        height: '27vh',
+        width: '27vw',
         minWidth: 'wrap-content',
         minHeight: 'wrap-content',
     };
