@@ -1,0 +1,17 @@
+.container {
+    padding: 36px 48px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    white-space: nowrap;
+    margin: 8px 0;
+}
+
+.chipContainer {
+    padding-left: 16px;
+}
