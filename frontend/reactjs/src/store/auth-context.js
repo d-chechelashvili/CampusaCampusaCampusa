@@ -16,9 +16,6 @@ const AuthContext = createContext({
 
 const calculateRemainingTime = (expirationTime) => {
     const currentTime = new Date().getTime();
-    console.log(expirationTime);
-    console.log(currentTime);
-    console.log(expirationTime - currentTime);
     return expirationTime - currentTime;
 };
 
@@ -65,7 +62,6 @@ export const AuthContextProvider = (props) => {
     const loginHandler = (token) => {
         setToken(token);
         localStorage.setItem('token', token);
-        const jwt = token.credential;
         const decoded = jwt_decode(token);
         const expirationTime = decoded.exp * 1000;
         localStorage.setItem('expirationTime', expirationTime.toString());

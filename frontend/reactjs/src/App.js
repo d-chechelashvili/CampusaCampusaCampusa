@@ -1,4 +1,4 @@
-import React from "react";
+import {useContext} from "react";
 import {Redirect, Route, Switch, useHistory, useLocation} from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
@@ -9,7 +9,7 @@ import Layout from "./components/layout/Layout";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
-    const authContext = React.useContext(AuthContext);
+    const authContext = useContext(AuthContext);
     const isLoggedIn = authContext.isLoggedIn;
     const history = useHistory();
     const location = useLocation();

@@ -1,4 +1,4 @@
-import React from 'react';
+import {useContext} from "react";
 import {useHistory} from "react-router-dom";
 import {GoogleLogin} from '@react-oauth/google';
 
@@ -7,7 +7,7 @@ import {Box} from "@mui/material";
 import AuthContext from "../store/auth-context";
 
 function SignInPage(props) {
-    const authContext = React.useContext(AuthContext);
+    const authContext = useContext(AuthContext);
     const history = useHistory();
 
     const handleLogin = (response) => {
