@@ -138,3 +138,14 @@ STATICFILES_DIRS = [
 
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+
+if os.getenv("DEV_MODE") == "true":
+    print("DEV_MODE is True")
+    SECURE_PROXY_SSL_HEADER = None
+    SECURE_SSL_REDIRECT = False
+else:
+    print("DEV_MODE is False")
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+
+
