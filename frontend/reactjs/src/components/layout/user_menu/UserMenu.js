@@ -14,8 +14,8 @@ function UserMenu(props) {
     };
 
     return (
-        <Box sx={{flexGrow: 0, marginLeft: "auto"}}>
-            <Tooltip title="Open settings">
+        <Box sx={{flexGrow: 0, marginLeft: "auto", paddingLeft: 1}}>
+            <Tooltip title={Boolean(anchorElUser) ? '' : 'Open Settings'}>
                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                     <Avatar src={props.pictureUrl} imgProps={{referrerPolicy: "no-referrer"}}/>
                 </IconButton>
@@ -28,6 +28,7 @@ function UserMenu(props) {
                     vertical: 'top',
                     horizontal: 'right',
                 }}
+                disableScrollLock
                 keepMounted
                 transformOrigin={{
                     vertical: 'top',

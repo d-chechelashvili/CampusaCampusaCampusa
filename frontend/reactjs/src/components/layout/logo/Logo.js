@@ -9,7 +9,7 @@ function Logo(props) {
     };
 
     return (
-        <Box display="flex" alignItems="center" justifyContent="center" marginRight={1}>
+        <Box display="flex" alignItems="center" justifyContent="center">
             <Link sx={linkStyle} component={RouterLink} to="/">
                 <Typography sx={{color: "#fce803"}} fontSize="2rem">კამპუსა</Typography>
             </Link>

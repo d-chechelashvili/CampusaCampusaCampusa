@@ -22,6 +22,8 @@ function SignInPage(props) {
         justifyContent: 'center',
         width: '100vw',
         height: 'calc(100vh - 5rem)',
+        minWidth: 'fit-content',
+        minHeight: 'fit-content',
     };
 
     const loginWrapperBoxStyle = {
