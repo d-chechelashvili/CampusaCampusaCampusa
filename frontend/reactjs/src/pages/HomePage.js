@@ -10,7 +10,7 @@ import SubjectList from "../components/subject_list/SubjectList";
 const HomePage = () => {
     const {sendRequest, status, data: loadedSubjects, error} = useHttp(
         getAllSubjects,
-        true
+        false
     );
 
     useEffect(() => {

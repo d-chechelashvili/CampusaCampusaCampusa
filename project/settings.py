@@ -142,8 +142,9 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
 if os.getenv("DEV_MODE") == "true":
     SECURE_PROXY_SSL_HEADER = None
     SECURE_SSL_REDIRECT = False
+    CSRF_COOKIE_SECURE = False
 else:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
 
-
+CSRF_COOKIE_HTTPONLY = False

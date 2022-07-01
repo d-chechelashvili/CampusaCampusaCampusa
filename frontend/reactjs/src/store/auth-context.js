@@ -1,15 +1,15 @@
 import {createContext, useCallback, useEffect, useState} from "react";
 
-import jwt_decode from "jwt-decode";
-
 
 let logoutTimer;
 
 const AuthContext = createContext({
     token: '',
     isLoggedIn: false,
-    login: (token) => {},
-    logout: () => {},
+    login: (token) => {
+    },
+    logout: () => {
+    },
 });
 
 const calculateRemainingTime = (expirationTime) => {
@@ -56,11 +56,10 @@ export const AuthContextProvider = (props) => {
         }
     }, []);
 
-    const loginHandler = (token) => {
-        setToken(token);
-        localStorage.setItem('token', token);
-        const decoded = jwt_decode(token);
-        const expirationTime = decoded.exp * 1000;
+    const loginHandler = (data) => {
+        setToken(data.accessToken);
+        localStorage.setItem('token', data.accessToken);
+        const expirationTime = new Date().getTime() + parseInt(data.duration) * 1000;
         localStorage.setItem('expirationTime', expirationTime.toString());
 
         const remainingTime = calculateRemainingTime(expirationTime);
