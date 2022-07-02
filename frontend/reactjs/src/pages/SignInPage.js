@@ -16,16 +16,28 @@ function SignInPage(props) {
     const history = useHistory();
 
     const googleLogin = useGoogleLogin({
-        onSuccess: async (tokenResponse) => {
-            const token = {accessToken: tokenResponse.access_token, duration: tokenResponse.expires_in};
-            authContext.login(token);
-            history.go(-1);
+        onSuccess: ({code}) => {
+            const tokens = loginUser(code);
+            //.then(handleLogin());
+            // authContext.login(token);
+            // history.go(-1);
         },
+        flow: 'auth-code',
         onError: errorResponse => console.log(errorResponse),
     });
 
-    async function handleLogin(response) {
-        const token = await loginUser(response);
+    // const googleLogin = useGoogleLogin({
+    //     onSuccess: async (tokenResponse) => {
+    //         const token = {accessToken: tokenResponse.access_token, duration: tokenResponse.expires_in};
+    //         authContext.login(token);
+    //         history.go(-1);
+    //     },
+    //     onError: errorResponse => console.log(errorResponse),
+    // });
+
+    function handleLogin(response) {
+        authContext.login(response.token);
+        history.go(-1);
     }
 
     const backgroundBoxStyle = {
@@ -56,7 +68,9 @@ function SignInPage(props) {
     return (
         <Box sx={backgroundBoxStyle}>
             <Box sx={loginWrapperBoxStyle}>
-                <GoogleButton onClick={() => {googleLogin()}}/>
+                <GoogleButton onClick={() => {
+                    googleLogin()
+                }}/>
             </Box>
         </Box>
     );

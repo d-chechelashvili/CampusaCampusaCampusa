@@ -1,5 +1,7 @@
-django
-djangorestframework
+django~=4.0.4
+djangorestframework~=3.13.1
+django-cors-headers
+requests~=2.28.1
 black
 flake8
 isort

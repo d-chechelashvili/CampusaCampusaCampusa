@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -32,7 +31,6 @@ ALLOWED_HOSTS = [
     "campusa.herokuapp.com",
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +43,15 @@ INSTALLED_APPS = [
     "backend.apps.BackendConfig",
     "frontend.apps.FrontendConfig",
     "rest_framework",
+    "corsheaders",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "https://localhost:8000",
+    "http://campusa.herokuapp.com",
+    "https://campusa.herokuapp.com",
 ]
 
 MIDDLEWARE = [
@@ -79,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "project.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -89,7 +95,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -109,7 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -120,7 +124,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -136,6 +139,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/reactjs/build/static"),
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
 
@@ -148,3 +157,7 @@ else:
     SECURE_SSL_REDIRECT = True
 
 CSRF_COOKIE_HTTPONLY = False
+
+GOOGLE_OAUTH2_CLIENT_ID = "912526093783-9kth2rcog3o9rlu2ag9pec6r35fhjadg.apps.googleusercontent.com"
+GOOGLE_OAUTH2_CLIENT_SECRET = "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"
+BASE_BACKEND_URL = "http://localhost:8000"

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getAllSubjects() {
-    const response = await fetch(window.location.origin + "/api/subjects",
+    const response = await fetch(window.location.origin + "/api/subjects/",
         {mode: "same-origin"}
     );
 
@@ -20,6 +20,18 @@ export async function getImageFromToken(token) {
         {headers: {Authorization: `Bearer ${token}`}},
     );
     return userInfo.data.picture;
+}
+
+export async function loginUser(code) {
+    const response = await fetch(window.location.origin + "/api/google/login/", {
+        method: "POST",
+        mode: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({code}),
+    });
+    return await response.json();
 }
 
 // export async function loginUser(googleToken) {
