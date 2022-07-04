@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import comments, difficulties, faculties, nicknames, plans, prerequisites, ratings, scores, semesters, \
-    subject_versions, subjects, users
+from .views import comments, difficulties, faculties, nicknames, planner_items, planner_semesters, prerequisites, \
+    ratings, scores, semesters, subject_versions, subjects, users
 
 urlpatterns = [
     path("comments/add_comment", comments.AddComment.as_view()),
@@ -16,8 +16,11 @@ urlpatterns = [
     path("nicknames/add_nickname", nicknames.AddNickname.as_view()),
     path("nicknames/get_nicknames", nicknames.GetNicknames.as_view()),
 
-    path("plans/add_plan", plans.AddPlan.as_view()),
-    path("plans/get_plans", plans.GetPlans.as_view()),
+    path("planner_items/add_plan", planner_items.AddPlannerItem.as_view()),
+    path("planner_items/get_plans", planner_items.GetPlannerItems.as_view()),
+
+    path("planner_semesters/add_planner_semester", planner_semesters.AddPlannerSemester.as_view()),
+    path("planner_semesters/get_planner_semesters", planner_semesters.GetPlannerSemesters.as_view()),
 
     path("prerequisites/add_prerequisite", prerequisites.AddPrerequisite.as_view()),
     path("prerequisites/get_prerequisites", prerequisites.GetPrerequisites.as_view()),
