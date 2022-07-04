@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import comments, difficulties, faculties, nicknames, planner_items, planner_semesters, prerequisites, \
-    ratings, scores, semesters, subject_versions, subjects, users
+    ratings, scores, subject_versions, subjects, users
 
 urlpatterns = [
     path("comments/add_comment", comments.AddComment.as_view()),
@@ -30,9 +30,6 @@ urlpatterns = [
 
     path("scores/add_score", scores.AddScore.as_view()),
     path("scores/get_scores", scores.GetScores.as_view()),
-
-    path("semesters/add_semester", semesters.AddSemester.as_view()),
-    path("semesters/get_semesters", semesters.GetSemesters.as_view()),
 
     path("subject_versions/add_subject_version", subject_versions.AddSubjectVersion.as_view()),
     path("subject_versions/get_subject_versions", subject_versions.GetSubjectVersions.as_view()),
