@@ -1,6 +1,7 @@
 from typing import Dict, Any
 
 import requests
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -36,3 +37,4 @@ def google_get_user_info(*, access_token: str) -> Dict[str, Any]:
         raise ValidationError('Failed to obtain user info from Google.')
 
     return response.json()
+

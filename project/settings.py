@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,7 +44,6 @@ INSTALLED_APPS = [
     "backend.apps.BackendConfig",
     "frontend.apps.FrontendConfig",
     "rest_framework",
-    "corsheaders",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -143,6 +143,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTStatelessUserAuthentication',
+    ),
 }
 
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
@@ -161,3 +164,8 @@ CSRF_COOKIE_HTTPONLY = False
 GOOGLE_OAUTH2_CLIENT_ID = "912526093783-9kth2rcog3o9rlu2ag9pec6r35fhjadg.apps.googleusercontent.com"
 GOOGLE_OAUTH2_CLIENT_SECRET = "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"
 BASE_BACKEND_URL = "http://localhost:8000"
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}

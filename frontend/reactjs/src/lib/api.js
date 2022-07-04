@@ -31,7 +31,21 @@ export async function loginUser(code) {
         },
         body: JSON.stringify({code}),
     });
-    return await response.json();
+    const data = await response.json();
+    console.log(data.access);
+
+    const newResponse = await fetch(window.location.origin + "/api/subjects/", {
+        method: "GET",
+        mode: "same-origin",
+        headers: {
+            "Authorization": `Bearer ${data.access}`,
+        },
+    });
+    console.log("AQ VAR");
+    console.log(newResponse);
+    const newData = await newResponse.json();
+    console.log(newData);
+    return data;
 }
 
 // export async function loginUser(googleToken) {
