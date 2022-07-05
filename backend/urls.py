@@ -2,7 +2,7 @@ from django.urls import path
 
 from .authentication.views import GoogleLoginAPI
 from .views.subject_list.subject_list import SubjectListAPI
-from .views.planner.planner import UserPlanAPI, AddSubjectToPlanAPI, RemoveSubjectFromPlanAPI
+from .views.planner.planner import UserPlanAPI, AddSubjectToPlanAPI, RemoveSubjectFromPlanAPI, UpdateSubjectGradeAPI
 
 urlpatterns = [
     # authentication
@@ -15,4 +15,5 @@ urlpatterns = [
     path('planner/get_plan', UserPlanAPI.as_view(), name='get-user-plan'),
     path('planner/add_subject', AddSubjectToPlanAPI.as_view(), name='add-subject-to-plan'),
     path('planner/remove_subject', RemoveSubjectFromPlanAPI.as_view(), name='remove-subject-from-plan'),
+    path('planner/update_grade', UpdateSubjectGradeAPI.as_view(), name='update-subject-grade'),
 ]

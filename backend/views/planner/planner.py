@@ -71,3 +71,19 @@ class RemoveSubjectFromPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
         PlannerItem.objects.filter(user=user_id, subject=subject_id, semester=args['semester']).delete()
 
         return JsonResponse('', status=status.HTTP_200_OK, safe=False)
+
+
+class UpdateSubjectGradeAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user_id = request.user.id
+
+        args = JSONParser().parse(request)
+        subject_id = Subject.objects.get(name=args['subject_name']).id
+
+        planner_item = PlannerItem.objects.get(user=user_id, subject=subject_id, semester=args['semester'])
+        planner_item.grade = args['grade']
+        planner_item.save()
+
+        return JsonResponse('', status=status.HTTP_200_OK, safe=False)
