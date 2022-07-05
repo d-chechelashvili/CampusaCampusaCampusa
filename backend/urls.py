@@ -1,5 +1,6 @@
 from django.urls import path
 
+from .views.planner.planner import UserPlansAPI
 from .authentication.views import GoogleLoginAPI
 from .views.subject_list.subject_list import SubjectListAPI
 from .views import comments, difficulties, faculties, nicknames, planner_items, prerequisites, ratings, scores, \
@@ -11,6 +12,9 @@ urlpatterns = [
 
     # subject_list
     path('subjects/', SubjectListAPI.as_view(), name='get-subject-list'),
+
+    # planner
+    path('plans/', UserPlansAPI.as_view(), name='get-user-plans'),
 
     # DB
     path("comments/add_comment", comments.AddComment.as_view()),
