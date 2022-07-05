@@ -1,8 +1,8 @@
 from django.db import models
 from rest_framework import serializers
 
-from backend.models.faculty import Faculty
 from backend.models.subject import Subject
+from backend.models.faculty import Faculty
 
 
 class SubjectVersion(models.Model):

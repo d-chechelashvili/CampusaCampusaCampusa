@@ -1,17 +1,18 @@
 from django.urls import path
 
 from .authentication.views import GoogleLoginAPI
-from .views import comments, difficulties, faculties, nicknames, planner_items, prerequisites, \
-    ratings, scores, subject_versions, subjects, users
 from .views.subject_list.subject_list import SubjectListAPI
+from .views import comments, difficulties, faculties, nicknames, planner_items, prerequisites, ratings, scores, \
+    subject_versions, subjects, users
 
 urlpatterns = [
     # authentication
     path('google/login/', GoogleLoginAPI.as_view(), name='login-with-google'),
 
-    # subject list
-    path('subjects/', SubjectListAPI.as_view(), name='subject-list'),
+    # subject_list
+    path('subjects/', SubjectListAPI.as_view(), name='get-subject-list'),
 
+    # DB
     path("comments/add_comment", comments.AddComment.as_view()),
     path("comments/get_comments", comments.GetComments.as_view()),
 

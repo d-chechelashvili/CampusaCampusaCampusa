@@ -2,9 +2,9 @@ from django.db import models
 from django.utils.timezone import now
 from rest_framework import serializers
 
-from backend.models.nickname import Nickname
-from backend.models.subject import Subject
 from backend.models.user import User
+from backend.models.subject import Subject
+from backend.models.nickname import Nickname
 
 
 class Comment(models.Model):

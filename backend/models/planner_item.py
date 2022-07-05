@@ -1,8 +1,8 @@
 from django.db import models
 from rest_framework import serializers
 
-from backend.models.subject import Subject
 from backend.models.user import User
+from backend.models.subject import Subject
 
 
 class PlannerItem(models.Model):
