@@ -1,13 +1,12 @@
 from django.conf import settings
 from django.http import JsonResponse
 from rest_framework import serializers, status
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from backend.authentication.mixins import PublicApiMixin, ApiErrorsMixin
+from backend.mixins import PublicApiMixin, ApiErrorsMixin
 from backend.authentication.services import google_get_tokens, google_get_user_info
-from backend.models import User
+from backend.models.user import User
 
 
 class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
@@ -39,11 +38,12 @@ class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
         }
         return JsonResponse(response_dict, status=status.HTTP_202_ACCEPTED)
 
+# example usage
 
-class DecodeJWTTest(ApiErrorsMixin, APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        print(request.user.id)
-        print(request.auth)
-        return JsonResponse({"movida": "wow"})
+# class DecodeJWTTest(ApiErrorsMixin, APIView):
+#     permission_classes = [IsAuthenticated]
+#
+#     def get(self, request):
+#         print(request.user.id)
+#         print(request.auth)
+#         return JsonResponse({"movida": "wow"})

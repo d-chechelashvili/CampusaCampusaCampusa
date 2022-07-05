@@ -18,16 +18,12 @@ const HomePage = () => {
 
     useEffect(() => {
         sendRequest(authContext.token);
-    }, [sendRequest]);
+    }, [sendRequest, authContext]);
 
     // todo if status is pending could show loading spinner
 
     if (error) {
-        return <Typography variant="h2" align="center">{error}</Typography>;
-    }
-
-    if (status === 'completed' && (!loadedSubjects || loadedSubjects.length === 0)) {
-        return <Typography variant="h2" align="center">NO DATA</Typography>;
+        return <Typography variant="h6" align="center">{error}</Typography>;
     }
 
     const gridContainerStyle = {

@@ -1,8 +1,8 @@
 from rest_framework import exceptions as rest_exceptions
 from django.core.exceptions import ValidationError
 
-from backend.models import User
-from backend.authentication.utils import get_error_message
+from backend.utils import get_error_message
+from backend.models.user import User
 
 
 class PublicApiMixin:
