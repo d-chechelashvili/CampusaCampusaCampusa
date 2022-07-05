@@ -5,6 +5,7 @@ let logoutTimer;
 
 const AuthContext = createContext({
     token: '',
+    pictureURL: '',
     isLoggedIn: false,
     login: (token) => {
     },
@@ -13,44 +14,51 @@ const AuthContext = createContext({
 });
 
 const calculateRemainingTime = (expirationTime) => {
-    const currentTime = new Date().getTime();
-    return expirationTime - currentTime;
+    return expirationTime - new Date().getTime();
 };
 
-const retrieveStoredToken = () => {
+const retrieveStoredData = () => {
     const storedToken = localStorage.getItem('token');
     const storedExpirationTime = parseInt(localStorage.getItem('expirationTime'));
+    const storedPictureURL = localStorage.getItem('pictureURL');
 
     const remainingTime = calculateRemainingTime(storedExpirationTime);
 
     if (remainingTime <= 60000) {
         localStorage.removeItem('token');
         localStorage.removeItem('expirationTime');
+        localStorage.removeItem('pictureURL');
         return null;
     }
 
     return {
         token: storedToken,
         duration: remainingTime,
+        pictureURL: storedPictureURL,
     };
 };
 
 export const AuthContextProvider = (props) => {
-    const tokenData = retrieveStoredToken();
+    const initialData = retrieveStoredData();
 
     let initialToken;
-    if (tokenData) {
-        initialToken = tokenData.token;
+    let initialPictureURL;
+    if (initialData) {
+        initialToken = initialData.token;
+        initialPictureURL = initialData.pictureURL;
     }
 
     const [token, setToken] = useState(initialToken);
+    const [pictureURL, setPictureURL] = useState(initialPictureURL);
 
     const userIsLoggedIn = !!token;
 
     const logoutHandler = useCallback(() => {
         setToken(null);
+        setPictureURL(null);
         localStorage.removeItem('token');
         localStorage.removeItem('expirationTime');
+        localStorage.removeItem('pictureURL');
         if (logoutTimer) {
             clearTimeout(logoutTimer);
         }
@@ -58,23 +66,25 @@ export const AuthContextProvider = (props) => {
 
     const loginHandler = (data) => {
         setToken(data.accessToken);
+        setPictureURL(data.pictureURL);
         localStorage.setItem('token', data.accessToken);
-        const expirationTime = new Date().getTime() + parseInt(data.duration) * 1000;
-        localStorage.setItem('expirationTime', expirationTime.toString());
+        localStorage.setItem('expirationTime', data.expirationTime.toString());
+        localStorage.setItem('pictureURL', data.pictureURL);
 
-        const remainingTime = calculateRemainingTime(expirationTime);
+        const remainingTime = calculateRemainingTime(data.expirationTime);
         logoutTimer = setTimeout(logoutHandler, remainingTime);
     };
 
     useEffect(() => {
-        if (tokenData) {
-            logoutTimer = setTimeout(logoutHandler, tokenData.duration);
+        if (initialData) {
+            logoutTimer = setTimeout(logoutHandler, initialData.duration);
         }
-    }, [tokenData, logoutHandler]);
+    }, [initialData, logoutHandler]);
 
 
     const contextValue = {
         token: token,
+        pictureURL: pictureURL,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
         logout: logoutHandler,

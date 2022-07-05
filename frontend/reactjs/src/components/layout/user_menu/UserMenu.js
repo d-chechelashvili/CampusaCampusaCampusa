@@ -1,21 +1,12 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useState} from 'react';
 
 import {Avatar, Box, IconButton, Menu, MenuItem, Tooltip, Typography} from "@mui/material";
 
-import {getImageFromToken} from "../../../lib/api";
 import AuthContext from "../../../store/auth-context";
 
 function UserMenu(props) {
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [pictureUrl, setPictureUrl] = useState(null);
     const authContext = useContext(AuthContext);
-
-
-    useEffect(() => {
-        getImageFromToken(authContext.token).then((imageUrl) => {
-            setPictureUrl(imageUrl);
-        });
-    }, [authContext, setPictureUrl]);
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -29,7 +20,7 @@ function UserMenu(props) {
         <Box sx={{flexGrow: 0, marginLeft: "auto", paddingLeft: 1}}>
             <Tooltip title={Boolean(anchorElUser) ? '' : 'Open Settings'}>
                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                    <Avatar src={pictureUrl} imgProps={{referrerPolicy: "no-referrer"}}/>
+                    <Avatar src={authContext.pictureURL} imgProps={{referrerPolicy: "no-referrer"}}/>
                 </IconButton>
             </Tooltip>
             <Menu

@@ -150,22 +150,24 @@ REST_FRAMEWORK = {
 
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+CSRF_COOKIE_HTTPONLY = False
+
+GOOGLE_OAUTH2_CLIENT_ID = "912526093783-9kth2rcog3o9rlu2ag9pec6r35fhjadg.apps.googleusercontent.com"
+GOOGLE_OAUTH2_CLIENT_SECRET = "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"
+BASE_BACKEND_URL = "https://campusa.herokuapp.com"
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
 
 if os.getenv("DEV_MODE") == "true":
     SECURE_PROXY_SSL_HEADER = None
     SECURE_SSL_REDIRECT = False
     CSRF_COOKIE_SECURE = False
+    BASE_BACKEND_URL = "http://localhost:8000"
 else:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
 
-CSRF_COOKIE_HTTPONLY = False
-
-GOOGLE_OAUTH2_CLIENT_ID = "912526093783-9kth2rcog3o9rlu2ag9pec6r35fhjadg.apps.googleusercontent.com"
-GOOGLE_OAUTH2_CLIENT_SECRET = "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"
-BASE_BACKEND_URL = "http://localhost:8000"
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-}

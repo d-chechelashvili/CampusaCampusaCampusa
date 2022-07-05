@@ -17,26 +17,19 @@ function SignInPage(props) {
 
     const googleLogin = useGoogleLogin({
         onSuccess: ({code}) => {
-            const tokens = loginUser(code);
-            //.then(handleLogin());
-            // authContext.login(token);
-            // history.go(-1);
+            loginUser(code).then(handleLogin);
         },
         flow: 'auth-code',
         onError: errorResponse => console.log(errorResponse),
     });
 
-    // const googleLogin = useGoogleLogin({
-    //     onSuccess: async (tokenResponse) => {
-    //         const token = {accessToken: tokenResponse.access_token, duration: tokenResponse.expires_in};
-    //         authContext.login(token);
-    //         history.go(-1);
-    //     },
-    //     onError: errorResponse => console.log(errorResponse),
-    // });
-
     function handleLogin(response) {
-        authContext.login(response.token);
+        const data = {
+            accessToken: response.access_token,
+            expirationTime: response.access_exp * 1000,
+            pictureURL: response.picture,
+        }
+        authContext.login(data);
         history.go(-1);
     }
 
