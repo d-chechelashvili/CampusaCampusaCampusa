@@ -9,7 +9,7 @@ from backend.mixins import PublicAPIMixin, APIErrorsMixin
 from backend.models.planner_item import PlannerItem, PlannerItemSerializer
 
 
-class UserPlansAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class UserPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -57,3 +57,17 @@ class AddSubjectToPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RemoveSubjectFromPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user_id = request.user.id
+
+        args = JSONParser().parse(request)
+        subject_id = Subject.objects.get(name=args['subject_name']).id
+
+        PlannerItem.objects.filter(user=user_id, subject=subject_id, semester=args['semester']).delete()
+
+        return JsonResponse('', status=status.HTTP_200_OK, safe=False)
