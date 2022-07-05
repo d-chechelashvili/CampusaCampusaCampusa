@@ -1,11 +1,16 @@
 from django.urls import path
 
-from .authentication.views import GoogleLoginApi
-from .views import comments, difficulties, faculties, nicknames, planner_items, planner_semesters, prerequisites, \
+from .authentication.views import GoogleLoginAPI
+from .views import comments, difficulties, faculties, nicknames, planner_items, prerequisites, \
     ratings, scores, subject_versions, subjects, users
+from .views.subject_list.subject_list import SubjectListAPI
 
 urlpatterns = [
-    path('google/login/', GoogleLoginApi.as_view(), name='login-with-google'),
+    # authentication
+    path('google/login/', GoogleLoginAPI.as_view(), name='login-with-google'),
+
+    # subject list
+    path('subjects/', SubjectListAPI.as_view(), name='subject-list'),
 
     path("comments/add_comment", comments.AddComment.as_view()),
     path("comments/get_comments", comments.GetComments.as_view()),
@@ -21,9 +26,6 @@ urlpatterns = [
 
     path("planner_items/add_plan", planner_items.AddPlannerItem.as_view()),
     path("planner_items/get_plans", planner_items.GetPlannerItems.as_view()),
-
-    path("planner_semesters/add_planner_semester", planner_semesters.AddPlannerSemester.as_view()),
-    path("planner_semesters/get_planner_semesters", planner_semesters.GetPlannerSemesters.as_view()),
 
     path("prerequisites/add_prerequisite", prerequisites.AddPrerequisite.as_view()),
     path("prerequisites/get_prerequisites", prerequisites.GetPrerequisites.as_view()),

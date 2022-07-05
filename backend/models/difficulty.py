@@ -1,14 +1,17 @@
 from django.db import models
 from rest_framework import serializers
 
+from backend.models.subject import Subject
+from backend.models.user import User
+
 
 class Difficulty(models.Model):
-    user_id = models.IntegerField()
-    subject_id = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     difficulty = models.IntegerField()
 
 
 class DifficultySerializer(serializers.ModelSerializer):
     class Meta:
         model = Difficulty
-        fields = ['id', 'user_id', 'subject_id', 'difficulty']
+        fields = ['id', 'user', 'subject', 'difficulty']

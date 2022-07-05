@@ -2,11 +2,15 @@ from django.db import models
 from django.utils.timezone import now
 from rest_framework import serializers
 
+from backend.models.nickname import Nickname
+from backend.models.subject import Subject
+from backend.models.user import User
+
 
 class Comment(models.Model):
-    user_id = models.IntegerField()
-    subject_id = models.IntegerField()
-    nickname_id = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    nickname = models.ForeignKey(Nickname, on_delete=models.CASCADE)
     comment = models.TextField()
     datetime = models.DateTimeField(blank=True, default=now)
 
@@ -14,4 +18,4 @@ class Comment(models.Model):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['id', 'user_id', 'subject_id', 'nickname_id', 'comment', 'datetime']
+        fields = ['id', 'user', 'subject', 'nickname', 'comment', 'datetime']

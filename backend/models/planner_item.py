@@ -1,10 +1,13 @@
 from django.db import models
 from rest_framework import serializers
 
+from backend.models.subject import Subject
+from backend.models.user import User
+
 
 class PlannerItem(models.Model):
-    user_id = models.IntegerField()
-    subject_id = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     semester = models.IntegerField()
     grade = models.CharField(max_length=1)
 
@@ -12,4 +15,4 @@ class PlannerItem(models.Model):
 class PlannerItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlannerItem
-        fields = ['id', 'user_id', 'subject_id', 'semester', 'grade']
+        fields = ['id', 'user', 'subject', 'semester', 'grade']

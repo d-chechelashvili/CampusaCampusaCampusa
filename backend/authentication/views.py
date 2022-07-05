@@ -4,12 +4,12 @@ from rest_framework import serializers, status
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from backend.mixins import PublicApiMixin, ApiErrorsMixin
+from backend.mixins import PublicAPIMixin, APIErrorsMixin
 from backend.authentication.services import google_get_tokens, google_get_user_info
 from backend.models.user import User
 
 
-class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
+class GoogleLoginAPI(PublicAPIMixin, APIErrorsMixin, APIView):
     class InputSerializer(serializers.Serializer):
         code = serializers.CharField(required=False)
         error = serializers.CharField(required=False)

@@ -1,10 +1,13 @@
 from django.db import models
 from rest_framework import serializers
 
+from backend.models.faculty import Faculty
+from backend.models.subject import Subject
+
 
 class SubjectVersion(models.Model):
-    subject_id = models.IntegerField()
-    faculty_id = models.IntegerField()
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     year = models.IntegerField()
     semester = models.CharField(max_length=100)
 
@@ -12,4 +15,4 @@ class SubjectVersion(models.Model):
 class SubjectVersionSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubjectVersion
-        fields = ['id', 'subject_id', 'faculty_id', 'year', 'semester']
+        fields = ['id', 'subject', 'faculty', 'year', 'semester']

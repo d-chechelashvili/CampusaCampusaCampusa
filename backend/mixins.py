@@ -5,12 +5,12 @@ from backend.utils import get_error_message
 from backend.models.user import User
 
 
-class PublicApiMixin:
+class PublicAPIMixin:
     authentication_classes = ()
     permission_classes = ()
 
 
-class ApiErrorsMixin:
+class APIErrorsMixin:
     """
     Mixin that transforms Django and Python exceptions into rest_framework ones.
     Without the mixin, they return 500 status code which is not desired.
