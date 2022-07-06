@@ -2,6 +2,7 @@ from django.urls import path
 
 from .authentication.views import GoogleLoginAPI
 from .views.subject_list.subject_list import SubjectListAPI
+from .views.subject_info.subject_info import SubjectInfoAPI
 from .views.planner.planner import UserPlanAPI, AddSubjectToPlanAPI, RemoveSubjectFromPlanAPI, UpdateSubjectGradeAPI
 
 urlpatterns = [
@@ -24,4 +25,9 @@ urlpatterns = [
 
     # args: subject_name, semester, grade
     path('planner/update_grade/', UpdateSubjectGradeAPI.as_view(), name='update-subject-grade'),
+
+
+    # ***************************** Subject Info **************************** #
+    # args: subject_name
+    path('subject_info/', SubjectInfoAPI.as_view(), name='get-subject-info'),
 ]

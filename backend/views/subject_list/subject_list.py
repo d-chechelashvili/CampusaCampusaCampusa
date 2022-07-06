@@ -6,36 +6,7 @@ from backend.models.rating import Rating
 from backend.models.difficulty import Difficulty
 from backend.models.subject_version import SubjectVersion
 from backend.mixins import PublicAPIMixin, APIErrorsMixin
-
-
-def calculate_rating(subject_id, ratings):
-    total = 0
-    count = 0
-
-    for rating in ratings:
-        if rating.subject.id == subject_id:
-            total += rating.rating
-            count += 1
-
-    if count == 0:
-        return -1
-
-    return total / count
-
-
-def calculate_difficulty(subject_id, difficulties):
-    total = 0
-    count = 0
-
-    for difficulty in difficulties:
-        if difficulty.subject.id == subject_id:
-            total += difficulty.difficulty
-            count += 1
-
-    if count == 0:
-        return -1
-
-    return total / count
+from backend.views.utils import calculate_rating, calculate_difficulty
 
 
 class SubjectListAPI(PublicAPIMixin, APIErrorsMixin, APIView):
@@ -45,17 +16,18 @@ class SubjectListAPI(PublicAPIMixin, APIErrorsMixin, APIView):
         result = []
 
         subject_versions = SubjectVersion.objects.select_related()
-        ratings = Rating.objects.select_related()
-        difficulties = Difficulty.objects.select_related()
 
         for subject_version in subject_versions:
+            ratings = Rating.objects.filter(subject=subject_version.subject.id)
+            difficulties = Difficulty.objects.filter(subject=subject_version.subject.id)
+
             subject = {
                 'name': subject_version.subject.name,
                 'faculty': subject_version.faculty.abbreviation,
                 'year': subject_version.year,
                 'credits': subject_version.subject.credits,
-                'rating': calculate_rating(subject_version.subject.id, ratings),
-                'difficulty': calculate_difficulty(subject_version.subject.id, difficulties),
+                'rating': calculate_rating(ratings),
+                'difficulty': calculate_difficulty(difficulties),
                 'semester': subject_version.semester
             }
             result.append(subject)
