@@ -103,11 +103,10 @@ class UpdateUserRatingAPI(PublicAPIMixin, APIErrorsMixin, APIView):
 
 
 class UpdateUserDifficultyAPI(PublicAPIMixin, APIErrorsMixin, APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        # user_id = request.user.id
-        user_id = 2
+        user_id = request.user.id
 
         args = JSONParser().parse(request)
         subject_id = Subject.objects.get(name=args['subject_name']).id
