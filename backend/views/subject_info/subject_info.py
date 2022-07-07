@@ -5,13 +5,13 @@ from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 
 from backend.models.score import Score
-from backend.models.rating import Rating, RatingSerializer
 from backend.models.subject import Subject
 from backend.models.comment import Comment
-from backend.models.difficulty import Difficulty
+from backend.models.difficulty import Difficulty, DifficultySerializer
 from backend.models.prerequisite import Prerequisite
 from backend.mixins import PublicAPIMixin, APIErrorsMixin
 from backend.models.subject_version import SubjectVersion
+from backend.models.rating import Rating, RatingSerializer
 from backend.views.utils import calculate_rating, get_semester, get_prerequisite_names, get_prerequisite_links, \
     calculate_difficulty, get_grades, get_comments
 
@@ -95,6 +95,38 @@ class UpdateUserRatingAPI(PublicAPIMixin, APIErrorsMixin, APIView):
             }
 
             serializer = RatingSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateUserDifficultyAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+    # permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        # user_id = request.user.id
+        user_id = 2
+
+        args = JSONParser().parse(request)
+        subject_id = Subject.objects.get(name=args['subject_name']).id
+
+        difficulties = Difficulty.objects.filter(user=user_id, subject=subject_id)
+        if len(difficulties) > 0:
+            difficulty = Difficulty.objects.get(user=user_id, subject=subject_id)
+            difficulty.difficulty = args['difficulty']
+            difficulty.save()
+
+            return JsonResponse('', status=status.HTTP_200_OK, safe=False)
+        else:
+            data = {
+                'user': user_id,
+                'subject': subject_id,
+                'difficulty': args['difficulty']
+            }
+
+            serializer = DifficultySerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
                 return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)

@@ -2,7 +2,7 @@ from django.urls import path
 
 from .authentication.views import GoogleLoginAPI
 from .views.subject_list.subject_list import SubjectListAPI
-from .views.subject_info.subject_info import SubjectInfoAPI, UpdateUserRatingAPI
+from .views.subject_info.subject_info import SubjectInfoAPI, UpdateUserRatingAPI, UpdateUserDifficultyAPI
 from .views.planner.planner import UserPlanAPI, AddSubjectToPlanAPI, RemoveSubjectFromPlanAPI, UpdateSubjectGradeAPI
 
 urlpatterns = [
@@ -33,4 +33,7 @@ urlpatterns = [
 
     # args: subject_name, rating
     path('subject_info/update_rating/', UpdateUserRatingAPI.as_view(), name='update-user-rating'),
+
+    # args: subject_name, difficulty
+    path('subject_info/update_difficulty/', UpdateUserDifficultyAPI.as_view(), name='update-user-difficulty'),
 ]
