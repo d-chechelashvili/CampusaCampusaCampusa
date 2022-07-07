@@ -1,10 +1,11 @@
+from rest_framework import status
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 
 from backend.models.score import Score
-from backend.models.rating import Rating
+from backend.models.rating import Rating, RatingSerializer
 from backend.models.subject import Subject
 from backend.models.comment import Comment
 from backend.models.difficulty import Difficulty
@@ -68,3 +69,34 @@ class SubjectInfoAPI(PublicAPIMixin, APIErrorsMixin, APIView):
         }
 
         return JsonResponse(result, safe=False)
+
+
+class UpdateUserRatingAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user_id = request.user.id
+
+        args = JSONParser().parse(request)
+        subject_id = Subject.objects.get(name=args['subject_name']).id
+
+        ratings = Rating.objects.filter(user=user_id, subject=subject_id)
+        if len(ratings) > 0:
+            rating = Rating.objects.get(user=user_id, subject=subject_id)
+            rating.rating = args['rating']
+            rating.save()
+
+            return JsonResponse('', status=status.HTTP_200_OK, safe=False)
+        else:
+            data = {
+                'user': user_id,
+                'subject': subject_id,
+                'rating': args['rating']
+            }
+
+            serializer = RatingSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
