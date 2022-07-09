@@ -1,11 +1,11 @@
 import React from "react";
 
 import SubjectHeader from "../components/subject_page/SubjectHeader";
-import SubjectDifficulty from "../components/subject_page/SubjectDifficulty";
 import SubjectScores from "../components/subject_page/SubjectScores";
-import SubjectComments from "../components/subject_page/SubjectComments";
 import SectionDivider from "../components/subject_page/SectionDivider";
 import SubjectDetails from "../components/subject_page/SubjectDetails";
+import SubjectComments from "../components/subject_page/SubjectComments";
+import SubjectDifficulty from "../components/subject_page/SubjectDifficulty";
 
 function SubjectPage(props) {
     return (

@@ -1,24 +1,34 @@
 import {useContext, useEffect} from "react";
+import {useDispatch} from "react-redux";
 
-import {Box, CircularProgress, Grid, Typography} from "@mui/material";
+import {Box, Grid, Typography} from "@mui/material";
 
 import useHttp from "../hooks/use-http";
-import {getAllSubjects} from "../lib/api";
 import AuthContext from "../store/auth-context";
 import Planner from "../components/planner/Planner";
+import {semesterActions} from "../store/redux-store";
 import SubjectList from "../components/subject_list/SubjectList";
+import * as SubjectListAPI from "../lib/api/SubjectListAPI";
+import * as PlannerAPI from "../lib/api/PlannerAPI";
 
 const HomePage = () => {
+    const dispatch = useDispatch();
     const authContext = useContext(AuthContext);
 
-    const {sendRequest, status, data: loadedSubjects, error} = useHttp(
-        getAllSubjects,
+    const {sendRequest: sendSubjectRequest, status: subjectStatus, data: loadedSubjects, error: subjectError} = useHttp(
+        SubjectListAPI.getAllSubjects,
+        true
+    );
+
+    const {sendRequest: sendPlannerRequest, status: plannerStatus, data: loadedPlan, error: plannerError} = useHttp(
+        PlannerAPI.getUserPlan,
         true
     );
 
     useEffect(() => {
-        sendRequest(authContext.token);
-    }, [sendRequest, authContext]);
+        sendSubjectRequest(authContext.token);
+        sendPlannerRequest(authContext.token);
+    }, [sendSubjectRequest, authContext]);
 
     const gridContainerStyle = {
         marginTop: "0",
@@ -30,7 +40,7 @@ const HomePage = () => {
         height: "calc(100vh - 4.35rem)",
     };
 
-    if (status === "pending") {
+    if (subjectStatus === "pending" || plannerStatus === "pending") {
         return (
             <Box sx={gridContainerStyle} display="flex"
                  alignItems="center" justifyContent="center">
@@ -39,19 +49,25 @@ const HomePage = () => {
         );
     }
 
-    if (error) {
-         return (
+    if (subjectError || plannerError) {
+        return (
             <Box sx={gridContainerStyle} display="flex"
                  alignItems="center" justifyContent="center">
-                <Typography variant="h6" align="center">{error}</Typography>;
+                {subjectError && <Typography variant="h6">{subjectError}</Typography>}
+                {plannerError && <Typography variant="h6">{plannerError}</Typography>}
             </Box>
         );
     }
 
+    if (plannerStatus === "completed" && loadedPlan) {
+        dispatch(semesterActions.populateSemesterList(loadedPlan));
+    }
+
+
     return (
         <Grid container spacing={0} sx={gridContainerStyle}>
             <Grid item xs={12} sm={6} md={5.2} sx={gridItemsStyle}>
-                <Planner/>
+                <Planner plan={loadedPlan}/>
             </Grid>
             <Grid item xs={12} sm={6} md={6.8} sx={gridItemsStyle}>
                 <SubjectList subjects={loadedSubjects}/>

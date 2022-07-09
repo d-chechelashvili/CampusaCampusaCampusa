@@ -93,7 +93,6 @@ const SubjectList = (props) => {
         sortTypeChanged,
     } = useControls();
 
-    props.subjects = subj;
     if (!props.subjects) {
         return <Typography variant="h2" align="center">იტვირთება...</Typography>;
     }

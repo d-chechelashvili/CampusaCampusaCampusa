@@ -7,8 +7,8 @@ import {Box} from "@mui/material";
 import GoogleButton from 'react-google-button'
 
 
-import {loginUser} from "../lib/api";
 import AuthContext from "../store/auth-context";
+import * as LoginAPI from "../lib/api/LoginAPI";
 
 function SignInPage(props) {
     const authContext = useContext(AuthContext);
@@ -16,7 +16,7 @@ function SignInPage(props) {
 
     const googleLogin = useGoogleLogin({
         onSuccess: ({code}) => {
-            loginUser(code).then(handleLogin);
+            LoginAPI.loginUser(code).then(handleLogin);
         },
         flow: 'auth-code',
         onError: errorResponse => console.log(errorResponse),

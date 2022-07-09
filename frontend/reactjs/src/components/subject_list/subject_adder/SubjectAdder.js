@@ -1,9 +1,11 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {Alert, Box, Button, TextField, Typography} from "@mui/material";
 
 import {semesterActions} from "../../../store/redux-store";
+import * as PlannerAPI from "../../../lib/api/PlannerAPI";
+import AuthContext from "../../../store/auth-context";
 
 
 function SubjectAdder(props) {
@@ -12,6 +14,7 @@ function SubjectAdder(props) {
     const [error, setError] = useState(null);
     const [semesterNumber, setSemesterNumber] = useState(null);
     const [errorTimeoutId, setErrorTimeoutId] = useState(null);
+    const authContext = useContext(AuthContext);
 
     const handleChange = (event) => {
         setSemesterNumber(event.target.value);
@@ -41,6 +44,7 @@ function SubjectAdder(props) {
 
     const addSubject = () => {
         if (validSubject()) {
+            PlannerAPI.addSubject(authContext.token, subjectName, semesterNumber)
             dispatch(semesterActions.addSubject({semesterNumber, subjectName, credits}));
         } else {
             clearTimeout(errorTimeoutId);

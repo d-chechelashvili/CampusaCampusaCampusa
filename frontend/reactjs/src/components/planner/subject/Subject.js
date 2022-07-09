@@ -51,7 +51,7 @@ function Subject(props) {
                 <ClearIcon fontSize="small"/>
             </IconButton>
             <SubjectInfo name={props.name} credits={props.credits}
-                         onGradeChange={props.onGradeChange}/>
+                         onGradeChange={props.onGradeChange} grade={props.grade}/>
             <IconButton onClick={handleDelete} size="small" sx={iconButtonStyle}>
                 <ClearIcon fontSize="small"/>
             </IconButton>

@@ -19,7 +19,7 @@ from backend.views.utils import calculate_rating, get_semester, get_prerequisite
 class SubjectInfoAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
+    def post(self, request):  # TODO change to get
         user_id = request.user.id
 
         args = JSONParser().parse(request)

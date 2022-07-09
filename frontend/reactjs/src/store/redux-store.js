@@ -1,11 +1,9 @@
 import {configureStore, createSlice} from "@reduxjs/toolkit";
 
-const memorizedSemesterList = [];
-
 
 const semesterStore = createSlice({
     name: "semesters",
-    initialState: {semesterList: memorizedSemesterList},
+    initialState: {semesterList: []},
     reducers: {
         addSemester(state) {
             const newSemester = {
@@ -38,6 +36,9 @@ const semesterStore = createSlice({
             const subjectIndex = semester.subjects.findIndex((subject) => subject.name === subjectName);
             semester.subjects.splice(subjectIndex, 1);
         },
+        populateSemesterList(state, action) {
+            state.semesterList = action.payload;
+        }
     }
 });
 

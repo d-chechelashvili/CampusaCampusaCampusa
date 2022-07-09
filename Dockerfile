@@ -20,4 +20,5 @@ RUN pip install -r requirements.txt
 RUN apt-get update && apt-get install npm -y
 RUN cd frontend/reactjs && npm ci
 RUN cd frontend/reactjs && chmod +x node_modules/.bin/react-scripts && npm run build
+RUN python manage.py makemigrations && python manage.py migrate
 CMD python manage.py runserver 0.0.0.0:$PORT

@@ -22,7 +22,7 @@ class UserPlanAPI(APIErrorsMixin, APIView):
         for planner_item in planner_items:
             if planner_item.user.id == user_id:
                 while planner_item.semester > len(result):
-                    result.append([])
+                    result.append({"subjects": []})
 
                 subject = {
                     'name': planner_item.subject.name,
@@ -30,8 +30,7 @@ class UserPlanAPI(APIErrorsMixin, APIView):
                     'grade': planner_item.grade
                 }
 
-                result[planner_item.semester - 1].append(subject)
-
+                result[planner_item.semester - 1]["subjects"].append(subject)
         return JsonResponse(result, safe=False)
 
 
