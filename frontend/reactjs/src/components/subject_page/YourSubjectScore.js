@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 
 import classes from "./YourSubjectScore.module.css";
 import {
@@ -14,11 +14,27 @@ import {
 } from "@mui/material";
 
 function YourSubjectScore(props) {
-    const [year, setYear] = React.useState(' ');
+    const [year, setYear] = React.useState(new Date().getFullYear());
+    const [semester, setSemester] = React.useState(null);
+    const scoreRef = useRef();
 
-    const handleChange = (event) => {
+    const handleYearChange = (event) => {
         setYear(event.target.value);
     };
+
+    const handleSemesterChange = (event) => {
+        setSemester(event.target.value);
+    };
+
+    // TODO
+    const handleSave = () => {
+        console.log(semester, year, parseFloat(scoreRef.current.value));
+    };
+
+    let years = [];
+    for (let i = 2010; i <= new Date().getFullYear(); i++) {
+        years.push(i);
+    }
 
     return (
         <React.Fragment>
@@ -28,6 +44,7 @@ function YourSubjectScore(props) {
                     <div className={classes.inputContainer}>
                         <FormControl fullWidth>
                             <TextField
+                                inputRef={scoreRef}
                                 required
                                 id="score"
                                 label="ქულა"
@@ -54,21 +71,11 @@ function YourSubjectScore(props) {
                                 value={year}
                                 label="წელი"
                                 size="small"
-                                onChange={handleChange}
+                                onChange={handleYearChange}
                             >
-                                <MenuItem value={2022}>2022</MenuItem>
-                                <MenuItem value={2021}>2021</MenuItem>
-                                <MenuItem value={2020}>2020</MenuItem>
-                                <MenuItem value={2019}>2019</MenuItem>
-                                <MenuItem value={2018}>2018</MenuItem>
-                                <MenuItem value={2017}>2017</MenuItem>
-                                <MenuItem value={2016}>2016</MenuItem>
-                                <MenuItem value={2015}>2015</MenuItem>
-                                <MenuItem value={2014}>2014</MenuItem>
-                                <MenuItem value={2013}>2013</MenuItem>
-                                <MenuItem value={2012}>2012</MenuItem>
-                                <MenuItem value={2011}>2011</MenuItem>
-                                <MenuItem value={2010}>2010</MenuItem>
+                                {years.map(year => (
+                                    <MenuItem key={year} value={year}>{year}</MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </div>
@@ -79,13 +86,15 @@ function YourSubjectScore(props) {
                                 row
                                 aria-labelledby="demo-row-radio-buttons-group-label"
                                 name="row-radio-buttons-group"
+                                value={semester}
+                                onChange={handleSemesterChange}
                             >
-                                <FormControlLabel value="fall" control={<Radio/>} label="შემოდგომის"/>
-                                <FormControlLabel value="spring" control={<Radio/>} label="გაზაფხულის"/>
+                                <FormControlLabel value="FALL" control={<Radio/>} label="შემოდგომის"/>
+                                <FormControlLabel value="SPRING" control={<Radio/>} label="გაზაფხულის"/>
                             </RadioGroup>
                         </FormControl>
                     </div>
-                    <Button variant="contained" size="large">შენახვა</Button>
+                    <Button variant="contained" size="large" onClick={handleSave}>შენახვა</Button>
                 </div>
             </div>
         </React.Fragment>

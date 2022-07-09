@@ -6,8 +6,8 @@ import CampusasSubjectScore from "./CampusasSubjectScore";
 function SubjectScores(props) {
     return (
         <React.Fragment>
-            <YourSubjectScore/>
-            <CampusasSubjectScore/>
+            <YourSubjectScore subjectName={props.subjectName}/>
+            <CampusasSubjectScore subjectName={props.subjectName}/>
         </React.Fragment>
     );
 }

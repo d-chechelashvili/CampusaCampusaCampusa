@@ -25,7 +25,7 @@ function App() {
                 <Route exact path="/">
                     {isLoggedIn ? <HomePage/> : <Redirect to="/sign-in"/>}
                 </Route>
-                <Route path="/subjects/:subjectId">
+                <Route path="/subjects/:subjectName">
                     {isLoggedIn ? <SubjectPage/> : <Redirect to="/sign-in"/>}
                 </Route>
                 <Route component={NotFoundPage}/>

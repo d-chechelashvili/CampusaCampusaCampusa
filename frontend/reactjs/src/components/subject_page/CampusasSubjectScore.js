@@ -5,10 +5,15 @@ import Paper from '@mui/material/Paper';
 import {Chart, SeriesTemplate, CommonSeriesSettings} from 'devextreme-react/chart';
 
 function CampusasSubjectScore(props) {
-    const [year, setYear] = React.useState("all");
+    const [year, setYear] = React.useState("ALL");
+    const [semester, setSemester] = React.useState("ALL");
 
-    const handleChange = (event) => {
+    const handleYearChange = (event) => {
         setYear(event.target.value);
+    };
+
+    const handleSemesterChange = (event) => {
+        setSemester(event.target.value);
     };
 
     const data = [
@@ -19,6 +24,11 @@ function CampusasSubjectScore(props) {
         {argument: 'E', value: 1},
         {argument: 'F', value: 30},
     ];
+
+    let years = [];
+    for (let i = 2010; i <= new Date().getFullYear(); i++) {
+        years.push(i);
+    }
 
     return (
         <React.Fragment>
@@ -34,22 +44,12 @@ function CampusasSubjectScore(props) {
                                 value={year}
                                 label="წელი"
                                 size="small"
-                                onChange={handleChange}
+                                onChange={handleYearChange}
                             >
-                                <MenuItem value={"all"}>ყველა</MenuItem>
-                                <MenuItem value={2022}>2022</MenuItem>
-                                <MenuItem value={2021}>2021</MenuItem>
-                                <MenuItem value={2020}>2020</MenuItem>
-                                <MenuItem value={2019}>2019</MenuItem>
-                                <MenuItem value={2018}>2018</MenuItem>
-                                <MenuItem value={2017}>2017</MenuItem>
-                                <MenuItem value={2016}>2016</MenuItem>
-                                <MenuItem value={2015}>2015</MenuItem>
-                                <MenuItem value={2014}>2014</MenuItem>
-                                <MenuItem value={2013}>2013</MenuItem>
-                                <MenuItem value={2012}>2012</MenuItem>
-                                <MenuItem value={2011}>2011</MenuItem>
-                                <MenuItem value={2010}>2010</MenuItem>
+                                <MenuItem value={"ALL"}>ყველა</MenuItem>
+                                {years.map(year => (
+                                    <MenuItem key={year} value={year}>{year}</MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </div>
@@ -60,11 +60,13 @@ function CampusasSubjectScore(props) {
                                 row
                                 aria-labelledby="demo-row-radio-buttons-group-label"
                                 name="row-radio-buttons-group"
-                                defaultValue="all"
+                                defaultValue="ALL"
+                                value={semester}
+                                onChange={handleSemesterChange}
                             >
-                                <FormControlLabel value="all" control={<Radio/>} label="ყველა"/>
-                                <FormControlLabel value="fall" control={<Radio/>} label="შემოდგომის"/>
-                                <FormControlLabel value="spring" control={<Radio/>} label="გაზაფხულის"/>
+                                <FormControlLabel value="ALL" control={<Radio/>} label="ყველა"/>
+                                <FormControlLabel value="FALL" control={<Radio/>} label="შემოდგომის"/>
+                                <FormControlLabel value="SPRING" control={<Radio/>} label="გაზაფხულის"/>
                             </RadioGroup>
                         </FormControl>
                     </div>

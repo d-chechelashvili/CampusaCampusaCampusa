@@ -1,15 +1,32 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import classes from "./SubjectHeader.module.css";
 import programming_methodology_syllabus from "../../media/syllabuses/programming_methodology.pdf";
 import {Rating} from "@mui/material";
+import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
+import AuthContext from "../../store/auth-context";
 
 function SubjectHeader(props) {
+    props.userRating = (props.userRating || 0) / 2;
+    props.averageRating = (props.averageRating || 7.1) / 2;
+    const authContext = useContext(AuthContext);
+    const [userRating, setUserRating] = React.useState(props.userRating);
+
+
+    const handleRatingChange = (event, newValue) => {
+        setUserRating(newValue);
+        SubjectInfoAPI.collectSubjectRating(authContext.token, props.subjectName, newValue * 2);
+    };
+
+    // TODO read syllabus path
+    // TODO read user rating from API
+    // TODO read average rating from API
+
     return (
         <React.Fragment>
             <div className={classes.container}>
                 <div className={classes.nameContainer}>
-                    <h1 className={classes.text}>პროგრამირების მეთოდოლოგია</h1>
+                    <h1 className={classes.text}>{props.subjectName}</h1>
                     <h3 className={classes.text}><a href={programming_methodology_syllabus} target="_blank"
                                                     rel="noreferrer">სილაბუსის ნახვა</a></h3>
                 </div>
@@ -17,13 +34,14 @@ function SubjectHeader(props) {
                     <div className={classes.ratingsContainerColumn}>
                         <h3 className={classes.centeredText}>თქვენი<br/>ზოგადი შეფასება</h3>
                         <div className={classes.pointsContainer}>
-                            <Rating name="your-rating" defaultValue={0} precision={1}/>
+                            <Rating name="your-rating" value={userRating} precision={0.5}
+                                    onChange={handleRatingChange}/>
                         </div>
                     </div>
                     <div className={classes.ratingsContainerColumn}>
                         <h3 className={classes.centeredText}>კამპუსას<br/>ზოგადი შეფასება</h3>
                         <div className={classes.pointsContainer}>
-                            <Rating name="campusa-rating" defaultValue={3.5} precision={0.5} readOnly/>
+                            <Rating name="campusa-rating" defaultValue={props.averageRating} precision={0.5} readOnly/>
                         </div>
                     </div>
                 </div>

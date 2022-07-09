@@ -1,9 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import classes from "./SubjectDifficulty.module.css";
 import {Box, Slider} from "@mui/material";
+import AuthContext from "../../store/auth-context";
+import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 
 function SubjectDifficulty(props) {
+    props.userDifficulty = (props.userDifficulty || 0);
+    props.averageDifficulty = (props.averageDifficulty || 6.5);
+    const authContext = useContext(AuthContext);
+    const [userDifficulty, setUserDifficulty] = React.useState(props.userDifficulty);
     const marks = [
         {
             value: 0,
@@ -15,6 +21,11 @@ function SubjectDifficulty(props) {
         },
     ];
 
+    const handleDifficultyChange = (event, newValue) => {
+        setUserDifficulty(newValue);
+        SubjectInfoAPI.collectSubjectDifficulty(authContext.token, props.subjectName, newValue);
+    };
+
     return (
         <React.Fragment>
             <div className={classes.container}>
@@ -23,7 +34,8 @@ function SubjectDifficulty(props) {
                     <Box className={classes.slider}>
                         <Slider
                             aria-label="your-difficulty"
-                            defaultValue={0}
+                            value={userDifficulty}
+                            onChange={handleDifficultyChange}
                             min={0}
                             max={10}
                             step={1}

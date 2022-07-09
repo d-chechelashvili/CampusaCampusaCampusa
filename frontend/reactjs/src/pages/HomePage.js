@@ -28,7 +28,7 @@ const HomePage = () => {
     useEffect(() => {
         sendSubjectRequest(authContext.token);
         sendPlannerRequest(authContext.token);
-    }, [sendSubjectRequest, authContext]);
+    }, [sendSubjectRequest, sendPlannerRequest, authContext]);
 
     const gridContainerStyle = {
         marginTop: "0",
