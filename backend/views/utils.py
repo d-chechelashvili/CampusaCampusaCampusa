@@ -1,3 +1,6 @@
+from django.conf import settings
+
+
 def calculate_rating(ratings):
     if len(ratings) == 0:
         return 0
@@ -50,7 +53,7 @@ def get_prerequisite_names(prerequisites):
 def get_prerequisite_links(prerequisites):
     prerequisite_links = []
     for prerequisite in prerequisites:
-        link = 'www.campusa.herokuapp.com/subject/' + prerequisite.prerequisite.name
+        link = settings.BASE_BACKEND_URL + '/subject/' + prerequisite.prerequisite.name
         prerequisite_links.append(link)
     return prerequisite_links
 

@@ -1,40 +1,52 @@
 import {useContext, useEffect} from "react";
 
-import {Grid, Typography} from "@mui/material";
+import {Box, CircularProgress, Grid, Typography} from "@mui/material";
 
 import useHttp from "../hooks/use-http";
 import {getAllSubjects} from "../lib/api";
+import AuthContext from "../store/auth-context";
 import Planner from "../components/planner/Planner";
 import SubjectList from "../components/subject_list/SubjectList";
-import AuthContext from "../store/auth-context";
 
 const HomePage = () => {
     const authContext = useContext(AuthContext);
 
     const {sendRequest, status, data: loadedSubjects, error} = useHttp(
         getAllSubjects,
-        false
+        true
     );
 
     useEffect(() => {
         sendRequest(authContext.token);
     }, [sendRequest, authContext]);
 
-    // todo if status is pending could show loading spinner
-
-    if (error) {
-        return <Typography variant="h6" align="center">{error}</Typography>;
-    }
-
     const gridContainerStyle = {
         marginTop: "0",
         width: "100%",
-        height: "calc(100vh - 5rem)",
+        height: "calc(100vh - 4.35rem)",
     };
 
     const gridItemsStyle = {
-        height: "calc(100vh - 5rem)",
+        height: "calc(100vh - 4.35rem)",
     };
+
+    if (status === "pending") {
+        return (
+            <Box sx={gridContainerStyle} display="flex"
+                 alignItems="center" justifyContent="center">
+                {/*<CircularProgress size="10rem" disableShrink/>*/}
+            </Box>
+        );
+    }
+
+    if (error) {
+         return (
+            <Box sx={gridContainerStyle} display="flex"
+                 alignItems="center" justifyContent="center">
+                <Typography variant="h6" align="center">{error}</Typography>;
+            </Box>
+        );
+    }
 
     return (
         <Grid container spacing={0} sx={gridContainerStyle}>

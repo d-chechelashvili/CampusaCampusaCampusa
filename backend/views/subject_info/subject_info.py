@@ -1,22 +1,22 @@
-from rest_framework import status
 from django.http import JsonResponse
-from rest_framework.views import APIView
+from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 
-from backend.models.score import Score
-from backend.models.subject import Subject
+from backend.mixins import APIErrorsMixin
 from backend.models.comment import Comment
 from backend.models.difficulty import Difficulty, DifficultySerializer
 from backend.models.prerequisite import Prerequisite
-from backend.mixins import PublicAPIMixin, APIErrorsMixin
-from backend.models.subject_version import SubjectVersion
 from backend.models.rating import Rating, RatingSerializer
+from backend.models.score import Score
+from backend.models.subject import Subject
+from backend.models.subject_version import SubjectVersion
 from backend.views.utils import calculate_rating, get_semester, get_prerequisite_names, get_prerequisite_links, \
     calculate_difficulty, get_grades, get_comments
 
 
-class SubjectInfoAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class SubjectInfoAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -71,7 +71,7 @@ class SubjectInfoAPI(PublicAPIMixin, APIErrorsMixin, APIView):
         return JsonResponse(result, safe=False)
 
 
-class UpdateUserRatingAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class UpdateUserRatingAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -102,7 +102,7 @@ class UpdateUserRatingAPI(PublicAPIMixin, APIErrorsMixin, APIView):
             return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UpdateUserDifficultyAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class UpdateUserDifficultyAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):

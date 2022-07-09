@@ -1,5 +1,5 @@
 export async function getAllSubjects(accessToken) {
-    const response = await fetch(window.location.origin + "/api/subjects/get_subjects", {
+    const response = await fetch(window.location.origin + "/api/subjects/", {
         method: "GET",
         mode: "same-origin",
         headers: {

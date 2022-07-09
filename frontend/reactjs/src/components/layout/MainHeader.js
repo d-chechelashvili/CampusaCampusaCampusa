@@ -21,7 +21,7 @@ const MainHeader = () => {
     };
 
     const toolBarStyle = {
-        height: "5rem",
+        height: "4.35rem",
     };
 
     return (

@@ -1,15 +1,15 @@
-from rest_framework import status
 from django.http import JsonResponse
-from rest_framework.views import APIView
+from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 
-from backend.models.subject import Subject
-from backend.mixins import PublicAPIMixin, APIErrorsMixin
+from backend.mixins import APIErrorsMixin
 from backend.models.planner_item import PlannerItem, PlannerItemSerializer
+from backend.models.subject import Subject
 
 
-class UserPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class UserPlanAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -35,7 +35,7 @@ class UserPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
         return JsonResponse(result, safe=False)
 
 
-class AddSubjectToPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class AddSubjectToPlanAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -59,7 +59,7 @@ class AddSubjectToPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class RemoveSubjectFromPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class RemoveSubjectFromPlanAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -73,7 +73,7 @@ class RemoveSubjectFromPlanAPI(PublicAPIMixin, APIErrorsMixin, APIView):
         return JsonResponse('', status=status.HTTP_200_OK, safe=False)
 
 
-class UpdateSubjectGradeAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class UpdateSubjectGradeAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):

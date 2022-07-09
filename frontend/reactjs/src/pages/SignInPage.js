@@ -38,7 +38,7 @@ function SignInPage(props) {
         alignItems: 'center',
         justifyContent: 'center',
         width: '100vw',
-        height: 'calc(100vh - 5rem)',
+        height: 'calc(100vh - 4.35rem)',
         minWidth: 'fit-content',
         minHeight: 'fit-content',
     };

@@ -37,13 +37,3 @@ class GoogleLoginAPI(PublicAPIMixin, APIErrorsMixin, APIView):
             'picture': user_data['picture'],
         }
         return JsonResponse(response_dict, status=status.HTTP_202_ACCEPTED)
-
-# example usage
-
-# class DecodeJWTTest(ApiErrorsMixin, APIView):
-#     permission_classes = [IsAuthenticated]
-#
-#     def get(self, request):
-#         print(request.user.id)
-#         print(request.auth)
-#         return JsonResponse({"movida": "wow"})

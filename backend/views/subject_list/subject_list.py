@@ -5,11 +5,11 @@ from rest_framework.permissions import IsAuthenticated
 from backend.models.rating import Rating
 from backend.models.difficulty import Difficulty
 from backend.models.subject_version import SubjectVersion
-from backend.mixins import PublicAPIMixin, APIErrorsMixin
+from backend.mixins import APIErrorsMixin
 from backend.views.utils import calculate_rating, calculate_difficulty
 
 
-class SubjectListAPI(PublicAPIMixin, APIErrorsMixin, APIView):
+class SubjectListAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
