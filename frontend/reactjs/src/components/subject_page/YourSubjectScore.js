@@ -15,7 +15,10 @@ import {
 
 function YourSubjectScore(props) {
     const [year, setYear] = React.useState(new Date().getFullYear());
-    const [semester, setSemester] = React.useState(null);
+    const [semester, setSemester] = React.useState("FALL");
+    const [scoreError, setScoreError] = React.useState(false);
+    const [saveSuccess, setSaveSuccess] = React.useState(false);
+    const [saveSuccessTimeoutId, setSaveSuccessTimeoutId] = React.useState(null);
     const scoreRef = useRef();
 
     const handleYearChange = (event) => {
@@ -28,7 +31,15 @@ function YourSubjectScore(props) {
 
     // TODO
     const handleSave = () => {
-        console.log(semester, year, parseFloat(scoreRef.current.value));
+        const score = parseFloat(scoreRef.current.value);
+        setScoreError(!Boolean(score));
+        setSaveSuccess(Boolean(score));
+        clearTimeout(saveSuccessTimeoutId);
+        const id = setTimeout(() => {
+            setSaveSuccess(false)
+        }, 850);
+        setSaveSuccessTimeoutId(id);
+        console.log(semester, year, score);
     };
 
     let years = [];
@@ -50,6 +61,7 @@ function YourSubjectScore(props) {
                                 label="ქულა"
                                 type="number"
                                 size="small"
+                                error={scoreError}
                                 InputProps={{
                                     inputProps: {
                                         min: 0,
@@ -94,8 +106,9 @@ function YourSubjectScore(props) {
                             </RadioGroup>
                         </FormControl>
                     </div>
-                    <Button variant="contained" size="large" onClick={handleSave}>შენახვა</Button>
-                </div>
+                    <Button variant="contained" size="large"
+                            color={saveSuccess ? "success" : "primary"}
+                            onClick={handleSave}>შენახვა</Button></div>
             </div>
         </React.Fragment>
     );
