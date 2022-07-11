@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import classes from "./SubjectComments.module.css";
 import Paper from "@mui/material/Paper";
 import SubjectComment from "./SubjectComment";
@@ -7,30 +7,43 @@ import SendIcon from '@mui/icons-material/Send';
 
 const initialComments = [
     {
-        text: "რამე კომენტარი"
+        text: "რამე კომენტარი",
+        date: new Date().getTime(),
     },
 ];
 
+const COMMENT_PER_PAGE = 5;
+
 function SubjectComments(props) {
     const [comments, setComments] = useState(initialComments);
+    const commentRef = useRef();
+    const [page, setPage] = React.useState(1);
 
-    let newComment = "";
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
 
-    function newCommentUpdated(e) {
-        newComment = e.target.value;
+    const addNewComment = () => {
+        if (commentRef.current.value.length > 0) {
+            setComments((prevComments) => {
+                const comment = {
+                    text: commentRef.current.value,
+                    date: new Date().getTime(),
+                };
+                return [comment, ...prevComments];
+            });
+        }
+        commentRef.current.value = "";
     }
 
-    function addNewComment() {
-        setComments((prevComments) => {
-            const comment = {
-                text: newComment
-            };
-            return [comment, ...prevComments];
-        });
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            addNewComment();
+        }
     }
 
     const SearchButton = () => (
-        <IconButton onClick={addNewComment}>
+        <IconButton color="primary" onClick={addNewComment}>
             <SendIcon/>
         </IconButton>
     );
@@ -43,16 +56,18 @@ function SubjectComments(props) {
                     <TextField fullWidth style={{padding: "0px 0px 48px 0px"}}
                                id="your-comment"
                                label="გაგვიზიარეთ თქვენი გამოცდილება ანონიმურად"
-                               onInput={newCommentUpdated}
+                               inputRef={commentRef}
+                               onKeyDown={handleKeyPress}
                                InputProps={{endAdornment: <SearchButton/>}}
                     />
                     {
-                        comments.map((comment) => (
-                            <SubjectComment text={comment.text}/>
-                        ))
+                        comments.slice((page - 1) * COMMENT_PER_PAGE, page * COMMENT_PER_PAGE)
+                            .map((comment) => (
+                                <SubjectComment text={comment.text} date={comment.date}/>
+                            ))
                     }
                     <div className={classes.paginationContainer}>
-                        <Pagination count={10}/>
+                        <Pagination count={Math.ceil(comments.length / 5)} page={page} onChange={handlePageChange}/>
                     </div>
                 </Paper>
             </div>
