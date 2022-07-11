@@ -161,7 +161,6 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-
 if os.getenv("DEV_MODE") == "true":
     SECURE_PROXY_SSL_HEADER = None
     SECURE_SSL_REDIRECT = False

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Dict, Union
+from typing import Dict, List, Union
 
 from backend.models.comment import Comment
 from backend.models.difficulty import Difficulty
@@ -72,7 +72,9 @@ def score_to_grade(score: int) -> str:
         return "F"
 
 
-def get_comments(comments: List[Comment], user_id: int) -> List[Dict[str, Union[str, datetime, bool]]]:
+def get_comments(
+    comments: List[Comment], user_id: int
+) -> List[Dict[str, Union[str, datetime, bool]]]:
     result: List[Dict[str, Union[str, datetime, bool]]] = []
     for comment in comments:
         result.append(

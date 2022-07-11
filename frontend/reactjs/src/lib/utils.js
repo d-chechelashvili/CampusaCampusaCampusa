@@ -136,9 +136,12 @@ export function getGradeDistributionFromScores(scores) {
         F: 0,
         "?": 0,
     };
-    for (let i = 0; i < scores.length; i++) {
-        grades[getGradeFromScore(scores[i])]++;
+    if (scores) {
+        for (let i = 0; i < scores.length; i++) {
+            grades[getGradeFromScore(scores[i])]++;
+        }
     }
+
     return grades;
 }
 

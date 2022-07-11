@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from "react";
 
 import {
     Box,
-    CircularProgress,
     FormControl,
     FormControlLabel,
     FormLabel,
@@ -40,14 +39,6 @@ function CampusasSubjectScore(props) {
             <Box display="flex"
                  alignItems="center" justifyContent="center">
                 <Typography variant="h6">{error}</Typography>
-            </Box>
-        );
-    }
-
-    if (status === "pending") {
-        return (
-            <Box display="flex" alignItems="center" justifyContent="center">
-                <CircularProgress size="3rem" disableShrink/>
             </Box>
         );
     }

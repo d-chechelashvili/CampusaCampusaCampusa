@@ -1,7 +1,9 @@
 from typing import Any, Optional
 
 
-def get_first_matching_attr(obj: Any, *attrs: Any, default: Optional[Any] = None) -> Any:
+def get_first_matching_attr(
+    obj: Any, *attrs: Any, default: Optional[Any] = None
+) -> Any:
     for attr in attrs:
         if hasattr(obj, attr):
             return getattr(obj, attr)

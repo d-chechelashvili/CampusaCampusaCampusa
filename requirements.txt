@@ -8,3 +8,5 @@ flake8
 isort
 mypy
 pytest
+django-stubs[compatible-mypy]
+djangorestframework-stubs[compatible-mypy]

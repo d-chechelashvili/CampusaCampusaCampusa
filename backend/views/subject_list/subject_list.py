@@ -35,6 +35,7 @@ class SubjectListAPI(APIErrorsMixin, APIView):
 
         return JsonResponse(result, safe=False)
 
+
 # class SubjectListAPI(APIErrorsMixin, APIView):
 #     permission_classes = [IsAuthenticated]
 #
