@@ -19,10 +19,10 @@ from backend.views.utils import calculate_rating, get_semester, get_prerequisite
 class SubjectInfoAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):  # TODO change to get
+    def get(self, request):
         user_id = request.user.id
 
-        args = JSONParser().parse(request)
+        args = request.query_params
         subject_name = args['subject_name']
 
         subject = Subject.objects.get(name=subject_name)
@@ -60,7 +60,6 @@ class SubjectInfoAPI(APIErrorsMixin, APIView):
             'credits': subject.credits,
             'semester': get_semester(subject_versions),
             'prerequisite_names': get_prerequisite_names(prerequisites),
-            'prerequisite_links': get_prerequisite_links(prerequisites),
             'user_difficulty': user_difficulty,
             'general_difficulty': calculate_difficulty(difficulties),
             'user_score': user_score,

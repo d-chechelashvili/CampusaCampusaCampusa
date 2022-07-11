@@ -50,14 +50,6 @@ def get_prerequisite_names(prerequisites):
     return prerequisite_names
 
 
-def get_prerequisite_links(prerequisites):
-    prerequisite_links = []
-    for prerequisite in prerequisites:
-        link = settings.BASE_BACKEND_URL + '/subject/' + prerequisite.prerequisite.name
-        prerequisite_links.append(link)
-    return prerequisite_links
-
-
 def score_to_grade(score):
     if score >= 91:
         return 'A'

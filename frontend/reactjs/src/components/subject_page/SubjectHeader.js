@@ -8,7 +8,7 @@ import AuthContext from "../../store/auth-context";
 
 function SubjectHeader(props) {
     props.userRating = (props.userRating || 0) / 2;
-    props.averageRating = (props.averageRating || 7.1) / 2;
+    props.averageRating = (props.averageRating || 0) / 2;
     const authContext = useContext(AuthContext);
     const [userRating, setUserRating] = React.useState(props.userRating);
 
@@ -19,8 +19,7 @@ function SubjectHeader(props) {
     };
 
     // TODO read syllabus path
-    // TODO read user rating from API
-    // TODO read average rating from API
+    const syllabusPath = programming_methodology_syllabus;
 
     return (
         <React.Fragment>

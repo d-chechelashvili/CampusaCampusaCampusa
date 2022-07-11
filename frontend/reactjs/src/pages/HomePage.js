@@ -63,7 +63,6 @@ const HomePage = () => {
         dispatch(semesterActions.populateSemesterList(loadedPlan));
     }
 
-
     return (
         <Grid container spacing={0} sx={gridContainerStyle}>
             <Grid item xs={12} sm={6} md={5.2} sx={gridItemsStyle}>

@@ -7,7 +7,7 @@ import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 
 function SubjectDifficulty(props) {
     props.userDifficulty = (props.userDifficulty || 0);
-    props.averageDifficulty = (props.averageDifficulty || 6.5);
+    props.averageDifficulty = (props.averageDifficulty || 0);
     const authContext = useContext(AuthContext);
     const [userDifficulty, setUserDifficulty] = React.useState(props.userDifficulty);
     const marks = [
@@ -49,7 +49,7 @@ function SubjectDifficulty(props) {
                     <Box className={classes.slider}>
                         <Slider
                             aria-label="campusa-difficulty"
-                            defaultValue={6.5}
+                            defaultValue={props.averageDifficulty}
                             min={0}
                             max={10}
                             step={0.1}

@@ -1,9 +1,9 @@
-export async function getSubjectInfo(accessToken, subject_name) {
-    const response = await fetch(window.location.origin + `/api/subject_info/?subject_name=${subject_name}`, {
+export async function getSubjectInfo(requestData) {
+    const response = await fetch(window.location.origin + `/api/subject_info/?subject_name=${requestData.subjectName}`, {
         method: "GET",
         mode: "same-origin",
         headers: {
-            "Authorization": `Bearer ${accessToken}`,
+            "Authorization": `Bearer ${requestData.accessToken}`,
         },
     });
     const data = await response.json();
