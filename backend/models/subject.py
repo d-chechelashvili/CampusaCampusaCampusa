@@ -11,4 +11,4 @@ class Subject(models.Model):
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
-        fields = ['id', 'name', 'credits', 'syllabus_path']
+        fields = ["id", "name", "credits", "syllabus_path"]

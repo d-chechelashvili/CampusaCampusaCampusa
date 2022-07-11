@@ -2,6 +2,7 @@ django
 djangorestframework
 djangorestframework-simplejwt
 requests
+types-requests
 black
 flake8
 isort

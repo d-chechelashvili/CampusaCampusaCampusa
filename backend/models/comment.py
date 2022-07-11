@@ -2,9 +2,9 @@ from django.db import models
 from django.utils.timezone import now
 from rest_framework import serializers
 
-from backend.models.user import User
-from backend.models.subject import Subject
 from backend.models.nickname import Nickname
+from backend.models.subject import Subject
+from backend.models.user import User
 
 
 class Comment(models.Model):
@@ -18,4 +18,4 @@ class Comment(models.Model):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['id', 'user', 'subject', 'nickname', 'comment', 'datetime']
+        fields = ["id", "user", "subject", "nickname", "comment", "datetime"]

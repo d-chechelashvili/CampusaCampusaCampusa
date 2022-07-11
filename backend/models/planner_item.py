@@ -1,8 +1,8 @@
 from django.db import models
 from rest_framework import serializers
 
-from backend.models.user import User
 from backend.models.subject import Subject
+from backend.models.user import User
 
 
 class PlannerItem(models.Model):
@@ -15,4 +15,4 @@ class PlannerItem(models.Model):
 class PlannerItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlannerItem
-        fields = ['id', 'user', 'subject', 'semester', 'grade']
+        fields = ["id", "user", "subject", "semester", "grade"]

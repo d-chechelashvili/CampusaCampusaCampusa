@@ -9,4 +9,4 @@ class Nickname(models.Model):
 class NicknameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nickname
-        fields = ['id', 'nickname']
+        fields = ["id", "nickname"]

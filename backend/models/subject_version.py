@@ -1,8 +1,8 @@
 from django.db import models
 from rest_framework import serializers
 
-from backend.models.subject import Subject
 from backend.models.faculty import Faculty
+from backend.models.subject import Subject
 
 
 class SubjectVersion(models.Model):
@@ -15,4 +15,4 @@ class SubjectVersion(models.Model):
 class SubjectVersionSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubjectVersion
-        fields = ['id', 'subject', 'faculty', 'year', 'semester']
+        fields = ["id", "subject", "faculty", "year", "semester"]

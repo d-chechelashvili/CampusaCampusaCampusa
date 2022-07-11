@@ -1,8 +1,8 @@
 from django.db import models
 from rest_framework import serializers
 
-from backend.models.user import User
 from backend.models.subject import Subject
+from backend.models.user import User
 
 
 class Score(models.Model):
@@ -16,4 +16,4 @@ class Score(models.Model):
 class ScoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Score
-        fields = ['id', 'user', 'subject', 'score', 'year', 'semester']
+        fields = ["id", "user", "subject", "score", "year", "semester"]

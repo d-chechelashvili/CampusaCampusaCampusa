@@ -1,8 +1,8 @@
 from django.db import models
 from rest_framework import serializers
 
-from backend.models.user import User
 from backend.models.subject import Subject
+from backend.models.user import User
 
 
 class Difficulty(models.Model):
@@ -14,4 +14,4 @@ class Difficulty(models.Model):
 class DifficultySerializer(serializers.ModelSerializer):
     class Meta:
         model = Difficulty
-        fields = ['id', 'user', 'subject', 'difficulty']
+        fields = ["id", "user", "subject", "difficulty"]

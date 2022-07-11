@@ -10,4 +10,4 @@ class Faculty(models.Model):
 class FacultySerializer(serializers.ModelSerializer):
     class Meta:
         model = Faculty
-        fields = ['id', 'name', 'abbreviation']
+        fields = ["id", "name", "abbreviation"]
