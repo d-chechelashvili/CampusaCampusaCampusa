@@ -1,12 +1,64 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import classes from "./CampusasSubjectScore.module.css";
-import {FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select} from "@mui/material";
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    InputLabel,
+    MenuItem,
+    Radio,
+    RadioGroup,
+    Select,
+    Typography
+} from "@mui/material";
 import Paper from '@mui/material/Paper';
-import {Chart, SeriesTemplate, CommonSeriesSettings} from 'devextreme-react/chart';
+import {Chart, CommonSeriesSettings, SeriesTemplate} from 'devextreme-react/chart';
+import useHttp from "../../hooks/use-http";
+import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
+import AuthContext from "../../store/auth-context";
+import {getGradeDistributionFromScores} from "../../lib/utils";
 
 function CampusasSubjectScore(props) {
     const [year, setYear] = React.useState("ALL");
     const [semester, setSemester] = React.useState("ALL");
+    const authContext = useContext(AuthContext);
+    const {sendRequest, status, data: loadedInfo, error} = useHttp(
+        SubjectInfoAPI.getScoreDistribution,
+        true
+    );
+
+    useEffect(() => {
+        sendRequest({accessToken: authContext.token, subjectName: props.subjectName, semester, year});
+    }, [sendRequest, authContext, props.subjectName, semester, year]);
+
+    if (error) {
+        return (
+            <Box display="flex"
+                 alignItems="center" justifyContent="center">
+                <Typography variant="h6">{error}</Typography>
+            </Box>
+        );
+    }
+
+    if (status === "pending") {
+        return (
+            <Box display="flex" alignItems="center" justifyContent="center">
+                <CircularProgress size="3rem" disableShrink/>
+            </Box>
+        );
+    }
+
+    const gradeDistribution = getGradeDistributionFromScores(loadedInfo);
+    const data = [
+        {argument: 'A', value: gradeDistribution.A},
+        {argument: 'B', value: gradeDistribution.B},
+        {argument: 'C', value: gradeDistribution.C},
+        {argument: 'D', value: gradeDistribution.D},
+        {argument: 'E', value: gradeDistribution.E},
+        {argument: 'F', value: gradeDistribution.F},
+    ];
 
     const handleYearChange = (event) => {
         setYear(event.target.value);
@@ -16,14 +68,6 @@ function CampusasSubjectScore(props) {
         setSemester(event.target.value);
     };
 
-    const data = [
-        {argument: 'A', value: 22},
-        {argument: 'B', value: 28},
-        {argument: 'C', value: 11},
-        {argument: 'D', value: 8},
-        {argument: 'E', value: 1},
-        {argument: 'F', value: 30},
-    ];
 
     let years = [];
     for (let i = 2010; i <= new Date().getFullYear(); i++) {

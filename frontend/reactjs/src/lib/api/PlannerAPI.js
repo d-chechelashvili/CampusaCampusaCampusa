@@ -39,9 +39,7 @@ export async function removeSubject(accessToken, subject_name, semester_num) {
         },
         body: JSON.stringify(body),
     });
-    const data = await response.json();
-    console.log(data);
-    return data;
+    return await response.json();
 }
 
 export async function updateGrade(accessToken, subject_name, semester_num, grade) {

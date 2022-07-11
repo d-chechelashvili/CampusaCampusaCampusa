@@ -13,7 +13,7 @@ from backend.models.score import Score
 from backend.models.subject import Subject
 from backend.models.subject_version import SubjectVersion
 from backend.views.utils import calculate_rating, get_semester, get_prerequisite_names, \
-    calculate_difficulty, get_grades, get_comments
+    calculate_difficulty, get_comments
 
 
 class SubjectInfoAPI(APIErrorsMixin, APIView):
@@ -63,10 +63,30 @@ class SubjectInfoAPI(APIErrorsMixin, APIView):
             'user_difficulty': user_difficulty,
             'general_difficulty': calculate_difficulty(difficulties),
             'user_score': user_score,
-            'grades': get_grades(scores),
             'comments': get_comments(comments, user_id)
         }
 
+        return JsonResponse(result, safe=False)
+
+
+class ScoreDistributionAPI(APIErrorsMixin, APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        args = request.query_params
+        subject_name = args['subject_name']
+        semester = args['semester']
+        year = args['year']
+        subject = Subject.objects.get(name=subject_name)
+        kwargs = {
+            'subject': subject.id,
+        }
+        if year != 'ALL':
+            kwargs['year'] = year
+        if semester != 'ALL':
+            kwargs['semester'] = semester
+        scores = Score.objects.filter(**kwargs)
+        result = [score.score for score in scores]
         return JsonResponse(result, safe=False)
 
 

@@ -65,17 +65,6 @@ def score_to_grade(score):
         return 'F'
 
 
-def get_grades(scores):
-    grades = []
-    for score in scores:
-        grades.append({
-            'score': score_to_grade(score.score),
-            'year': score.year,
-            'semester': score.semester
-        })
-    return grades
-
-
 def get_comments(comments, user_id):
     result = []
     for comment in comments:

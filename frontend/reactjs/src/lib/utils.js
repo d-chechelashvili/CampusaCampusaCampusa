@@ -80,7 +80,7 @@ export function getUniqueFacultiesFromSubjects(subjects) {
     return faculties;
 }
 
-export function getSemesterDisplayString(semester, shortened=false) {
+export function getSemesterDisplayString(semester, shortened = false) {
     switch (semester) {
         case "SPRING":
             return shortened ? "გაზ" : "გაზაფხულის";
@@ -90,7 +90,6 @@ export function getSemesterDisplayString(semester, shortened=false) {
             return shortened ? "სულ" : "ორივეში";
     }
 }
-
 
 export function getYearInRoman(year) {
     switch (year) {
@@ -107,3 +106,38 @@ export function getYearInRoman(year) {
     }
 }
 
+export function getGradeFromScore(score) {
+    score = parseFloat(score);
+    switch (true) {
+        case score >= 91:
+            return "A";
+        case score >= 81:
+            return "B";
+        case score >= 71:
+            return "C";
+        case score >= 61:
+            return "D";
+        case score >= 51:
+            return "E";
+        case score < 51:
+            return "F";
+        default:
+            return "?";
+    }
+}
+
+export function getGradeDistributionFromScores(scores) {
+    let grades = {
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0,
+        E: 0,
+        F: 0,
+        "?": 0,
+    };
+    for (let i = 0; i < scores.length; i++) {
+        grades[getGradeFromScore(scores[i])]++;
+    }
+    return grades;
+}
