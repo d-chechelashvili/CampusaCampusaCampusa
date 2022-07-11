@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
 
 import classes from "./SubjectHeader.module.css";
-import programming_methodology_syllabus from "../../media/syllabuses/programming_methodology.pdf";
 import {Rating} from "@mui/material";
 import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 import AuthContext from "../../store/auth-context";
@@ -18,15 +17,19 @@ function SubjectHeader(props) {
         SubjectInfoAPI.collectSubjectRating(authContext.token, props.subjectName, newValue * 2);
     };
 
-    // TODO read syllabus path
-    const syllabusPath = programming_methodology_syllabus;
+    let syllabus;
+    try {
+        syllabus = require("../../media/syllabuses/" + props.syllabusPath);
+    } catch (ex) {
+        console.log(ex);
+    }
 
     return (
         <React.Fragment>
             <div className={classes.container}>
                 <div className={classes.nameContainer}>
                     <h1 className={classes.text}>{props.subjectName}</h1>
-                    <h3 className={classes.text}><a href={programming_methodology_syllabus} target="_blank"
+                    <h3 className={classes.text}><a href={syllabus} target="_blank"
                                                     rel="noreferrer">სილაბუსის ნახვა</a></h3>
                 </div>
                 <div className={classes.ratingsContainer}>

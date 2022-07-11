@@ -12,7 +12,7 @@ from backend.models.rating import Rating, RatingSerializer
 from backend.models.score import Score
 from backend.models.subject import Subject
 from backend.models.subject_version import SubjectVersion
-from backend.views.utils import calculate_rating, get_semester, get_prerequisite_names, get_prerequisite_links, \
+from backend.views.utils import calculate_rating, get_semester, get_prerequisite_names, \
     calculate_difficulty, get_grades, get_comments
 
 
