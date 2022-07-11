@@ -1,16 +1,16 @@
 import {useDispatch, useSelector} from 'react-redux';
+import {useContext} from "react";
 
 import {Box, CircularProgress, Stack} from "@mui/material";
 import Scrollbars from "react-custom-scrollbars-2";
 
 import Semester from "./semester/Semester";
 import TotalBar from "./total_bar/TotalBar";
+import AuthContext from "../../store/auth-context";
 import SemesterAdder from "./semester/SemesterAdder";
+import * as PlannerAPI from "../../lib/api/PlannerAPI";
 import {semesterActions} from "../../store/redux-store";
 import {getCreditsFromSubjects, getGPAFromSubjects} from "../../lib/utils";
-import * as PlannerAPI from "../../lib/api/PlannerAPI";
-import {useContext} from "react";
-import AuthContext from "../../store/auth-context";
 
 
 function Planner(props) {

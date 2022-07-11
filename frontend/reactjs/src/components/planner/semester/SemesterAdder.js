@@ -18,8 +18,8 @@ function SemesterAdder(props) {
         <Box display="flex" flexDirection="column" alignItems="center">
             <Divider sx={dividerStyle}/>
             <Button startIcon={<AddCircleIcon/>}
-                size="small" variant="contained"
-                onClick={props.onClick} sx={buttonStyle}>
+                    size="small" variant="contained"
+                    onClick={props.onClick} sx={buttonStyle}>
                 სემესტრის დამატება
             </Button>
         </Box>

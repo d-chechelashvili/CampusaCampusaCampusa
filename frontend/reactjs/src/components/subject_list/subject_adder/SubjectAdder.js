@@ -3,27 +3,27 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {Alert, Box, Button, TextField, Typography} from "@mui/material";
 
-import {semesterActions} from "../../../store/redux-store";
-import * as PlannerAPI from "../../../lib/api/PlannerAPI";
 import AuthContext from "../../../store/auth-context";
+import * as PlannerAPI from "../../../lib/api/PlannerAPI";
+import {semesterActions} from "../../../store/redux-store";
 
 
 function SubjectAdder(props) {
     const dispatch = useDispatch();
-    const semesterList = useSelector((state) => state.semesterList);
+    const authContext = useContext(AuthContext);
     const [error, setError] = useState(null);
     const [semesterNumber, setSemesterNumber] = useState(null);
     const [errorTimeoutId, setErrorTimeoutId] = useState(null);
-    const authContext = useContext(AuthContext);
+    const semesterList = useSelector((state) => state.semesterList);
 
     const handleChange = (event) => {
         setSemesterNumber(event.target.value);
     };
 
-    const subjectName = props.subjectName;
-    const credits = props.subjectCredits;
-    const semester = props.subjectSemester;
     const year = props.subjectYear;
+    const credits = props.subjectCredits;
+    const subjectName = props.subjectName;
+    const semester = props.subjectSemester;
 
     const validSubject = () => {
         for (let i = 0; i < semesterList.length; i++) {
@@ -129,7 +129,8 @@ function SubjectAdder(props) {
             </Box>
             {error &&
                 <Alert onClick={() => setError(null)}
-                       onClose={() => {}}
+                       onClose={() => {
+                       }}
                        sx={{marginTop: 0.5}} severity="error">{error}</Alert>
             }
         </Box>

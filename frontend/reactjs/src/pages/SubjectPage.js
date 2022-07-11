@@ -1,16 +1,17 @@
+import {useParams} from "react-router-dom";
 import React, {useContext, useEffect} from "react";
 
+import {Box, Typography} from "@mui/material";
+
+import useHttp from "../hooks/use-http";
+import AuthContext from "../store/auth-context";
+import * as SubjectInfoAPI from "../lib/api/SubjectInfoAPI";
 import SubjectHeader from "../components/subject_page/SubjectHeader";
 import SubjectScores from "../components/subject_page/SubjectScores";
 import SectionDivider from "../components/subject_page/SectionDivider";
 import SubjectDetails from "../components/subject_page/SubjectDetails";
 import SubjectComments from "../components/subject_page/SubjectComments";
 import SubjectDifficulty from "../components/subject_page/SubjectDifficulty";
-import {useParams} from "react-router-dom";
-import useHttp from "../hooks/use-http";
-import * as SubjectInfoAPI from "../lib/api/SubjectInfoAPI";
-import AuthContext from "../store/auth-context";
-import {Box, Typography} from "@mui/material";
 
 function SubjectPage(props) {
     const params = useParams();

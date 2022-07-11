@@ -1,8 +1,8 @@
 import React from "react";
-
-import classes from "./Prerequisite.module.css";
-import {Chip} from "@mui/material";
 import {Link as RouterLink} from "react-router-dom";
+
+import {Chip} from "@mui/material";
+import classes from "./Prerequisite.module.css";
 
 function Prerequisite(props) {
     const linkStyle = {

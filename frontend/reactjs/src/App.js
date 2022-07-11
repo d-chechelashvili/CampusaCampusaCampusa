@@ -5,15 +5,16 @@ import HomePage from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import SubjectPage from "./pages/SubjectPage";
 import AuthContext from "./store/auth-context";
-import Layout from "./components/layout/Layout";
 import NotFoundPage from "./pages/NotFoundPage";
+import Layout from "./components/layout/Layout";
 
 function App() {
-    const authContext = useContext(AuthContext);
-    const isLoggedIn = authContext.isLoggedIn;
     const history = useHistory();
     const location = useLocation();
-    
+    const authContext = useContext(AuthContext);
+
+    const isLoggedIn = authContext.isLoggedIn;
+
     if (!isLoggedIn && (location.pathname === "/" || location.pathname.startsWith("/subjects/"))) {
         history.push(location);
     }

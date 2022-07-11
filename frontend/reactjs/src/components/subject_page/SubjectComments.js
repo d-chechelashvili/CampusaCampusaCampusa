@@ -1,9 +1,11 @@
 import React, {useRef, useState} from "react";
-import classes from "./SubjectComments.module.css";
+
 import Paper from "@mui/material/Paper";
-import SubjectComment from "./SubjectComment";
-import {IconButton, Pagination, TextField} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
+import {IconButton, Pagination, TextField} from "@mui/material";
+
+import SubjectComment from "./SubjectComment";
+import classes from "./SubjectComments.module.css";
 
 const initialComments = [
     {
@@ -15,9 +17,9 @@ const initialComments = [
 const COMMENT_PER_PAGE = 5;
 
 function SubjectComments(props) {
-    const [comments, setComments] = useState(initialComments);
     const commentRef = useRef();
     const [page, setPage] = React.useState(1);
+    const [comments, setComments] = useState(initialComments);
 
     const handlePageChange = (event, value) => {
         setPage(value);
@@ -34,13 +36,13 @@ function SubjectComments(props) {
             });
         }
         commentRef.current.value = "";
-    }
+    };
 
     const handleKeyPress = (event) => {
         if (event.key === "Enter") {
             addNewComment();
         }
-    }
+    };
 
     const SearchButton = () => (
         <IconButton color="primary" onClick={addNewComment}>

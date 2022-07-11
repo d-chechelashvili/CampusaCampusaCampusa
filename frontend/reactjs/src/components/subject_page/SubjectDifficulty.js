@@ -1,15 +1,17 @@
 import React, {useContext} from "react";
 
-import classes from "./SubjectDifficulty.module.css";
 import {Box, Slider} from "@mui/material";
+
 import AuthContext from "../../store/auth-context";
+import classes from "./SubjectDifficulty.module.css";
 import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 
 function SubjectDifficulty(props) {
+    const authContext = useContext(AuthContext);
     props.userDifficulty = (props.userDifficulty || 0);
     props.averageDifficulty = (props.averageDifficulty || 0);
-    const authContext = useContext(AuthContext);
     const [userDifficulty, setUserDifficulty] = React.useState(props.userDifficulty);
+
     const marks = [
         {
             value: 0,

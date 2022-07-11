@@ -5,7 +5,7 @@ const initialControlsState = {
     facultyFilterValue: [],
     semesterFilterValue: [],
     yearFilterValue: [],
-    sortType: "default"
+    sortType: "default",
 };
 
 const controlsStateReducer = (state, action) => {

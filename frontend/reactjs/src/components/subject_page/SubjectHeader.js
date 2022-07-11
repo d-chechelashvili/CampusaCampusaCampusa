@@ -1,14 +1,15 @@
 import React, {useContext} from "react";
 
-import classes from "./SubjectHeader.module.css";
 import {Rating} from "@mui/material";
-import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
+
+import classes from "./SubjectHeader.module.css";
 import AuthContext from "../../store/auth-context";
+import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 
 function SubjectHeader(props) {
+    const authContext = useContext(AuthContext);
     props.userRating = (props.userRating || 0) / 2;
     props.averageRating = (props.averageRating || 0) / 2;
-    const authContext = useContext(AuthContext);
     const [userRating, setUserRating] = React.useState(props.userRating);
 
 

@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from "react";
-import classes from "./CampusasSubjectScore.module.css";
+import React, {useContext, useEffect, useState} from "react";
+
 import {
     Box,
     CircularProgress,
@@ -13,17 +13,19 @@ import {
     Select,
     Typography
 } from "@mui/material";
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
 import {Chart, CommonSeriesSettings, SeriesTemplate} from 'devextreme-react/chart';
+
 import useHttp from "../../hooks/use-http";
-import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 import AuthContext from "../../store/auth-context";
+import classes from "./CampusasSubjectScore.module.css";
+import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 import {getGradeDistributionFromScores} from "../../lib/utils";
 
 function CampusasSubjectScore(props) {
-    const [year, setYear] = React.useState("ALL");
-    const [semester, setSemester] = React.useState("ALL");
     const authContext = useContext(AuthContext);
+    const [year, setYear] = useState("ALL");
+    const [semester, setSemester] = useState("ALL");
     const {sendRequest, status, data: loadedInfo, error} = useHttp(
         SubjectInfoAPI.getScoreDistribution,
         true

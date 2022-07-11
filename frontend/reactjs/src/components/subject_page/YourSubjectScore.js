@@ -1,25 +1,27 @@
 import React, {useRef} from "react";
 
-import classes from "./YourSubjectScore.module.css";
 import {
     Button,
     FormControl,
     FormControlLabel,
     FormLabel,
     InputLabel,
-    MenuItem, Radio,
+    MenuItem,
+    Radio,
     RadioGroup,
     Select,
     TextField
 } from "@mui/material";
 
+import classes from "./YourSubjectScore.module.css";
+
 function YourSubjectScore(props) {
-    const [year, setYear] = React.useState(new Date().getFullYear());
+    const scoreRef = useRef();
     const [semester, setSemester] = React.useState("FALL");
+    const [year, setYear] = React.useState(new Date().getFullYear());
     const [scoreError, setScoreError] = React.useState(false);
     const [saveSuccess, setSaveSuccess] = React.useState(false);
     const [saveSuccessTimeoutId, setSaveSuccessTimeoutId] = React.useState(null);
-    const scoreRef = useRef();
 
     const handleYearChange = (event) => {
         setYear(event.target.value);

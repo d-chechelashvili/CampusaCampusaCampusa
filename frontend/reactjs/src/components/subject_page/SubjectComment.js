@@ -1,5 +1,7 @@
 import React from "react";
+
 import {Divider, Grid, Typography} from "@mui/material";
+
 import {getFormattedDate} from "../../lib/utils";
 
 function SubjectComment(props) {

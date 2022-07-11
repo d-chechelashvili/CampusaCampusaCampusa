@@ -5,11 +5,11 @@ import {Box, Grid, Typography} from "@mui/material";
 
 import useHttp from "../hooks/use-http";
 import AuthContext from "../store/auth-context";
+import * as PlannerAPI from "../lib/api/PlannerAPI";
 import Planner from "../components/planner/Planner";
 import {semesterActions} from "../store/redux-store";
-import SubjectList from "../components/subject_list/SubjectList";
 import * as SubjectListAPI from "../lib/api/SubjectListAPI";
-import * as PlannerAPI from "../lib/api/PlannerAPI";
+import SubjectList from "../components/subject_list/SubjectList";
 
 const HomePage = () => {
     const dispatch = useDispatch();

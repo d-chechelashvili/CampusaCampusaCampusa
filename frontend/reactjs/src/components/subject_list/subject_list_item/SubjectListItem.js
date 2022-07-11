@@ -1,5 +1,4 @@
 import {useState} from "react";
-
 import {Link as RouterLink} from "react-router-dom";
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -29,13 +28,13 @@ const SubjectListItem = (props) => {
         setIsExpanded((expanded) => !expanded);
     };
 
+    const rating = props.subject.rating;
+    const credits = props.subject.credits;
+    const faculty = props.subject.faculty;
+    const subjectName = props.subject.name;
+    const difficulty = props.subject.difficulty;
     const year = getYearInRoman(props.subject.year);
     const semester = getSemesterDisplayString(props.subject.semester, true);
-    const credits = props.subject.credits;
-    const rating = props.subject.rating;
-    const difficulty = props.subject.difficulty;
-    const subjectName = props.subject.name;
-    const faculty = props.subject.faculty;
 
     const linkStyle = {
         "text-decoration": "none",

@@ -2,17 +2,15 @@ import {useContext} from "react";
 import {useHistory} from "react-router-dom";
 import {useGoogleLogin} from '@react-oauth/google';
 
-
 import {Box} from "@mui/material";
 import GoogleButton from 'react-google-button'
-
 
 import AuthContext from "../store/auth-context";
 import * as LoginAPI from "../lib/api/LoginAPI";
 
 function SignInPage(props) {
-    const authContext = useContext(AuthContext);
     const history = useHistory();
+    const authContext = useContext(AuthContext);
 
     const googleLogin = useGoogleLogin({
         onSuccess: ({code}) => {

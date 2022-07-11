@@ -1,14 +1,15 @@
 import React from "react";
 
-import classes from "./SubjectDetails.module.css";
 import {Chip} from "@mui/material";
+
 import Prerequisite from "./Prerequisite";
+import classes from "./SubjectDetails.module.css";
 import {getSemesterDisplayString} from "../../lib/utils";
 
 function SubjectDetails(props) {
-    const credits = (props.credits || 6).toString();
+    const credits = props.credits.toString();
+    const prerequisites = props.prerequisites;
     const semester = getSemesterDisplayString(props.semester);
-    const prerequisites = props.prerequisites || ["პროგრამირების აბსტრაქცია", "პროგრამირების პარადიგმები"];
 
     return (
         <React.Fragment>
