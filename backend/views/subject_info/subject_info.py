@@ -228,7 +228,7 @@ class CommentsAPI(APIErrorsMixin, APIView):
         subject_name = args["subject_name"]
         subject = Subject.objects.get(name=subject_name)
 
-        comments = Comment.objects.select_related().filter(subject=subject.id)
+        comments = Comment.objects.select_related().filter(subject=subject.id).order_by("-datetime")
 
         result = []
 
@@ -239,7 +239,5 @@ class CommentsAPI(APIErrorsMixin, APIView):
                 "is_client_author": comment.user.id == user_id,
                 "date": comment.datetime.strftime(("%d/%m/%Y")),
             })
-
-        result.reverse()
 
         return JsonResponse(result, safe=False)
