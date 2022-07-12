@@ -146,7 +146,6 @@ class UpdateUserScoreAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request: Request) -> JsonResponse:
-        print("Aq var")
         user_id = request.user.id
 
         args = JSONParser().parse(request)
@@ -183,18 +182,24 @@ class AddCommentAPI(APIErrorsMixin, APIView):
         args = JSONParser().parse(request)
         subject_id = Subject.objects.get(name=args["subject_name"]).id
 
-        nickname_ids = [nickname.id for nickname in Nickname.objects.all()]
-        subject_nickname_ids = [comment.nickname.id for comment in Comment.objects.filter(subject_id=subject_id)]
+        user_comments = Comment.objects.filter(user_id=user_id, subject_id=subject_id)
+        if len(user_comments) > 0:
+            nickname_id = user_comments.first().nickname.id
+        else:
+            nickname_ids = [nickname.id for nickname in Nickname.objects.all()]
+            subject_nickname_ids = [comment.nickname.id for comment in Comment.objects.filter(subject_id=subject_id)]
 
-        nickname_id_counts = Counter(nickname_ids + subject_nickname_ids)
-        sorted_nickname_id_counts = nickname_id_counts.most_common()[::-1]
-        filtered_nickname_id_counts = list(
-            filter(lambda x: x[1] == sorted_nickname_id_counts[0][1], sorted_nickname_id_counts))
+            nickname_id_counts = Counter(nickname_ids + subject_nickname_ids)
+            sorted_nickname_id_counts = nickname_id_counts.most_common()[::-1]
+            filtered_nickname_id_counts = list(
+                filter(lambda x: x[1] == sorted_nickname_id_counts[0][1], sorted_nickname_id_counts))
+
+            nickname_id = random.choice(filtered_nickname_id_counts)[0]
 
         data = {
             "user": user_id,
             "subject": subject_id,
-            "nickname": random.choice(filtered_nickname_id_counts)[0],
+            "nickname": nickname_id,
             "comment": args["comment"],
         }
 
@@ -234,4 +239,7 @@ class CommentsAPI(APIErrorsMixin, APIView):
                 "is_client_author": comment.user.id == user_id,
                 "date": comment.datetime.strftime(("%d/%m/%Y")),
             })
+
+        result.reverse()
+
         return JsonResponse(result, safe=False)

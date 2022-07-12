@@ -51,7 +51,7 @@ function SubjectComment(props) {
                         fontWeight: props.isAuthor ? "bold" : "normal"
                     }}>{name}</h4>
                     <p style={{textAlign: "left", color: "gray"}}>{props.date}</p>
-                    <Typography sx={{marginLeft: "16px", textAlign: "left"}}
+                    <Typography sx={{textAlign: "left"}}
                                 display="block" variant="body1">
                         {props.text}
                     </Typography>
