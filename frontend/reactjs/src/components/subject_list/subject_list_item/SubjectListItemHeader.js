@@ -13,7 +13,7 @@ function SubjectListItemHeader(props) {
                                     variant="body1">{props.year}</Typography>
                     </Box>
                     <Typography sx={{color: "#000000", float: "right", marginRight: 1}}
-                                fontSize="1rem" variant="body1">კურსი:</Typography>
+                                fontSize="1.03rem" variant="body1">კურსი:</Typography>
                 </Box>
             }
         />

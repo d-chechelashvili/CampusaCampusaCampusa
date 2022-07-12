@@ -76,7 +76,7 @@ const SubjectListItem = (props) => {
     };
 
     const cardContentStyle = {
-        paddingTop: 1.5,
+        paddingTop: 0,
         paddingBottom: 0,
     };
 

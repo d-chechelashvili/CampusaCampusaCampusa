@@ -21,9 +21,7 @@ function SubjectHeader(props) {
     let syllabus;
     try {
         syllabus = require("../../media/syllabuses/" + props.syllabusPath);
-    } catch (ex) {
-        console.log(ex);
-    }
+    } catch (ex) {}
 
     return (
         <React.Fragment>
