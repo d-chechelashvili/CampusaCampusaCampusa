@@ -12,7 +12,7 @@ const SubjectSemesterFilter = (props) => {
         props.onChange(event);
     };
 
-    const semesterValues = ["SPRING", "AUTUMN", "BOTH"];
+    const semesterValues = ["SPRING", "FALL", "BOTH"];
 
     const formStyle = {
         marginTop: 1,

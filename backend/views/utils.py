@@ -29,23 +29,23 @@ def calculate_difficulty(difficulties: List[Difficulty]) -> float:
 
 
 def get_semester(subject_versions: List[SubjectVersion]) -> str:
-    autumn = False
+    fall = False
     spring = False
 
     for subject_version in subject_versions:
-        if subject_version.semester == "AUTUMN":
-            autumn = True
+        if subject_version.semester == "FALL":
+            fall = True
         elif subject_version.semester == "SPRING":
             spring = True
         else:
-            autumn = True
+            fall = True
             spring = True
             break
 
-    if autumn and spring:
+    if fall and spring:
         return "BOTH"
-    elif autumn:
-        return "AUTUMN"
+    elif fall:
+        return "FALL"
     else:
         return "SPRING"
 

@@ -84,7 +84,7 @@ export function getSemesterDisplayString(semester, shortened = false) {
     switch (semester) {
         case "SPRING":
             return shortened ? "გაზ" : "გაზაფხულის";
-        case "AUTUMN":
+        case "FALL":
             return shortened ? "შემ" : "შემოდგომის";
         default:
             return shortened ? "სულ" : "ორივეში";

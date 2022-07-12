@@ -10,7 +10,7 @@ from backend.models.comment import Comment
 from backend.models.difficulty import Difficulty, DifficultySerializer
 from backend.models.prerequisite import Prerequisite
 from backend.models.rating import Rating, RatingSerializer
-from backend.models.score import Score
+from backend.models.score import Score, ScoreSerializer
 from backend.models.subject import Subject
 from backend.models.subject_version import SubjectVersion
 from backend.views.utils import (
@@ -148,3 +148,34 @@ class UpdateUserDifficultyAPI(APIErrorsMixin, APIView):
                 return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
             return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateUserScoreAPI(APIErrorsMixin, APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request: Request) -> JsonResponse:
+        user_id = request.user.id
+
+        args = JSONParser().parse(request)
+        subject_id = Subject.objects.get(name=args["subject_name"]).id
+
+        scores = Score.objects.filter(user=user_id, subject=subject_id, year=args["year"], semester=args["semester"])
+        if len(scores) > 0:
+            scores[0].score = args["score"]
+            scores[0].save()
+            return JsonResponse("", status=status.HTTP_200_OK, safe=False)
+
+        data = {
+            "user": user_id,
+            "subject": subject_id,
+            "score": args["score"],
+            "year": args["year"],
+            "semester": args["semester"],
+        }
+
+        serializer = ScoreSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

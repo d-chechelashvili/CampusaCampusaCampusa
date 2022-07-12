@@ -67,7 +67,7 @@ function SubjectAdder(props) {
         switch (semester) {
             case "SPRING":
                 return semesterNum % 2 === 0;
-            case "AUTUMN":
+            case "FALL":
                 return semesterNum % 2 === 1;
             default:
                 return true;
