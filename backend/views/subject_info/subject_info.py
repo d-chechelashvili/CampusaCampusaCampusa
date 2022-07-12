@@ -201,7 +201,14 @@ class AddCommentAPI(APIErrorsMixin, APIView):
         serializer = CommentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+            comment = Comment.objects.get(id=serializer.data["id"])
+            response = {
+                "author_nickname": comment.nickname.nickname,
+                "comment_text": comment.comment,
+                "is_client_author": comment.user.id == user_id,
+                "date": comment.datetime.strftime(("%d/%m/%Y")),
+            }
+            return JsonResponse(response, status=status.HTTP_201_CREATED)
 
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

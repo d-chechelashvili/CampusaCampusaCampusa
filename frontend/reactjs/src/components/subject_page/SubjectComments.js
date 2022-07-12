@@ -16,6 +16,7 @@ function SubjectComments(props) {
     const commentRef = useRef();
     const authContext = useContext(AuthContext);
     const [page, setPage] = React.useState(1);
+    const [comments, setComments] = React.useState([]);
     const {sendRequest, status, data: loadedComments, error} = useHttp(
         SubjectInfoAPI.getComments,
         true
@@ -24,6 +25,12 @@ function SubjectComments(props) {
     useEffect(() => {
         sendRequest({accessToken: authContext.token, subjectName: props.subjectName});
     }, [sendRequest, authContext, props.subjectName]);
+
+    useEffect(() => {
+        if (status === "completed") {
+            setComments(loadedComments);
+        }
+    }, [status, loadedComments, setComments]);
 
     if (error) {
         return (
@@ -47,6 +54,19 @@ function SubjectComments(props) {
     };
 
     const addNewComment = () => {
+        if (commentRef.current.value.length > 0) {
+            SubjectInfoAPI.addComment(authContext.token, props.subjectName, commentRef.current.value).then((response) => {
+                setComments((prevComments) => {
+                    const comment = {
+                        comment_text: response.comment_text,
+                        author_nickname: response.author_nickname,
+                        date: response.date,
+                        is_client_author: response.is_client_author,
+                    };
+                    return [comment, ...prevComments];
+                });
+            });
+        }
         commentRef.current.value = "";
     };
 
@@ -75,14 +95,14 @@ function SubjectComments(props) {
                                InputProps={{endAdornment: <SearchButton/>}}
                     />
                     {
-                        loadedComments.slice((page - 1) * COMMENT_PER_PAGE, page * COMMENT_PER_PAGE)
+                        comments.slice((page - 1) * COMMENT_PER_PAGE, page * COMMENT_PER_PAGE)
                             .map((comment) => (
                                 <SubjectComment text={comment.comment_text} date={comment.date}
                                                 author={comment.author_nickname} isAuthor={comment.is_client_author}/>
                             ))
                     }
                     <div className={classes.paginationContainer}>
-                        <Pagination count={Math.ceil(loadedComments.length / 5)} page={page}
+                        <Pagination count={Math.ceil(comments.length / 5)} page={page}
                                     onChange={handlePageChange}/>
                     </div>
                 </Paper>

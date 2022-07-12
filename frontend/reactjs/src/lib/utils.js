@@ -126,7 +126,7 @@ export function getGradeFromScore(score) {
     }
 }
 
-export function getGradeDistributionFromScores(scores) {
+export function getGradeDistributionFromScores(scores, status) {
     let grades = {
         A: 0,
         B: 0,
@@ -136,7 +136,7 @@ export function getGradeDistributionFromScores(scores) {
         F: 0,
         "?": 0,
     };
-    if (scores) {
+    if (scores || status === "completed") {
         for (let i = 0; i < scores.length; i++) {
             grades[getGradeFromScore(scores[i])]++;
         }

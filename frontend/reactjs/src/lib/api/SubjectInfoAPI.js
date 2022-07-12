@@ -91,3 +91,17 @@ export async function getComments(requestData) {
 
     return data;
 }
+
+export async function addComment(accessToken, subject_name, comment) {
+    const body = {subject_name: subject_name, comment: comment};
+    const response = await fetch(window.location.origin + "/api/subject_info/add_comment/", {
+        method: "POST",
+        mode: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(body),
+    });
+    return await response.json();
+}

@@ -43,7 +43,7 @@ function CampusasSubjectScore(props) {
         );
     }
 
-    const gradeDistribution = getGradeDistributionFromScores(loadedInfo);
+    const gradeDistribution = getGradeDistributionFromScores(loadedInfo, status);
     const data = [
         {argument: 'A', value: gradeDistribution.A},
         {argument: 'B', value: gradeDistribution.B},

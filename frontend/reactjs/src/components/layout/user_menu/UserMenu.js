@@ -18,7 +18,7 @@ function UserMenu(props) {
 
     return (
         <Box sx={{flexGrow: 0, marginLeft: "auto", paddingLeft: 1}}>
-            <Tooltip title={Boolean(anchorElUser) ? '' : 'Open Settings'}>
+            <Tooltip title={Boolean(anchorElUser) ? '' : 'მენიუს გახსნა'}>
                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                     <Avatar src={authContext.pictureURL} imgProps={{referrerPolicy: "no-referrer"}}/>
                 </IconButton>
@@ -41,7 +41,7 @@ function UserMenu(props) {
                 onClose={handleCloseUserMenu}
             >
                 <MenuItem key="logout" onClick={handleCloseUserMenu}>
-                    <Typography onClick={props.onLogout} textAlign="center">Logout</Typography>
+                    <Typography onClick={props.onLogout} textAlign="center">გამოსვლა</Typography>
                 </MenuItem>
             </Menu>
         </Box>
