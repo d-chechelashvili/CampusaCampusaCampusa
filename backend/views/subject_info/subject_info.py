@@ -215,3 +215,28 @@ class AddCommentAPI(APIErrorsMixin, APIView):
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CommentsAPI(APIErrorsMixin, APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request: Request) -> JsonResponse:
+        user_id = request.user.id
+
+        args = request.query_params
+        subject_name = args["subject_name"]
+        subject = Subject.objects.get(name=subject_name)
+
+        comments = Comment.objects.select_related().filter(subject=subject.id)
+
+        result = []
+
+        for comment in comments:
+            result.append({
+                "author_nickname": comment.nickname.nickname,
+                "comment_text": comment.comment,
+                "is_client_author": comment.user.id == user_id,
+                "date": comment.datetime.strftime(("%d/%m/%Y")),
+            })
+
+        return JsonResponse(result, safe=False)

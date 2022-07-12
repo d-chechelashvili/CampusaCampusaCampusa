@@ -14,6 +14,7 @@ from .views.subject_info.subject_info import (
     UpdateUserRatingAPI,
     UpdateUserScoreAPI,
     AddCommentAPI,
+    CommentsAPI,
 )
 from .views.subject_list.subject_list import SubjectListAPI
 
@@ -74,5 +75,11 @@ urlpatterns = [
         "subject_info/add_comment/",
         AddCommentAPI.as_view(),
         name="add-comment",
+    ),
+    # args: subject_name
+    path(
+        "subject_info/get_comments/",
+        CommentsAPI.as_view(),
+        name="get-comments",
     ),
 ]
