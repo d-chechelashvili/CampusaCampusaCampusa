@@ -11,3 +11,4 @@ pytest
 django-stubs[compatible-mypy]
 djangorestframework-stubs[compatible-mypy]
 dj-database-url
+psycopg2
