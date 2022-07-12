@@ -1,3 +1,6 @@
+import random
+from collections import defaultdict, Counter
+
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.parsers import JSONParser
@@ -6,8 +9,9 @@ from rest_framework.request import Request
 from rest_framework.views import APIView
 
 from backend.mixins import APIErrorsMixin
-from backend.models.comment import Comment
+from backend.models.comment import Comment, CommentSerializer
 from backend.models.difficulty import Difficulty, DifficultySerializer
+from backend.models.nickname import Nickname
 from backend.models.prerequisite import Prerequisite
 from backend.models.rating import Rating, RatingSerializer
 from backend.models.score import Score, ScoreSerializer
@@ -174,6 +178,38 @@ class UpdateUserScoreAPI(APIErrorsMixin, APIView):
         }
 
         serializer = ScoreSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AddCommentAPI(APIErrorsMixin, APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request: Request) -> JsonResponse:
+        user_id = request.user.id
+
+        args = JSONParser().parse(request)
+        subject_id = Subject.objects.get(name=args["subject_name"]).id
+
+        nickname_ids = [nickname.id for nickname in Nickname.objects.all()]
+        subject_nickname_ids = [comment.nickname.id for comment in Comment.objects.filter(subject_id=subject_id)]
+
+        nickname_id_counts = Counter(nickname_ids + subject_nickname_ids)
+        sorted_nickname_id_counts = nickname_id_counts.most_common()[::-1]
+        filtered_nickname_id_counts = list(
+            filter(lambda x: x[1] == sorted_nickname_id_counts[0][1], sorted_nickname_id_counts))
+
+        data = {
+            "user": user_id,
+            "subject": subject_id,
+            "nickname": random.choice(filtered_nickname_id_counts)[0],
+            "comment": args["comment"],
+        }
+
+        serializer = CommentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)

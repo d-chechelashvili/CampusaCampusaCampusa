@@ -13,6 +13,7 @@ from .views.subject_info.subject_info import (
     UpdateUserDifficultyAPI,
     UpdateUserRatingAPI,
     UpdateUserScoreAPI,
+    AddCommentAPI,
 )
 from .views.subject_list.subject_list import SubjectListAPI
 
@@ -67,5 +68,11 @@ urlpatterns = [
         "subject_info/update_score/",
         UpdateUserScoreAPI.as_view(),
         name="update-user-score",
+    ),
+    # args: subject_name, comment
+    path(
+        "subject_info/add_comment/",
+        AddCommentAPI.as_view(),
+        name="add-comment",
     ),
 ]
