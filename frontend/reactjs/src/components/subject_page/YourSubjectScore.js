@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useContext, useRef} from "react";
 
 import {
     Button,
@@ -13,10 +13,13 @@ import {
     TextField
 } from "@mui/material";
 
+import AuthContext from "../../store/auth-context";
 import classes from "./YourSubjectScore.module.css";
+import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 
 function YourSubjectScore(props) {
     const scoreRef = useRef();
+    const authContext = useContext(AuthContext);
     const [semester, setSemester] = React.useState("FALL");
     const [year, setYear] = React.useState(new Date().getFullYear());
     const [scoreError, setScoreError] = React.useState(false);
@@ -31,7 +34,6 @@ function YourSubjectScore(props) {
         setSemester(event.target.value);
     };
 
-    // TODO
     const handleSave = () => {
         const score = parseFloat(scoreRef.current.value);
         setScoreError(!Boolean(score));
@@ -41,7 +43,7 @@ function YourSubjectScore(props) {
             setSaveSuccess(false)
         }, 850);
         setSaveSuccessTimeoutId(id);
-        console.log(semester, year, score);
+        SubjectInfoAPI.collectUserScore(authContext.token, props.subjectName, year, semester, score);
     };
 
     let years = [];

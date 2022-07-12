@@ -158,6 +158,7 @@ class UpdateUserScoreAPI(APIErrorsMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request: Request) -> JsonResponse:
+        print("Aq var")
         user_id = request.user.id
 
         args = JSONParser().parse(request)

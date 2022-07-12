@@ -61,3 +61,17 @@ export async function collectSubjectDifficulty(accessToken, subject_name, diffic
     });
     return await response.json();
 }
+
+export async function collectUserScore(accessToken, subject_name, year, semester, score) {
+    const body = {subject_name: subject_name, year: year, semester: semester, score: score};
+    const response = await fetch(window.location.origin + "/api/subject_info/update_score/", {
+        method: "POST",
+        mode: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(body),
+    });
+    return await response.json();
+}
