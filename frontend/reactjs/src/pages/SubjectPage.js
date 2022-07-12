@@ -58,7 +58,7 @@ function SubjectPage(props) {
             <SectionDivider/>
             <SubjectScores subjectName={params.subjectName}/>
             <SectionDivider/>
-            <SubjectComments/>
+            <SubjectComments subjectName={params.subjectName}/>
         </React.Fragment>
     );
 }

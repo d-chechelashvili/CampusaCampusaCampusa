@@ -1,40 +1,52 @@
-import React, {useRef, useState} from "react";
+import React, {useContext, useEffect, useRef} from "react";
 
 import Paper from "@mui/material/Paper";
 import SendIcon from '@mui/icons-material/Send';
-import {IconButton, Pagination, TextField} from "@mui/material";
+import {Box, CircularProgress, IconButton, Pagination, TextField, Typography} from "@mui/material";
 
+import useHttp from "../../hooks/use-http";
 import SubjectComment from "./SubjectComment";
 import classes from "./SubjectComments.module.css";
-
-const initialComments = [
-    {
-        text: "რამე კომენტარი",
-        date: new Date().getTime(),
-    },
-];
+import AuthContext from "../../store/auth-context";
+import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 
 const COMMENT_PER_PAGE = 5;
 
 function SubjectComments(props) {
     const commentRef = useRef();
+    const authContext = useContext(AuthContext);
     const [page, setPage] = React.useState(1);
-    const [comments, setComments] = useState(initialComments);
+    const {sendRequest, status, data: loadedComments, error} = useHttp(
+        SubjectInfoAPI.getComments,
+        true
+    );
+
+    useEffect(() => {
+        sendRequest({accessToken: authContext.token, subjectName: props.subjectName});
+    }, [sendRequest, authContext, props.subjectName]);
+
+    if (error) {
+        return (
+            <Box display="flex"
+                 alignItems="center" justifyContent="center">
+                <Typography variant="h6">{error}</Typography>
+            </Box>
+        );
+    }
+
+    if (status === "pending") {
+        return (
+            <Box display="flex" alignItems="center" justifyContent="center">
+                <CircularProgress size="4rem" disableShrink/>
+            </Box>
+        );
+    }
 
     const handlePageChange = (event, value) => {
         setPage(value);
     };
 
     const addNewComment = () => {
-        if (commentRef.current.value.length > 0) {
-            setComments((prevComments) => {
-                const comment = {
-                    text: commentRef.current.value,
-                    date: new Date().getTime(),
-                };
-                return [comment, ...prevComments];
-            });
-        }
         commentRef.current.value = "";
     };
 
@@ -63,13 +75,15 @@ function SubjectComments(props) {
                                InputProps={{endAdornment: <SearchButton/>}}
                     />
                     {
-                        comments.slice((page - 1) * COMMENT_PER_PAGE, page * COMMENT_PER_PAGE)
+                        loadedComments.slice((page - 1) * COMMENT_PER_PAGE, page * COMMENT_PER_PAGE)
                             .map((comment) => (
-                                <SubjectComment text={comment.text} date={comment.date}/>
+                                <SubjectComment text={comment.comment_text} date={comment.date}
+                                                author={comment.author_nickname} isAuthor={comment.is_client_author}/>
                             ))
                     }
                     <div className={classes.paginationContainer}>
-                        <Pagination count={Math.ceil(comments.length / 5)} page={page} onChange={handlePageChange}/>
+                        <Pagination count={Math.ceil(loadedComments.length / 5)} page={page}
+                                    onChange={handlePageChange}/>
                     </div>
                 </Paper>
             </div>

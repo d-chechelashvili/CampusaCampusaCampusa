@@ -75,3 +75,19 @@ export async function collectUserScore(accessToken, subject_name, year, semester
     });
     return await response.json();
 }
+
+export async function getComments(requestData) {
+    const response = await fetch(window.location.origin + `/api/subject_info/get_comments/?subject_name=${requestData.subjectName}`, {
+        method: "GET",
+        mode: "same-origin",
+        headers: {
+            "Authorization": `Bearer ${requestData.accessToken}`,
+        },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Could not fetch comments.');
+    }
+
+    return data;
+}

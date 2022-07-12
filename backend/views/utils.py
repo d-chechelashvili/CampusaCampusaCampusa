@@ -70,19 +70,3 @@ def score_to_grade(score: int) -> str:
         return "E"
     else:
         return "F"
-
-
-def get_comments(
-    comments: List[Comment], user_id: int
-) -> List[Dict[str, Union[str, datetime, bool]]]:
-    result: List[Dict[str, Union[str, datetime, bool]]] = []
-    for comment in comments:
-        result.append(
-            {
-                "nickname": comment.nickname.nickname,
-                "datetime": comment.datetime,
-                "comment": comment.comment,
-                "is_your_comment": comment.user.id == user_id,
-            }
-        )
-    return result

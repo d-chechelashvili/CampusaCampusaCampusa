@@ -1,5 +1,5 @@
 import random
-from collections import defaultdict, Counter
+from collections import Counter
 
 from django.http import JsonResponse
 from rest_framework import status
@@ -20,7 +20,6 @@ from backend.models.subject_version import SubjectVersion
 from backend.views.utils import (
     calculate_difficulty,
     calculate_rating,
-    get_comments,
     get_prerequisite_names,
     get_semester,
 )
@@ -40,8 +39,6 @@ class SubjectInfoAPI(APIErrorsMixin, APIView):
         subject_versions = SubjectVersion.objects.filter(subject=subject.id)
         prerequisites = Prerequisite.objects.select_related().filter(subject=subject.id)
         difficulties = Difficulty.objects.filter(subject=subject.id)
-        scores = Score.objects.filter(subject=subject.id)
-        comments = Comment.objects.select_related().filter(subject=subject.id)
 
         user_rating = 0
         if len(ratings.filter(user_id=user_id)) > 0:
@@ -50,13 +47,6 @@ class SubjectInfoAPI(APIErrorsMixin, APIView):
         user_difficulty = 0
         if len(difficulties.filter(user_id=user_id)) > 0:
             user_difficulty = difficulties.get(user=user_id).difficulty
-
-        user_score = {"score": 0, "year": 0, "semester": ""}
-        if len(scores.filter(user_id=user_id)) > 0:
-            score = scores.get(user=user_id)
-            user_score["score"] = (score.score,)
-            user_score["year"] = (score.year,)
-            user_score["semester"] = score.semester
 
         result = {
             "name": subject.name,
@@ -68,8 +58,6 @@ class SubjectInfoAPI(APIErrorsMixin, APIView):
             "prerequisite_names": get_prerequisite_names(prerequisites),
             "user_difficulty": user_difficulty,
             "general_difficulty": calculate_difficulty(difficulties),
-            "user_score": user_score,
-            "comments": get_comments(comments, user_id),
         }
 
         return JsonResponse(result, safe=False)
@@ -239,5 +227,4 @@ class CommentsAPI(APIErrorsMixin, APIView):
                 "is_client_author": comment.user.id == user_id,
                 "date": comment.datetime.strftime(("%d/%m/%Y")),
             })
-
         return JsonResponse(result, safe=False)
