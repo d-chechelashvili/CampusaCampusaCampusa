@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {Redirect, Route, Switch, useHistory, useLocation} from "react-router-dom";
+import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
@@ -9,28 +9,22 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./components/layout/Layout";
 
 function App() {
-    const history = useHistory();
     const location = useLocation();
     const authContext = useContext(AuthContext);
 
     const isLoggedIn = authContext.isLoggedIn;
 
-    if (!isLoggedIn && (location.pathname === "/" || location.pathname.startsWith("/subjects/"))) {
-        history.push(location);
-    }
-
     return (
         <Layout>
-            <Switch>
-                {!isLoggedIn && <Route exact path="/sign-in" component={SignInPage}/>}
-                <Route exact path="/">
-                    {isLoggedIn ? <HomePage/> : <Redirect to="/sign-in"/>}
-                </Route>
-                <Route path="/subjects/:subjectName">
-                    {isLoggedIn ? <SubjectPage/> : <Redirect to="/sign-in"/>}
-                </Route>
-                <Route component={NotFoundPage}/>
-            </Switch>
+            <Routes>
+                {!isLoggedIn && <Route exact path="/sign-in" element={<SignInPage/>}/>}
+                <Route path="/"
+                       element={isLoggedIn ? <HomePage/> : <Navigate to="/sign-in"/>}/>
+                <Route path="/subjects/:subjectName"
+                       element={isLoggedIn ? <SubjectPage/> :
+                           <Navigate to="/sign-in" replace state={{from: location}}/>}/>
+                <Route path="*" element={<NotFoundPage/>}/>
+            </Routes>
         </Layout>
     );
 }

@@ -1,9 +1,10 @@
 import {useParams} from "react-router-dom";
 import React, {useContext, useEffect} from "react";
 
-import {Box, Typography} from "@mui/material";
+import {Box} from "@mui/material";
 
 import useHttp from "../hooks/use-http";
+import NotFoundPage from "./NotFoundPage";
 import AuthContext from "../store/auth-context";
 import * as SubjectInfoAPI from "../lib/api/SubjectInfoAPI";
 import SubjectHeader from "../components/subject_page/SubjectHeader";
@@ -27,10 +28,7 @@ function SubjectPage(props) {
 
     if (error) {
         return (
-            <Box display="flex"
-                 alignItems="center" justifyContent="center">
-                <Typography variant="h6">{error}</Typography>
-            </Box>
+            <NotFoundPage/>
         );
     }
 

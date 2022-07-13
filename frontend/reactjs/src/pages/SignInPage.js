@@ -1,6 +1,6 @@
 import {useContext} from "react";
-import {useHistory} from "react-router-dom";
 import {useGoogleLogin} from '@react-oauth/google';
+import {useLocation, useNavigate} from "react-router-dom";
 
 import {Box} from "@mui/material";
 import GoogleButton from 'react-google-button'
@@ -9,7 +9,8 @@ import AuthContext from "../store/auth-context";
 import * as LoginAPI from "../lib/api/LoginAPI";
 
 function SignInPage(props) {
-    const history = useHistory();
+    const navigate = useNavigate();
+    const location = useLocation();
     const authContext = useContext(AuthContext);
 
     const googleLogin = useGoogleLogin({
@@ -27,7 +28,11 @@ function SignInPage(props) {
             pictureURL: response.picture,
         }
         authContext.login(data);
-        history.go(-1);
+        if (location.state?.from){
+q            navigate(location.state.from);
+        }else{
+            navigate("/");
+        }
     }
 
     const backgroundBoxStyle = {

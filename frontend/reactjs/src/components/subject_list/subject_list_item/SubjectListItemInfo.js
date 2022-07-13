@@ -1,6 +1,9 @@
 import {Box, Divider, Grid, Typography} from "@mui/material";
 
 function SubjectListItemInfo(props) {
+    props.rating = props.rating.toFixed(1);
+    props.difficulty = props.difficulty.toFixed(1);
+
     const infoWrappingBoxStyle = {
         display: "flex",
         flexDirection: "row",

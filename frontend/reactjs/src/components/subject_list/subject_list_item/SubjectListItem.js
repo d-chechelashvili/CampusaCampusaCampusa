@@ -87,7 +87,7 @@ const SubjectListItem = (props) => {
 
     return (
         <Card sx={cardStyle}>
-            <RouterLink style={linkStyle} to={`/subjects/${subjectName}`}>
+            <RouterLink style={linkStyle} to={`subjects/${subjectName}`}>
                 <SubjectListItemHeader subjectName={subjectName}
                                        faculty={faculty} year={year}
                                        yearBoxStyle={yearBoxStyle}/>

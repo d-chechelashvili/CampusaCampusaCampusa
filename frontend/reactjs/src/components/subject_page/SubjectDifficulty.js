@@ -9,7 +9,7 @@ import * as SubjectInfoAPI from "../../lib/api/SubjectInfoAPI";
 function SubjectDifficulty(props) {
     const authContext = useContext(AuthContext);
     props.userDifficulty = (props.userDifficulty || 0);
-    props.averageDifficulty = (props.averageDifficulty || 0);
+    props.averageDifficulty = (props.averageDifficulty.toFixed(1) || 0);
     const [userDifficulty, setUserDifficulty] = React.useState(props.userDifficulty);
 
     const marks = [
