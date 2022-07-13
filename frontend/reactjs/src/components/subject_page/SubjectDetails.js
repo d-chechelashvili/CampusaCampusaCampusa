@@ -2,13 +2,14 @@ import React from "react";
 
 import {Chip} from "@mui/material";
 
-import Prerequisite from "./Prerequisite";
+import Requisite from "./Requisite";
 import classes from "./SubjectDetails.module.css";
 import {getSemesterDisplayString} from "../../lib/utils";
 
 function SubjectDetails(props) {
     const credits = props.credits.toString();
     const prerequisites = props.prerequisites;
+    const postrequisites = props.postrequisites;
     const semester = getSemesterDisplayString(props.semester);
 
     return (
@@ -29,7 +30,13 @@ function SubjectDetails(props) {
                 <div className={classes.form}>
                     <h3 className={classes.text}>პრერეკვიზიტები:</h3>
                     {prerequisites.map(prerequisite =>
-                        <Prerequisite key={prerequisite} name={prerequisite}/>
+                        <Requisite key={prerequisite} name={prerequisite}/>
+                    )}
+                </div>
+                <div className={classes.form}>
+                    <h3 className={classes.text}>პოსტრეკვიზიტები:</h3>
+                    {postrequisites.map(postrequisite =>
+                        <Requisite key={postrequisite} name={postrequisite}/>
                     )}
                 </div>
             </div>

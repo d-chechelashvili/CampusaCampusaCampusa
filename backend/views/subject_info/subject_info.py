@@ -20,6 +20,7 @@ from backend.models.subject_version import SubjectVersion
 from backend.views.utils import (
     calculate_difficulty,
     calculate_rating,
+    get_postrequisite_names,
     get_prerequisite_names,
     get_semester,
 )
@@ -38,6 +39,9 @@ class SubjectInfoAPI(APIErrorsMixin, APIView):
         ratings = Rating.objects.filter(subject=subject.id)
         subject_versions = SubjectVersion.objects.filter(subject=subject.id)
         prerequisites = Prerequisite.objects.select_related().filter(subject=subject.id)
+        postrequisites = Prerequisite.objects.select_related().filter(
+            prerequisite=subject.id
+        )
         difficulties = Difficulty.objects.filter(subject=subject.id)
 
         user_rating = 0
@@ -56,6 +60,7 @@ class SubjectInfoAPI(APIErrorsMixin, APIView):
             "credits": subject.credits,
             "semester": get_semester(subject_versions),
             "prerequisite_names": get_prerequisite_names(prerequisites),
+            "postrequisite_names": get_postrequisite_names(postrequisites),
             "user_difficulty": user_difficulty,
             "general_difficulty": calculate_difficulty(difficulties),
         }
@@ -151,7 +156,12 @@ class UpdateUserScoreAPI(APIErrorsMixin, APIView):
         args = JSONParser().parse(request)
         subject_id = Subject.objects.get(name=args["subject_name"]).id
 
-        scores = Score.objects.filter(user=user_id, subject=subject_id, year=args["year"], semester=args["semester"])
+        scores = Score.objects.filter(
+            user=user_id,
+            subject=subject_id,
+            year=args["year"],
+            semester=args["semester"],
+        )
         if len(scores) > 0:
             scores[0].score = args["score"]
             scores[0].save()
@@ -187,12 +197,19 @@ class AddCommentAPI(APIErrorsMixin, APIView):
             nickname_id = user_comments.first().nickname.id
         else:
             nickname_ids = [nickname.id for nickname in Nickname.objects.all()]
-            subject_nickname_ids = [comment.nickname.id for comment in Comment.objects.filter(subject_id=subject_id)]
+            subject_nickname_ids = [
+                comment.nickname.id
+                for comment in Comment.objects.filter(subject_id=subject_id)
+            ]
 
             nickname_id_counts = Counter(nickname_ids + subject_nickname_ids)
             sorted_nickname_id_counts = nickname_id_counts.most_common()[::-1]
             filtered_nickname_id_counts = list(
-                filter(lambda x: x[1] == sorted_nickname_id_counts[0][1], sorted_nickname_id_counts))
+                filter(
+                    lambda x: x[1] == sorted_nickname_id_counts[0][1],
+                    sorted_nickname_id_counts,
+                )
+            )
 
             nickname_id = random.choice(filtered_nickname_id_counts)[0]
 
@@ -228,16 +245,22 @@ class CommentsAPI(APIErrorsMixin, APIView):
         subject_name = args["subject_name"]
         subject = Subject.objects.get(name=subject_name)
 
-        comments = Comment.objects.select_related().filter(subject=subject.id).order_by("-datetime")
+        comments = (
+            Comment.objects.select_related()
+            .filter(subject=subject.id)
+            .order_by("-datetime")
+        )
 
         result = []
 
         for comment in comments:
-            result.append({
-                "author_nickname": comment.nickname.nickname,
-                "comment_text": comment.comment,
-                "is_client_author": comment.user.id == user_id,
-                "date": comment.datetime.strftime(("%d/%m/%Y")),
-            })
+            result.append(
+                {
+                    "author_nickname": comment.nickname.nickname,
+                    "comment_text": comment.comment,
+                    "is_client_author": comment.user.id == user_id,
+                    "date": comment.datetime.strftime(("%d/%m/%Y")),
+                }
+            )
 
         return JsonResponse(result, safe=False)

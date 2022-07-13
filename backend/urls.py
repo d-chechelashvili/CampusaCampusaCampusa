@@ -8,13 +8,13 @@ from .views.planner.planner import (
     UserPlanAPI,
 )
 from .views.subject_info.subject_info import (
+    AddCommentAPI,
+    CommentsAPI,
     ScoreDistributionAPI,
     SubjectInfoAPI,
     UpdateUserDifficultyAPI,
     UpdateUserRatingAPI,
     UpdateUserScoreAPI,
-    AddCommentAPI,
-    CommentsAPI,
 )
 from .views.subject_list.subject_list import SubjectListAPI
 

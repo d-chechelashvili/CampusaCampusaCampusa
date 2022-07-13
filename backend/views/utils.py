@@ -1,7 +1,5 @@
-from datetime import datetime
-from typing import Dict, List, Union
+from typing import List
 
-from backend.models.comment import Comment
 from backend.models.difficulty import Difficulty
 from backend.models.prerequisite import Prerequisite
 from backend.models.rating import Rating
@@ -55,6 +53,13 @@ def get_prerequisite_names(prerequisites: List[Prerequisite]) -> List[str]:
     for prerequisite in prerequisites:
         prerequisite_names.append(prerequisite.prerequisite.name)
     return prerequisite_names
+
+
+def get_postrequisite_names(postrequisites: List[Prerequisite]) -> List[str]:
+    postrequisite_names = []
+    for postrequisite in postrequisites:
+        postrequisite_names.append(postrequisite.subject.name)
+    return postrequisite_names
 
 
 def score_to_grade(score: int) -> str:

@@ -48,7 +48,8 @@ function SubjectPage(props) {
                            syllabusPath={loadedInfo.syllabus_path}/>
             <SectionDivider/>
             <SubjectDetails credits={loadedInfo.credits} semester={loadedInfo.semester}
-                            prerequisites={loadedInfo.prerequisite_names}/>
+                            prerequisites={loadedInfo.prerequisite_names}
+                            postrequisites={loadedInfo.postrequisite_names}/>
             <SectionDivider/>
             <SubjectDifficulty subjectName={params.subjectName}
                                userDifficulty={loadedInfo.user_difficulty}

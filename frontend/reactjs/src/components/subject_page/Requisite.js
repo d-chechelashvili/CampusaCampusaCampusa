@@ -4,7 +4,7 @@ import {Link as RouterLink} from "react-router-dom";
 import {Chip} from "@mui/material";
 import classes from "./Prerequisite.module.css";
 
-function Prerequisite(props) {
+function Requisite(props) {
     const linkStyle = {
         "text-decoration": "none",
         "color": "inherit",
@@ -25,4 +25,4 @@ function Prerequisite(props) {
     );
 }
 
-export default Prerequisite;
+export default Requisite;
