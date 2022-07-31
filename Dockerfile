@@ -11,7 +11,6 @@ COPY frontend/migrations /CampusaCampusaCampusa/frontend/migrations
 COPY frontend/reactjs/public /CampusaCampusaCampusa/frontend/reactjs/public
 COPY frontend/reactjs/src /CampusaCampusaCampusa/frontend/reactjs/src
 COPY frontend/reactjs/*.json /CampusaCampusaCampusa/frontend/reactjs/
-COPY frontend/reactjs/.env /CampusaCampusaCampusa/frontend/reactjs/
 COPY project /CampusaCampusaCampusa/project
 COPY manage.py /CampusaCampusaCampusa/
 COPY requirements.txt /CampusaCampusaCampusa/

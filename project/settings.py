@@ -178,5 +178,8 @@ else:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_SSL_REDIRECT = True
 
-with open(os.path.join(os.getcwd(), "frontend", "reactjs", ".env"), "w") as f:
+print(GOOGLE_OAUTH2_CLIENT_ID)
+path = os.path.join(os.getcwd(), "frontend", "reactjs", ".env")
+print(path)
+with open(path, "w") as f:
     f.write("REACT_APP_GOOGLE_CLIENT_ID=" + GOOGLE_OAUTH2_CLIENT_ID)
