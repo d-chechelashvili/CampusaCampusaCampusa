@@ -157,5 +157,5 @@ frontend/reactjs/npm-debug.log*
 frontend/reactjs/yarn-debug.log*
 frontend/reactjs/yarn-error.log*
 
-frontend/reactjs/.env
+!frontend/reactjs/.env
 !frontend/reactjs/src/lib/
