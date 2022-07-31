@@ -29,9 +29,9 @@ function SignInPage(props) {
         }
         authContext.login(data);
         if (location.state?.from){
-            navigate(location.state.from);
+            navigate(location.state.from, {replace: true});
         }else{
-            navigate("/");
+            navigate("/", {replace: true});
         }
     }
 

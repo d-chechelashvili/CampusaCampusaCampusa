@@ -27,7 +27,6 @@ class GoogleLoginAPI(APIErrorsMixin, APIView):
         validated_data = input_serializer.validated_data
 
         code = validated_data.get("code")
-
         tokens_response = google_get_tokens(
             code=code, redirect_uri=settings.BASE_BACKEND_URL
         ).json()

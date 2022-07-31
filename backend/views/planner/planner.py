@@ -18,7 +18,7 @@ class UserPlanAPI(APIErrorsMixin, APIView):
     def get(self, request: Request) -> JsonResponse:
         user_id = request.user.id
 
-        result: List[Dict[str, List[Union[str, int]]]] = []
+        result: List[Dict[str, List[Dict[str, Union[str, int]]]]] = []
 
         planner_items = PlannerItem.objects.select_related()
 

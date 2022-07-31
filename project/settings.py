@@ -15,6 +15,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import dj_database_url
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--b-w@moq+0j2lblg)kdc6*aie$d1bb_u6v8p=$jy)(cd19&_do"
+if os.getenv("DEV_MODE") == "true":
+    load_dotenv()
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -155,10 +159,9 @@ SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
 CSRF_COOKIE_HTTPONLY = False
 
-GOOGLE_OAUTH2_CLIENT_ID = (
-    "912526093783-9kth2rcog3o9rlu2ag9pec6r35fhjadg.apps.googleusercontent.com"
-)
-GOOGLE_OAUTH2_CLIENT_SECRET = "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"
+GOOGLE_OAUTH2_CLIENT_ID = os.environ.get("GOOGLE_OAUTH2_CLIENT_ID")
+GOOGLE_OAUTH2_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH2_CLIENT_SECRET")
+
 BASE_BACKEND_URL = "https://campusa.herokuapp.com"
 
 SIMPLE_JWT = {
@@ -174,3 +177,6 @@ if os.getenv("DEV_MODE") == "true":
 else:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_SSL_REDIRECT = True
+
+with open(os.path.join(os.getcwd(), "frontend", "reactjs", ".env"), "w") as f:
+    f.write("REACT_APP_GOOGLE_CLIENT_ID=" + GOOGLE_OAUTH2_CLIENT_ID)

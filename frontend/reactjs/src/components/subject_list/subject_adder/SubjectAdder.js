@@ -44,6 +44,7 @@ function SubjectAdder(props) {
 
     const addSubject = () => {
         if (validSubject()) {
+            console.log(semesterNumber);
             PlannerAPI.addSubject(authContext.token, subjectName, semesterNumber)
             dispatch(semesterActions.addSubject({semesterNumber, subjectName, credits}));
         } else {
