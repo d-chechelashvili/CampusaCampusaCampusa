@@ -26,8 +26,6 @@ function SubjectAdder(props) {
     const semester = props.subjectSemester;
 
     const validSubject = () => {
-        console.log("semester:", semesterNumber);
-        console.log("semesterList:", semesterList);
         if (semesterNumber === null || semesterList.length === 0) {
             setError("შესაბამისი სემესტრი ვერ მოიძებნა");
             return false;
@@ -50,8 +48,6 @@ function SubjectAdder(props) {
 
     const addSubject = () => {
         if (validSubject()) {
-            console.log(semesterList);
-            console.log(semesterNumber);
             PlannerAPI.addSubject(authContext.token, subjectName, semesterNumber)
             dispatch(semesterActions.addSubject({semesterNumber, subjectName, credits}));
         } else {

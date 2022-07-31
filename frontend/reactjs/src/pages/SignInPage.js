@@ -28,9 +28,9 @@ function SignInPage(props) {
             pictureURL: response.picture,
         }
         authContext.login(data);
-        if (location.state?.from){
+        if (location.state?.from) {
             navigate(location.state.from, {replace: true});
-        }else{
+        } else {
             navigate("/", {replace: true});
         }
     }

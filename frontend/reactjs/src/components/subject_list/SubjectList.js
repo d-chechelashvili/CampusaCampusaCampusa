@@ -105,7 +105,7 @@ const SubjectList = (props) => {
                     </Grid>
                 </Box>
                 {sortedSubjects.map((subject) => (
-                    <SubjectListItem subject={subject}/>
+                    <SubjectListItem key={subject.name.concat(subject.faculty)} subject={subject}/>
                 ))}
             </Stack>
             <Box sx={{height: {xs: "15px", sm: 0}, width: {xs: "100%", sm: 0}}}/>

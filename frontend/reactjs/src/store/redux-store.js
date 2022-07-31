@@ -38,7 +38,6 @@ const semesterStore = createSlice({
         },
         populateSemesterList(state, action) {
             state.semesterList = action.payload;
-            console.log(state.semesterList);
         }
     }
 });
